@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
-import { Github, ArrowRight } from "lucide-react";
+import { Github, ArrowRight, Home, FolderKanban, TrendingUp, User, Mail } from "lucide-react";
 import "./styles.css";
 
 const projects = [
