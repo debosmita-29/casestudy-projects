@@ -99,36 +99,26 @@ const navItems = [
   { label: "Contact", href: "#contact" }
 ];
 
+const impactStats = [
+  { value: "90%", label: "Reduction in engineering effort through AI-assisted workflows." },
+  { value: "5+", label: "Production-grade AI SaaS architectures designed and implemented." },
+  { value: "99.3%", label: "Regression stability enabled through intelligent automation." }
+];
+
 function CaseStudy({ project, onBack }) {
   return (
     <main className="case">
-      <button
-        type="button"
-        onClick={onBack}
-        style={{
-          background: "transparent",
-          color: "#a1a1aa",
-          border: "1px solid #27272a",
-          borderRadius: "999px",
-          padding: "10px 16px",
-          cursor: "pointer",
-          marginBottom: "24px"
-        }}
-      >
+      <button type="button" onClick={onBack} className="back-btn">
         ← Back to Projects
       </button>
-
       <h1>{project.title}</h1>
       <img src={project.img} alt={project.title} />
-
       <p style={{ whiteSpace: "pre-line" }}>{project.caseStudy}</p>
-
       <div className="chips">
         {project.stack.map((s) => (
           <span key={s}>{s}</span>
         ))}
       </div>
-
       <a className="primary" href={project.github} target="_blank" rel="noreferrer">
         View GitHub Repository <ArrowRight size={16} />
       </a>
@@ -137,8 +127,6 @@ function CaseStudy({ project, onBack }) {
 }
 
 function App() {
-  // FIX 1: Use React state for routing instead of window.location / pushState.
-  // The original URL-based routing breaks in sandboxed/iframe environments.
   const [currentSlug, setCurrentSlug] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -148,188 +136,62 @@ function App() {
 
   const closeMenu = () => setMenuOpen(false);
 
-  // FIX 2: Removed useEffect that set document.body.style.overflow — this can
-  // cause layout issues in sandboxed environments. Overflow lock is handled inline.
-
   if (selectedProject) {
-    return (
-      <CaseStudy
-        project={selectedProject}
-        onBack={() => setCurrentSlug(null)}
-      />
-    );
+    return <CaseStudy project={selectedProject} onBack={() => setCurrentSlug(null)} />;
   }
-
-  // FIX 3: Hamburger button uses position: "absolute" within a relative wrapper
-  // instead of position: "fixed", which can be clipped in iframes/sandboxes.
-  // FIX 4: z-index values reduced to reasonable numbers (9999) — the original
-  // used 2147483647 (MAX_INT) which can cause stacking issues in some renderers.
 
   return (
     <div style={{ position: "relative" }}>
-      {/* Hamburger toggle button */}
-      <button
-        type="button"
-        aria-label="Open navigation menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen(true)}
-        style={{
-          position: "fixed",
-          left: "18px",
-          top: "18px",
-          zIndex: 9999,
-          width: "48px",
-          height: "48px",
-          borderRadius: "16px",
-          border: "1px solid rgba(255,255,255,0.22)",
-          background: "rgba(8,8,10,0.92)",
-          backdropFilter: "blur(16px)",
-          WebkitBackdropFilter: "blur(16px)",
-          cursor: "pointer",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "5px",
-          boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
-          padding: 0,
-          margin: 0
-        }}
-      >
-        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
-        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
-        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
-      </button>
 
-      {/* Backdrop overlay */}
+      {/* Backdrop */}
       {menuOpen && (
-        <div
-          role="presentation"
-          onClick={closeMenu}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.62)",
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
-            zIndex: 9997
-          }}
-        />
+        <div role="presentation" onClick={closeMenu} className="drawer-backdrop" />
       )}
 
-      {/* Slide-out drawer */}
-      <aside
-        aria-hidden={!menuOpen}
-        style={{
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          width: "320px",
-          maxWidth: "86vw",
-          background: "linear-gradient(180deg, rgba(12,12,14,0.99), rgba(20,20,24,0.99))",
-          borderRight: "1px solid rgba(255,255,255,0.12)",
-          boxShadow: "30px 0 80px rgba(0,0,0,0.48)",
-          zIndex: 9998,
-          // FIX 5: Use visibility to truly hide the drawer when closed,
-          // preventing focusable elements from being reachable off-screen.
-          transform: menuOpen ? "translateX(0)" : "translateX(-110%)",
-          visibility: menuOpen ? "visible" : "hidden",
-          transition: "transform 260ms ease, visibility 260ms ease",
-          padding: "26px",
-          color: "#fff",
-          boxSizing: "border-box"
-        }}
-      >
-        <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
+      {/* Drawer */}
+      <aside className={`drawer${menuOpen ? " drawer--open" : ""}`}>
+        <div className="drawer-header">
           <div>
-            <p style={{ margin: 0, color: "#a1a1aa", fontSize: "12px", letterSpacing: "0.18em", textTransform: "uppercase" }}>
-              Portfolio
-            </p>
-            <h2 style={{ margin: "8px 0 0", fontSize: "24px" }}>Debosmita Roy</h2>
+            <p className="drawer-label">Portfolio Menu</p>
+            <h2 className="drawer-name">Debosmita Roy</h2>
           </div>
-
-          <button
-            type="button"
-            onClick={closeMenu}
-            aria-label="Close navigation menu"
-            style={{
-              background: "transparent",
-              border: "none",
-              color: "#d4d4d8",
-              fontSize: "30px",
-              cursor: "pointer",
-              lineHeight: 1,
-              padding: 0
-            }}
-          >
-            ×
-          </button>
+          <button type="button" onClick={closeMenu} aria-label="Close menu" className="drawer-close">×</button>
         </div>
-
-        <nav style={{ display: "flex", flexDirection: "column", gap: "12px", marginTop: "34px" }}>
+        <nav className="drawer-nav">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              onClick={closeMenu}
-              style={{
-                color: "#fff",
-                textDecoration: "none",
-                padding: "14px 16px",
-                borderRadius: "16px",
-                border: "1px solid rgba(255,255,255,0.10)",
-                background: "rgba(255,255,255,0.045)",
-                transition: "all 180ms ease"
-              }}
-            >
+            <a key={item.href} href={item.href} onClick={closeMenu} className="drawer-link">
               {item.label}
             </a>
           ))}
         </nav>
-
-        <div
-          style={{
-            position: "absolute",
-            left: "26px",
-            right: "26px",
-            bottom: "26px",
-            padding: "18px",
-            borderRadius: "22px",
-            background: "rgba(255,255,255,0.06)",
-            border: "1px solid rgba(255,255,255,0.10)"
-          }}
-        >
-          <p style={{ margin: 0, color: "#d4d4d8", lineHeight: 1.6, fontSize: "14px" }}>
-            AI Engineer by heart. Builder of systems that think, learn, and scale.
-          </p>
+        <div className="drawer-footer">
+          <p>AI Engineer by heart. Builder of systems that think, learn, and scale.</p>
         </div>
       </aside>
 
-      {/* Top nav bar */}
-      <nav>
-        <b style={{ paddingLeft: "54px" }}>Debosmita Roy</b>
-        <div>
+      {/* Top nav — hamburger lives inside here, vertically centered */}
+      <nav className="topnav">
+        <button
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen(true)}
+          className="hamburger-btn"
+        >
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+          <span className="hamburger-line" />
+        </button>
+        <b className="topnav-brand">Debosmita Roy</b>
+        <div className="topnav-links">
           <a href="#projects">Projects</a>
           <a href="#impact">Impact</a>
           <a href="#about">About Me</a>
           <a href="#contact">Contact</a>
-          <a
-            href="https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub"
-          >
-            <Github size={18} />
+          <a href="https://github.com/debosmita-29/casestudy-projects" target="_blank" rel="noreferrer" aria-label="GitHub">
+            <Github size={17} />
           </a>
-          <a
-            href="https://www.linkedin.com/in/debosmita-roy-b0964921/"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="LinkedIn"
-          >
-            in
-          </a>
+          <a href="https://www.linkedin.com/in/debosmita-roy-b0964921/" target="_blank" rel="noreferrer" aria-label="LinkedIn">in</a>
         </div>
       </nav>
 
@@ -337,27 +199,19 @@ function App() {
       <section id="home" className="hero">
         <p className="eyebrow">AI • Data Analytics • Agentic Systems</p>
         <h1>Building Autonomous AI Systems for Enterprise Intelligence</h1>
-        <p>
-          Optimization • Observability • Analytics • Talent intelligence • Multi-Agent Systems • RAG Architectures • Enterprise SaaS Platforms • Autonomous Analytics • AI Observability.
-        </p>
+        <p>RAG, optimization, observability, analytics, and talent intelligence.</p>
       </section>
 
-      {/* Projects grid */}
+      {/* Projects — all 5, auto-fill grid */}
       <section id="projects" className="grid">
         {projects.map((p) => (
-          <article
-            key={p.slug}
-            onClick={() => setCurrentSlug(p.slug)}
-            style={{ cursor: "pointer" }}
-          >
+          <article key={p.slug} onClick={() => setCurrentSlug(p.slug)}>
             <img src={p.img} alt={p.title} />
             <div>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
               <div className="chips">
-                {p.stack.map((s) => (
-                  <span key={s}>{s}</span>
-                ))}
+                {p.stack.map((s) => <span key={s}>{s}</span>)}
               </div>
               <b>Open case study →</b>
             </div>
@@ -366,64 +220,61 @@ function App() {
       </section>
 
       {/* Impact */}
-      <section id="impact" className="impact">
-        <h2>Enterprise Impact</h2>
-        <p>
-          Designed to communicate architecture depth, hands-on implementation,
-          dataset-driven thinking, and leadership-level AI product vision.
-        </p>
+      <section id="impact" className="impact-section">
+        <h2 className="section-title">Enterprise Impact</h2>
+        <div className="impact-grid">
+          {impactStats.map((stat) => (
+            <div key={stat.value} className="impact-card">
+              <span className="impact-value">{stat.value}</span>
+              <p className="impact-label">{stat.label}</p>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* About */}
-      <section
-        id="about"
-        className="impact"
-        style={{ textAlign: "left", maxWidth: "1100px", margin: "0 auto", padding: "80px 28px" }}
-      >
-        <p className="eyebrow">About Me</p>
-        <h2>AI Engineer by heart. Builder of systems that think, learn, and scale.</h2>
-        <p>
-          My story sits at the intersection of engineering discipline and AI imagination.
-          I started with deep foundations in software engineering, testing, automation,
-          platforms, telecommunications, and enterprise systems, then evolved into
-          building Agentic AI, RAG-backed intelligence, multi-agent orchestration,
-          and autonomous SaaS platforms.
-        </p>
-        <p>
-          What drives me is turning complexity into intelligent systems: agents that
-          reason, pipelines that retrieve the right knowledge, dashboards that explain
-          operational signals, and platforms that move teams from manual effort to
-          autonomous execution.
-        </p>
+      <section id="about" className="about-section">
+        <div className="about-card">
+          <p className="eyebrow">About Me</p>
+          <h2>AI Engineer by heart. Builder of systems that think, learn, and scale.</h2>
+          <p>
+            I operate at the intersection of AI architecture, enterprise platforms, autonomous systems, and
+            intelligent automation. My work focuses on building Agentic AI, RAG-backed enterprise
+            intelligence, orchestration pipelines, observability systems, and production-ready SaaS platforms.
+          </p>
+          <p>
+            I started with deep foundations in software engineering, testing, automation,
+            telecommunications, and enterprise systems — then evolved into multi-agent orchestration
+            and autonomous AI platforms that move teams from manual effort to intelligent execution.
+          </p>
+        </div>
       </section>
 
       {/* Contact */}
-      <section
-        id="contact"
-        className="impact"
-        style={{ maxWidth: "1100px", margin: "0 auto", padding: "80px 28px" }}
-      >
-        <p className="eyebrow">Contact</p>
-        <h2>Let's connect</h2>
-        <p>
-          I'm open to meaningful conversations around Agentic AI, enterprise RAG,
-          AI-native SaaS platforms, intelligent automation, and leadership-level AI
-          transformation.
-        </p>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", justifyContent: "center", marginTop: "28px" }}>
-          <a className="primary" href="mailto:debosmitaroy.ai@gmail.com">
+      <section id="contact" className="contact-section">
+        <div className="contact-left">
+          <p className="eyebrow">Contact</p>
+          <h2>Let's connect</h2>
+          <p>
+            Open to conversations around Agentic AI, enterprise intelligence, autonomous
+            systems, AI-native SaaS platforms, and intelligent automation.
+          </p>
+        </div>
+        <div className="contact-right">
+          <a className="contact-btn contact-btn--light" href="mailto:debosmitaroy.ai@gmail.com">
             Email: debosmitaroy.ai@gmail.com
           </a>
           <a
-            className="primary"
+            className="contact-btn contact-btn--dark"
             href="https://www.linkedin.com/in/debosmita-roy-b0964921/"
             target="_blank"
             rel="noreferrer"
           >
-            LinkedIn: Debosmita Roy <ArrowRight size={16} />
+            LinkedIn: Debosmita Roy
           </a>
         </div>
       </section>
+
     </div>
   );
 }
