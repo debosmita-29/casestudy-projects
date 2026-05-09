@@ -338,8 +338,7 @@ function App() {
         <p className="eyebrow">AI • Data Analytics • Agentic Systems</p>
         <h1>Building Autonomous AI Systems for Enterprise Intelligence</h1>
         <p>
-          Five portfolio-ready implementations packaged as a Turborepo: RAG,
-          optimization, observability, analytics, and talent intelligence.
+          RAG,optimization, observability, analytics, and talent intelligence.
         </p>
       </section>
 
