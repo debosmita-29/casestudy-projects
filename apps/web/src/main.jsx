@@ -321,4 +321,5 @@ export default function DebosmitaPortfolio() {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App/>);
+createRoot(document.getElementById('root')).render(<App/>, <DebosmitaPortfolio></DebosmitaPortfolio>);
+  
