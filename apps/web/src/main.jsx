@@ -338,7 +338,7 @@ function App() {
         <p className="eyebrow">AI • Data Analytics • Agentic Systems</p>
         <h1>Building Autonomous AI Systems for Enterprise Intelligence</h1>
         <p>
-          RAG, optimization, observability, analytics, and talent intelligence.
+          Optimization • Observability • Analytics • Talent intelligence • Multi-Agent Systems • RAG Architectures • Enterprise SaaS Platforms • Autonomous Analytics • AI Observability.
         </p>
       </section>
 
