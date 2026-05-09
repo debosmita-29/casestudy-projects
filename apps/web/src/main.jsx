@@ -99,6 +99,39 @@ const navItems = [
   { label: "Contact", href: "#contact" }
 ];
 
+const hamburgerButtonStyle = {
+  position: "fixed",
+  left: "18px",
+  top: "18px",
+  zIndex: 2147483647,
+  width: "48px",
+  height: "48px",
+  borderRadius: "16px",
+  border: "1px solid rgba(255,255,255,0.22)",
+  background: "rgba(8,8,10,0.92)",
+  WebkitBackdropFilter: "blur(16px)",
+  backdropFilter: "blur(16px)",
+  cursor: "pointer",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  gap: "5px",
+  boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
+  padding: 0,
+  margin: 0,
+  appearance: "none"
+};
+
+const hamburgerLineStyle = {
+  width: "21px",
+  height: "2px",
+  background: "#ffffff",
+  borderRadius: "999px",
+  display: "block",
+  flexShrink: 0
+};
+
 function getProjectBySlug(slug) {
   return projects.find((p) => p.slug === slug);
 }
@@ -156,6 +189,13 @@ function App() {
     return () => window.removeEventListener("popstate", handleRoute);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
   const slug = route.startsWith("/projects/") ? route.replace("/projects/", "") : null;
   const selected = slug ? getProjectBySlug(slug) : null;
 
@@ -168,47 +208,34 @@ function App() {
   return (
     <div>
       <button
+        type="button"
         aria-label="Open navigation menu"
+        aria-expanded={menuOpen}
         onClick={() => setMenuOpen(true)}
-        style={{
-          position: "fixed",
-          left: "20px",
-          top: "20px",
-          zIndex: 1000,
-          width: "46px",
-          height: "46px",
-          borderRadius: "14px",
-          border: "1px solid rgba(255,255,255,0.16)",
-          background: "rgba(12,12,14,0.78)",
-          backdropFilter: "blur(14px)",
-          cursor: "pointer",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "5px",
-          boxShadow: "0 18px 60px rgba(0,0,0,0.35)"
-        }}
+        style={hamburgerButtonStyle}
       >
-        <span style={{ width: 20, height: 2, background: "#fff", borderRadius: 999 }} />
-        <span style={{ width: 20, height: 2, background: "#fff", borderRadius: 999 }} />
-        <span style={{ width: 20, height: 2, background: "#fff", borderRadius: 999 }} />
+        <span style={hamburgerLineStyle} />
+        <span style={hamburgerLineStyle} />
+        <span style={hamburgerLineStyle} />
       </button>
 
       {menuOpen && (
         <div
+          role="presentation"
           onClick={closeMenu}
           style={{
             position: "fixed",
             inset: 0,
             background: "rgba(0,0,0,0.62)",
+            WebkitBackdropFilter: "blur(6px)",
             backdropFilter: "blur(6px)",
-            zIndex: 1001
+            zIndex: 2147483645
           }}
         />
       )}
 
       <aside
+        aria-hidden={!menuOpen}
         style={{
           position: "fixed",
           left: 0,
@@ -217,15 +244,16 @@ function App() {
           width: "320px",
           maxWidth: "86vw",
           background:
-            "linear-gradient(180deg, rgba(12,12,14,0.98), rgba(20,20,24,0.98))",
-          borderRight: "1px solid rgba(255,255,255,0.10)",
-          boxShadow: "30px 0 80px rgba(0,0,0,0.45)",
-          zIndex: 1002,
-          transform: menuOpen ? "translateX(0)" : "translateX(-105%)",
+            "linear-gradient(180deg, rgba(12,12,14,0.99), rgba(20,20,24,0.99))",
+          borderRight: "1px solid rgba(255,255,255,0.12)",
+          boxShadow: "30px 0 80px rgba(0,0,0,0.48)",
+          zIndex: 2147483646,
+          transform: menuOpen ? "translateX(0)" : "translateX(-110%)",
           transition: "transform 260ms ease",
           padding: "26px",
           color: "#fff",
-          boxSizing: "border-box"
+          boxSizing: "border-box",
+          pointerEvents: menuOpen ? "auto" : "none"
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
@@ -245,6 +273,7 @@ function App() {
           </div>
 
           <button
+            type="button"
             onClick={closeMenu}
             aria-label="Close navigation menu"
             style={{
@@ -253,7 +282,8 @@ function App() {
               color: "#d4d4d8",
               fontSize: "30px",
               cursor: "pointer",
-              lineHeight: 1
+              lineHeight: 1,
+              padding: 0
             }}
           >
             ×
@@ -300,7 +330,7 @@ function App() {
       </aside>
 
       <nav>
-        <b>Debosmita Roy</b>
+        <b style={{ paddingLeft: "54px" }}>Debosmita Roy</b>
         <div>
           <a href="#projects">Projects</a>
           <a href="#impact">Impact</a>
@@ -438,4 +468,10 @@ function App() {
   );
 }
 
-createRoot(document.getElementById("root")).render(<App />);
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+  throw new Error("Root element with id='root' was not found.");
+}
+
+createRoot(rootElement).render(<App />);
