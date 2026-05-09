@@ -320,7 +320,7 @@ function App() {
             rel="noreferrer"
             aria-label="GitHub"
           >
-            <GitHub size={18} />
+            <Github size={18} />
           </a>
           <a
             href="https://www.linkedin.com/in/debosmita-roy-b0964921/"
