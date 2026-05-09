@@ -99,39 +99,6 @@ const navItems = [
   { label: "Contact", href: "#contact" }
 ];
 
-const hamburgerButtonStyle = {
-  position: "fixed",
-  left: "18px",
-  top: "18px",
-  zIndex: 2147483647,
-  width: "48px",
-  height: "48px",
-  borderRadius: "16px",
-  border: "1px solid rgba(255,255,255,0.22)",
-  background: "rgba(8,8,10,0.92)",
-  WebkitBackdropFilter: "blur(16px)",
-  backdropFilter: "blur(16px)",
-  cursor: "pointer",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "5px",
-  boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
-  padding: 0,
-  margin: 0,
-  appearance: "none"
-};
-
-const hamburgerLineStyle = {
-  width: "21px",
-  height: "2px",
-  background: "#ffffff",
-  borderRadius: "999px",
-  display: "block",
-  flexShrink: 0
-};
-
 function getProjectBySlug(slug) {
   return projects.find((p) => p.slug === slug);
 }
@@ -145,6 +112,7 @@ function CaseStudy({ project }) {
   return (
     <main className="case">
       <button
+        type="button"
         onClick={goBack}
         style={{
           background: "transparent",
@@ -198,12 +166,44 @@ function App() {
 
   const slug = route.startsWith("/projects/") ? route.replace("/projects/", "") : null;
   const selected = slug ? getProjectBySlug(slug) : null;
-
   const closeMenu = () => setMenuOpen(false);
 
   if (selected) {
     return <CaseStudy project={selected} />;
   }
+
+  const hamburgerButtonStyle = {
+    position: "fixed",
+    left: "18px",
+    top: "18px",
+    zIndex: 2147483647,
+    width: "48px",
+    height: "48px",
+    borderRadius: "16px",
+    border: "1px solid rgba(255,255,255,0.22)",
+    background: "rgba(8,8,10,0.92)",
+    WebkitBackdropFilter: "blur(16px)",
+    backdropFilter: "blur(16px)",
+    cursor: "pointer",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "5px",
+    boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
+    padding: 0,
+    margin: 0,
+    appearance: "none"
+  };
+
+  const hamburgerLineStyle = {
+    width: "21px",
+    height: "2px",
+    background: "#ffffff",
+    borderRadius: "999px",
+    display: "block",
+    flexShrink: 0
+  };
 
   return (
     <div>
