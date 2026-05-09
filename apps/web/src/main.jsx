@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
-import { GitHub, ArrowRight } from "lucide-react";
+import { Github, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import "./styles.css";
 
@@ -146,9 +146,9 @@ function CaseStudy({ project }) {
         href={project.github}
         target="_blank"
         rel="noreferrer"
-        className="mt-8 inline-flex items-center px-6 py-3 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
+        className="mt-8 inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-white text-black font-semibold hover:scale-105 transition"
       >
-        View GitHub Repository →
+        View GitHub Repository <ArrowRight size={16} />
       </a>
     </main>
   );
@@ -300,6 +300,15 @@ function DebosmitaPortfolio() {
             </a>
             <a href="#contact" className={`transition ${active === "contact" ? "text-white" : "text-zinc-400"}`}>
               Contact
+            </a>
+            <a
+              href="https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-white transition inline-flex items-center gap-2"
+              aria-label="GitHub portfolio repository"
+            >
+              <Github size={18} /> GitHub
             </a>
             <a
               href="https://www.linkedin.com/in/debosmita-roy-b0964921/"
@@ -476,7 +485,13 @@ function DebosmitaPortfolio() {
   );
 }
 
-createRoot(document.getElementById("root")).render(
+const rootElement = document.getElementById("root");
+
+if (!rootElement) {
+  throw new Error("Root element with id='root' was not found. Check index.html.");
+}
+
+createRoot(rootElement).render(
   <React.StrictMode>
     <DebosmitaPortfolio />
   </React.StrictMode>
