@@ -1,1 +1,143 @@
-body{margin:0;background:linear-gradient(#020617,#09090b,#000);color:white;font-family:Inter,Arial,sans-serif}nav{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;padding:18px 48px;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);border-bottom:1px solid #27272a}nav a{color:#a1a1aa;text-decoration:none;margin-left:24px;display:inline-flex;vertical-align:middle}.hero{padding:110px 32px;text-align:center;max-width:1050px;margin:auto}.eyebrow{color:#38bdf8;text-transform:uppercase;letter-spacing:.2em}.hero h1{font-size:64px;line-height:1.02;margin:16px 0;background:linear-gradient(90deg,#fff,#a1a1aa);-webkit-background-clip:text;color:transparent}.hero p{color:#d4d4d8;font-size:20px}.grid{max-width:1150px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;padding:20px 32px 80px}article{background:#18181b;border:1px solid #27272a;border-radius:24px;overflow:hidden;cursor:pointer;transition:.2s}article:hover{transform:translateY(-4px);border-color:#38bdf8}article img{width:100%;height:210px;object-fit:cover}article div{padding:24px}article p{color:#a1a1aa}.chips{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}.chips span{background:#0f172a;border:1px solid #334155;color:#bae6fd;border-radius:999px;padding:6px 10px;font-size:12px}.impact{text-align:center;max-width:850px;margin:auto;padding:80px 32px}.case{max-width:860px;margin:auto;padding:60px 32px;white-space:pre-line}.case img{width:100%;border-radius:24px;margin:24px 0}.case button{background:none;border:0;color:#a1a1aa;cursor:pointer}.primary{display:inline-flex;gap:8px;align-items:center;color:#38bdf8;text-decoration:none}
+body {
+    margin: 0;
+    background: linear-gradient(#020617,#09090b,#000);
+    color: #fff;
+    font-family: Inter,Arial,sans-serif
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 48px;
+    background: #000000a6;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid #27272a
+}
+
+nav a {
+    color: #a1a1aa;
+    text-decoration: none;
+    margin-left: 24px;
+    display: inline-flex;
+    vertical-align: middle
+}
+
+.hero {
+    padding: 110px 32px;
+    text-align: center;
+    max-width: 1050px;
+    margin: auto
+}
+
+.eyebrow {
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: .2em
+}
+
+.hero h1 {
+    font-size: 64px;
+    line-height: 1.02;
+    margin: 16px 0;
+    background: linear-gradient(90deg,#fff,#a1a1aa);
+    -webkit-background-clip: text;
+    color: transparent
+}
+
+.hero p {
+    color: #d4d4d8;
+    font-size: 20px
+}
+
+.grid {
+    max-width: 1150px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+    gap: 28px;
+    padding: 20px 32px 80px
+}
+
+article {
+    background: #18181b;
+    border: 1px solid #27272a;
+    border-radius: 24px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .2s
+}
+
+article:hover {
+    filter: brightness(1.08);
+    border-color: #38bdf8
+}
+
+article img {
+    width: 100%;
+    height: 210px;
+    object-fit: cover
+}
+
+article div {
+    padding: 24px
+}
+
+article p {
+    color: #a1a1aa
+}
+
+.chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 16px 0
+}
+
+.chips span {
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: #bae6fd;
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px
+}
+
+.impact {
+    text-align: center;
+    max-width: 850px;
+    margin: auto;
+    padding: 80px 32px
+}
+
+.case {
+    max-width: 860px;
+    margin: auto;
+    padding: 60px 32px;
+    white-space: pre-line
+}
+
+.case img {
+    width: 100%;
+    border-radius: 24px;
+    margin: 24px 0
+}
+
+.case button {
+    background: none;
+    border: 0;
+    color: #a1a1aa;
+    cursor: pointer
+}
+
+.primary {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    color: #38bdf8;
+    text-decoration: none
+}
