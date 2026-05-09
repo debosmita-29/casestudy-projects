@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { createRoot } from "react-dom/client";
 import { Github, ArrowRight, Home, FolderKanban, TrendingUp, User, Mail } from "lucide-react";
 import "./styles.css";
@@ -130,6 +130,37 @@ function App() {
   const [currentSlug, setCurrentSlug] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // When the user navigates into a project, push a history entry so the
+  // browser/phone back button has something to pop back to.
+  const navigateTo = useCallback((slug) => {
+    window.history.pushState({ slug }, "", `#project-${slug}`);
+    setCurrentSlug(slug);
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Go back to home — called by the ← button AND by popstate.
+  const navigateHome = useCallback(() => {
+    setCurrentSlug(null);
+    window.scrollTo(0, 0);
+  }, []);
+
+  // Listen for browser/phone back button — popstate fires when the user
+  // presses back. If the popped state has no slug we're at the homepage.
+  useEffect(() => {
+    const onPop = (e) => {
+      const slug = e.state && e.state.slug ? e.state.slug : null;
+      setCurrentSlug(slug);
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
+
+  // On first load, clear any stale hash so we always start at home.
+  useEffect(() => {
+    window.history.replaceState({ slug: null }, "", window.location.pathname);
+  }, []);
+
   const selectedProject = currentSlug
     ? projects.find((p) => p.slug === currentSlug)
     : null;
@@ -137,7 +168,7 @@ function App() {
   const closeMenu = () => setMenuOpen(false);
 
   if (selectedProject) {
-    return <CaseStudy project={selectedProject} onBack={() => setCurrentSlug(null)} />;
+    return <CaseStudy project={selectedProject} onBack={navigateHome} />;
   }
 
   return (
@@ -205,7 +236,7 @@ function App() {
       {/* Projects — all 5, auto-fill grid */}
       <section id="projects" className="grid">
         {projects.map((p) => (
-          <article key={p.slug} onClick={() => setCurrentSlug(p.slug)}>
+          <article key={p.slug} onClick={() => navigateTo(p.slug)}>
             <img src={p.img} alt={p.title} />
             <div>
               <h3>{p.title}</h3>
