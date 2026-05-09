@@ -1,6 +1,0 @@
-task_id,required_skill,estimate_hours,priority
-T001,rag,16,5
-T002,frontend,10,3
-T003,observability,12,4
-T004,data-engineering,20,5
-T005,security,8,4

@@ -1,1 +1,0 @@
-Support escalation playbooks define severity, owner routing, customer impact, and remediation. Multi-agent RAG systems can summarize procedures and recommend next best actions.

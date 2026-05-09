@@ -1,4 +1,0 @@
-job_id,title,required_skills,level
-J001,Principal AI Platform Engineer,"python rag fastapi vector search mlops",Principal
-J002,Staff Frontend Engineer,"react typescript design systems",Staff
-J003,Data Intelligence Architect,"sql data engineering governance analytics",Principal
