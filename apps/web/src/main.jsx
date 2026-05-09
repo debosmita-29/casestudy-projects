@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { createRoot } from "react-dom/client";
 import { GitHub, ArrowRight } from "lucide-react";
 import "./styles.css";
@@ -99,21 +99,12 @@ const navItems = [
   { label: "Contact", href: "#contact" }
 ];
 
-function getProjectBySlug(slug) {
-  return projects.find((p) => p.slug === slug);
-}
-
-function CaseStudy({ project }) {
-  const goBack = () => {
-    window.history.pushState({}, "", "/");
-    window.dispatchEvent(new window.PopStateEvent("popstate"));
-  };
-
+function CaseStudy({ project, onBack }) {
   return (
     <main className="case">
       <button
         type="button"
-        onClick={goBack}
+        onClick={onBack}
         style={{
           background: "transparent",
           color: "#a1a1aa",
@@ -130,7 +121,7 @@ function CaseStudy({ project }) {
       <h1>{project.title}</h1>
       <img src={project.img} alt={project.title} />
 
-      <p>{project.caseStudy}</p>
+      <p style={{ whiteSpace: "pre-line" }}>{project.caseStudy}</p>
 
       <div className="chips">
         {project.stack.map((s) => (
@@ -146,79 +137,71 @@ function CaseStudy({ project }) {
 }
 
 function App() {
-  const [route, setRoute] = useState(
-    typeof window !== "undefined" ? window.location.pathname : "/"
-  );
+  // FIX 1: Use React state for routing instead of window.location / pushState.
+  // The original URL-based routing breaks in sandboxed/iframe environments.
+  const [currentSlug, setCurrentSlug] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  useEffect(() => {
-    const handleRoute = () => setRoute(window.location.pathname);
-    window.addEventListener("popstate", handleRoute);
-    return () => window.removeEventListener("popstate", handleRoute);
-  }, []);
+  const selectedProject = currentSlug
+    ? projects.find((p) => p.slug === currentSlug)
+    : null;
 
-  useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [menuOpen]);
-
-  const slug = route.startsWith("/projects/") ? route.replace("/projects/", "") : null;
-  const selected = slug ? getProjectBySlug(slug) : null;
   const closeMenu = () => setMenuOpen(false);
 
-  if (selected) {
-    return <CaseStudy project={selected} />;
+  // FIX 2: Removed useEffect that set document.body.style.overflow — this can
+  // cause layout issues in sandboxed environments. Overflow lock is handled inline.
+
+  if (selectedProject) {
+    return (
+      <CaseStudy
+        project={selectedProject}
+        onBack={() => setCurrentSlug(null)}
+      />
+    );
   }
 
-  const hamburgerButtonStyle = {
-    position: "fixed",
-    left: "18px",
-    top: "18px",
-    zIndex: 2147483647,
-    width: "48px",
-    height: "48px",
-    borderRadius: "16px",
-    border: "1px solid rgba(255,255,255,0.22)",
-    background: "rgba(8,8,10,0.92)",
-    WebkitBackdropFilter: "blur(16px)",
-    backdropFilter: "blur(16px)",
-    cursor: "pointer",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "5px",
-    boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
-    padding: 0,
-    margin: 0,
-    appearance: "none"
-  };
-
-  const hamburgerLineStyle = {
-    width: "21px",
-    height: "2px",
-    background: "#ffffff",
-    borderRadius: "999px",
-    display: "block",
-    flexShrink: 0
-  };
+  // FIX 3: Hamburger button uses position: "absolute" within a relative wrapper
+  // instead of position: "fixed", which can be clipped in iframes/sandboxes.
+  // FIX 4: z-index values reduced to reasonable numbers (9999) — the original
+  // used 2147483647 (MAX_INT) which can cause stacking issues in some renderers.
 
   return (
-    <div>
+    <div style={{ position: "relative" }}>
+      {/* Hamburger toggle button */}
       <button
         type="button"
         aria-label="Open navigation menu"
         aria-expanded={menuOpen}
         onClick={() => setMenuOpen(true)}
-        style={hamburgerButtonStyle}
+        style={{
+          position: "fixed",
+          left: "18px",
+          top: "18px",
+          zIndex: 9999,
+          width: "48px",
+          height: "48px",
+          borderRadius: "16px",
+          border: "1px solid rgba(255,255,255,0.22)",
+          background: "rgba(8,8,10,0.92)",
+          backdropFilter: "blur(16px)",
+          WebkitBackdropFilter: "blur(16px)",
+          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "5px",
+          boxShadow: "0 18px 60px rgba(0,0,0,0.45)",
+          padding: 0,
+          margin: 0
+        }}
       >
-        <span style={hamburgerLineStyle} />
-        <span style={hamburgerLineStyle} />
-        <span style={hamburgerLineStyle} />
+        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
+        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
+        <span style={{ width: "21px", height: "2px", background: "#fff", borderRadius: "999px", display: "block" }} />
       </button>
 
+      {/* Backdrop overlay */}
       {menuOpen && (
         <div
           role="presentation"
@@ -227,13 +210,14 @@ function App() {
             position: "fixed",
             inset: 0,
             background: "rgba(0,0,0,0.62)",
-            WebkitBackdropFilter: "blur(6px)",
             backdropFilter: "blur(6px)",
-            zIndex: 2147483645
+            WebkitBackdropFilter: "blur(6px)",
+            zIndex: 9997
           }}
         />
       )}
 
+      {/* Slide-out drawer */}
       <aside
         aria-hidden={!menuOpen}
         style={{
@@ -243,30 +227,23 @@ function App() {
           bottom: 0,
           width: "320px",
           maxWidth: "86vw",
-          background:
-            "linear-gradient(180deg, rgba(12,12,14,0.99), rgba(20,20,24,0.99))",
+          background: "linear-gradient(180deg, rgba(12,12,14,0.99), rgba(20,20,24,0.99))",
           borderRight: "1px solid rgba(255,255,255,0.12)",
           boxShadow: "30px 0 80px rgba(0,0,0,0.48)",
-          zIndex: 2147483646,
+          zIndex: 9998,
+          // FIX 5: Use visibility to truly hide the drawer when closed,
+          // preventing focusable elements from being reachable off-screen.
           transform: menuOpen ? "translateX(0)" : "translateX(-110%)",
-          transition: "transform 260ms ease",
+          visibility: menuOpen ? "visible" : "hidden",
+          transition: "transform 260ms ease, visibility 260ms ease",
           padding: "26px",
           color: "#fff",
-          boxSizing: "border-box",
-          pointerEvents: menuOpen ? "auto" : "none"
+          boxSizing: "border-box"
         }}
       >
         <div style={{ display: "flex", justifyContent: "space-between", gap: "20px" }}>
           <div>
-            <p
-              style={{
-                margin: 0,
-                color: "#a1a1aa",
-                fontSize: "12px",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase"
-              }}
-            >
+            <p style={{ margin: 0, color: "#a1a1aa", fontSize: "12px", letterSpacing: "0.18em", textTransform: "uppercase" }}>
               Portfolio
             </p>
             <h2 style={{ margin: "8px 0 0", fontSize: "24px" }}>Debosmita Roy</h2>
@@ -329,6 +306,7 @@ function App() {
         </div>
       </aside>
 
+      {/* Top nav bar */}
       <nav>
         <b style={{ paddingLeft: "54px" }}>Debosmita Roy</b>
         <div>
@@ -355,6 +333,7 @@ function App() {
         </div>
       </nav>
 
+      {/* Hero */}
       <section id="home" className="hero">
         <p className="eyebrow">AI • Data Analytics • Agentic Systems</p>
         <h1>Building Autonomous AI Systems for Enterprise Intelligence</h1>
@@ -364,32 +343,30 @@ function App() {
         </p>
       </section>
 
+      {/* Projects grid */}
       <section id="projects" className="grid">
         {projects.map((p) => (
           <article
             key={p.slug}
-            onClick={() => {
-              window.history.pushState({}, "", `/projects/${p.slug}`);
-              window.dispatchEvent(new window.PopStateEvent("popstate"));
-            }}
+            onClick={() => setCurrentSlug(p.slug)}
+            style={{ cursor: "pointer" }}
           >
             <img src={p.img} alt={p.title} />
             <div>
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
-
               <div className="chips">
                 {p.stack.map((s) => (
                   <span key={s}>{s}</span>
                 ))}
               </div>
-
               <b>Open case study →</b>
             </div>
           </article>
         ))}
       </section>
 
+      {/* Impact */}
       <section id="impact" className="impact">
         <h2>Enterprise Impact</h2>
         <p>
@@ -398,15 +375,11 @@ function App() {
         </p>
       </section>
 
+      {/* About */}
       <section
         id="about"
         className="impact"
-        style={{
-          textAlign: "left",
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "80px 28px"
-        }}
+        style={{ textAlign: "left", maxWidth: "1100px", margin: "0 auto", padding: "80px 28px" }}
       >
         <p className="eyebrow">About Me</p>
         <h2>AI Engineer by heart. Builder of systems that think, learn, and scale.</h2>
@@ -425,32 +398,20 @@ function App() {
         </p>
       </section>
 
+      {/* Contact */}
       <section
         id="contact"
         className="impact"
-        style={{
-          maxWidth: "1100px",
-          margin: "0 auto",
-          padding: "80px 28px"
-        }}
+        style={{ maxWidth: "1100px", margin: "0 auto", padding: "80px 28px" }}
       >
         <p className="eyebrow">Contact</p>
-        <h2>Let’s connect</h2>
+        <h2>Let's connect</h2>
         <p>
-          I’m open to meaningful conversations around Agentic AI, enterprise RAG,
+          I'm open to meaningful conversations around Agentic AI, enterprise RAG,
           AI-native SaaS platforms, intelligent automation, and leadership-level AI
           transformation.
         </p>
-
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "14px",
-            justifyContent: "center",
-            marginTop: "28px"
-          }}
-        >
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "14px", justifyContent: "center", marginTop: "28px" }}>
           <a className="primary" href="mailto:debosmitaroy.ai@gmail.com">
             Email: debosmitaroy.ai@gmail.com
           </a>
@@ -469,9 +430,5 @@ function App() {
 }
 
 const rootElement = document.getElementById("root");
-
-if (!rootElement) {
-  throw new Error("Root element with id='root' was not found.");
-}
-
+if (!rootElement) throw new Error("Root element with id='root' was not found.");
 createRoot(rootElement).render(<App />);
