@@ -4,7 +4,7 @@ import { Github, ArrowRight } from "lucide-react";
 import "./styles.css";
 
 const projects = [
-  { slug: "cogniintel", title: "CogniIntel", desc: "Autonomous enterprise knowledge extraction using multi-agent RAG systems.", img: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/cogniintel/README.md", stack: ["RAG", "FAISS-like retrieval", "Agent orchestration"], caseStudy: `CogniIntel is a multi-agent RAG system designed to unify fragmented enterprise knowledge.
+  { slug: "cogniintel", title: "CogniIntel", desc: "Autonomous enterprise knowledge extraction using multi-agent RAG systems.", img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c", github: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/cogniintel/README.md", stack: ["RAG", "FAISS-like retrieval", "Agent orchestration"], caseStudy: `CogniIntel is a multi-agent RAG system designed to unify fragmented enterprise knowledge.
 
 Implementation included in this repo:
 - Document ingestion over policy and support datasets
