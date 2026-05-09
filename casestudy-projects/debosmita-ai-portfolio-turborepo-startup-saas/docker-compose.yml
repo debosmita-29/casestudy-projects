@@ -1,0 +1,97 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: portfolio_ai
+      POSTGRES_USER: portfolio
+      POSTGRES_PASSWORD: portfolio
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  web:
+    build: ./apps/web
+    ports:
+      - "3000:80"
+  dashboard:
+    build: ./apps/dashboard
+    ports:
+      - "3001:3001"
+    environment:
+      NEXT_PUBLIC_API_BASE: http://localhost
+  cogniintel:
+    build: ./apps/cogniintel
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: postgresql://portfolio:portfolio@postgres:5432/portfolio_ai
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      API_KEY: ${API_KEY:-demo-api-key}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      - postgres
+      - redis
+  quantumroute-ai:
+    build: ./apps/quantumroute-ai
+    ports:
+      - "8002:8002"
+    environment:
+      DATABASE_URL: postgresql://portfolio:portfolio@postgres:5432/portfolio_ai
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      API_KEY: ${API_KEY:-demo-api-key}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      - postgres
+      - redis
+  agentops-sentinel:
+    build: ./apps/agentops-sentinel
+    ports:
+      - "8003:8003"
+    environment:
+      DATABASE_URL: postgresql://portfolio:portfolio@postgres:5432/portfolio_ai
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      API_KEY: ${API_KEY:-demo-api-key}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      - postgres
+      - redis
+  insightforge:
+    build: ./apps/insightforge
+    ports:
+      - "8004:8004"
+    environment:
+      DATABASE_URL: postgresql://portfolio:portfolio@postgres:5432/portfolio_ai
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      API_KEY: ${API_KEY:-demo-api-key}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      - postgres
+      - redis
+  neurorecruit:
+    build: ./apps/neurorecruit
+    ports:
+      - "8005:8005"
+    environment:
+      DATABASE_URL: postgresql://portfolio:portfolio@postgres:5432/portfolio_ai
+      REDIS_URL: redis://redis:6379/0
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-change-me}
+      API_KEY: ${API_KEY:-demo-api-key}
+      LLM_PROVIDER: ${LLM_PROVIDER:-mock}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    depends_on:
+      - postgres
+      - redis
+volumes:
+  pgdata:

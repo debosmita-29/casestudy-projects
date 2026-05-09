@@ -1,0 +1,5 @@
+resource_id,skills,capacity_hours,cost_per_hour
+R001,"rag,python,data-engineering",18,95
+R002,"frontend,react,typescript",12,85
+R003,"observability,security,platform",14,105
+R004,"data-engineering,python,analytics",22,90

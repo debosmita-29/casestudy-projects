@@ -1,0 +1,1 @@
+Enterprise AI governance requires grounded answers, source citations, retrieval logs, and human review for high-impact decisions. Knowledge workers retrieve information faster when AI indexes documents and returns evidence-backed answers.

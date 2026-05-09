@@ -1,0 +1,7 @@
+date,region,product,revenue,orders,customer_segment
+2026-01-03,North America,AI Workflow Suite,128000,42,Enterprise
+2026-01-05,EMEA,Data Quality Cloud,97000,36,Mid Market
+2026-01-07,APAC,AgentOps Platform,88000,28,Enterprise
+2026-02-02,North America,AgentOps Platform,152000,51,Enterprise
+2026-02-12,EMEA,AI Workflow Suite,110000,40,Enterprise
+2026-03-14,LATAM,Data Quality Cloud,64000,26,SMB

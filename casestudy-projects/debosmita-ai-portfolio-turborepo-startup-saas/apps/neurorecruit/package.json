@@ -1,0 +1,11 @@
+{
+  "name": "@portfolio/neurorecruit",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "python src/main.py",
+    "build": "python src/main.py",
+    "lint": "python -m py_compile src/main.py",
+    "test": "python src/main.py"
+  }
+}
