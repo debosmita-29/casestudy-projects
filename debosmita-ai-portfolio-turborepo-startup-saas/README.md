@@ -1,4 +1,4 @@
-# Debosmita Roy AI SaaS Portfolio Turborepo
+# AI SaaS Projects - Enterprise Grade
 
 Production-grade startup demo monorepo containing a portfolio web app, AI SaaS dashboard, and five executable FastAPI AI products.
 
