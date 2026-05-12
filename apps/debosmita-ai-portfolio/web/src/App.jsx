@@ -117,10 +117,174 @@ const pages = {
   resources: "Resources"
 };
 
+const newsletterContent = {
+  slug: "nemoclaw-future-agentic-ai",
+
+  title: "What NemoClaw Teaches Us About the Future of Agentic AI",
+
+  subtitle:
+    "Why the next generation of AI systems will be operational, adaptive, and environment-aware.",
+
+  readTime: "6 min read",
+
+  content: `
+Most AI systems today are still fundamentally reactive.
+
+They answer questions.
+Generate text.
+Summarize documents.
+Produce outputs when prompted.
+
+But the next generation of AI systems will not simply respond.
+They will observe, reason, adapt, recover, and continuously operate inside dynamic environments.
+
+That shift changes everything.
+
+NemoClaw is my teaching framework for understanding what this new generation of AI systems may look like.
+
+Not as another chatbot.
+Not as another prompt wrapper.
+But as a resilient operational intelligence architecture.
+
+The biggest misconception in AI today is that better prompts alone create intelligent systems.
+
+They do not.
+
+Production-grade AI systems require memory, orchestration, telemetry, evaluation, feedback loops, and environmental awareness.
+
+Without those capabilities, most AI agents remain fragile demos.
+
+This is why many enterprise AI initiatives fail after initial excitement.
+
+The problem is rarely model intelligence alone.
+
+The real challenge is operational intelligence.
+
+Modern AI agents break because they lose context, fail silently, hallucinate tool outputs, and cannot recover from unexpected workflow states.
+
+Many systems today still operate like isolated reasoning engines disconnected from the environments they are supposed to support.
+
+NemoClaw represents a different philosophy.
+
+An environment-aware agent should understand signals beyond the immediate prompt.
+
+It should understand:
+
+• system state
+• workflow history
+• operational telemetry
+• user intent persistence
+• feedback loops
+• tool reliability
+• failure patterns
+• governance boundaries
+
+This is where the future of agentic AI begins.
+
+The next evolution of AI systems will involve orchestration layers capable of coordinating specialized agents together.
+
+One agent may retrieve knowledge.
+Another may validate evidence.
+Another may score risk.
+Another may monitor observability signals.
+Another may summarize actions for human review.
+
+The intelligence emerges not from a single model, but from coordinated operational behavior.
+
+This is extremely important for enterprise systems.
+
+Enterprises do not simply need AI that sounds intelligent.
+
+They need AI systems that are:
+
+• observable
+• traceable
+• governable
+• resilient
+• measurable
+• explainable
+• recoverable
+
+Without these properties, AI cannot safely scale inside operational ecosystems.
+
+This is why observability becomes one of the most important foundations of modern agentic systems.
+
+In traditional software systems, observability helps engineers understand failures, latency, bottlenecks, and system health.
+
+In AI systems, observability must evolve further.
+
+We need visibility into:
+
+• hallucination patterns
+• retrieval quality
+• reasoning traces
+• tool-call reliability
+• agent coordination behavior
+• prompt drift
+• memory corruption
+• context fragmentation
+
+The future AI stack will increasingly resemble distributed systems engineering.
+
+This is where many organizations are currently underestimating the complexity ahead.
+
+Most current AI discussions still focus heavily on prompts and models.
+
+But the long-term competitive advantage will come from operational architectures.
+
+The winners will be the organizations that can design systems capable of continuous adaptation.
+
+NemoClaw also introduces the idea of feedback-native intelligence.
+
+A modern AI system should not operate as a one-time reasoning engine.
+
+It should continuously learn from outcomes.
+
+Did the workflow succeed?
+Did the user correct the response?
+Did the retrieval contain contradictions?
+Did a downstream system fail?
+Did the orchestration layer recover correctly?
+
+These signals matter enormously.
+
+Over time, feedback-aware systems become operationally smarter.
+
+Another major shift will involve memory.
+
+Most AI systems today still operate with extremely limited continuity.
+
+But future systems will increasingly use memory graphs, persistent context layers, and long-term interaction histories.
+
+This changes how agents reason.
+
+Instead of isolated responses, they begin operating with accumulated situational awareness.
+
+This creates opportunities for:
+
+• adaptive workflows
+• personalized orchestration
+• autonomous recovery
+• proactive recommendations
+• operational prediction
+
+This is where AI starts moving from conversational systems toward operational systems.
+
+And that transition is the most important shift happening in AI engineering right now.
+
+The future of AI will not belong to systems that simply generate answers.
+
+It will belong to systems that can observe, adapt, recover, coordinate, and continuously operate under real-world constraints.
+
+That is the direction NemoClaw is designed to explore.
+`
+};
+
 export default function App() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeProjectSlug, setActiveProjectSlug] = useState(null);
+  const [selectedArticle, setSelectedArticle] = useState(null);
 
   const openCaseStudy = (slug) => {
     setActiveProjectSlug(slug);
@@ -129,6 +293,20 @@ export default function App() {
     window.history.replaceState({ page: "caseStudy", slug }, "", `#project-${slug}`);
     setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   };
+
+  const openArticle = (article) => {
+  setSelectedArticle(article);
+  setPage("article");
+  setMenuOpen(false);
+
+  window.history.replaceState(
+    { page: "article", slug: article.slug },
+    "",
+    `#writing-${article.slug}`
+  );
+
+  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+};
 
   useEffect(() => {
     const openFromHash = () => {
@@ -225,7 +403,7 @@ export default function App() {
           goToPage={goToPage}
         />
       )}
-      {page === "writing" && <WritingPage />}
+      {page === "writing" && <WritingPage openArticle={openArticle} />}
       {page === "speaking" && <SpeakingPage />}
       {page === "resources" && <ResourcesPage />}
       {page === "contact" && <ContactPage />}
@@ -233,6 +411,12 @@ export default function App() {
       {page === "terms" && <TermsPage />}
       {page === "home" && <NewsletterSection />}
       {page === "home" && <SpotifyPlaylistSection />}
+      {page === "article" && (
+        <ArticlePage
+          article={selectedArticle}
+          goToPage={goToPage}
+        />
+      )}
       <Footer goToPage={goToPage} />
     </div>
   );
@@ -447,6 +631,41 @@ function CaseStudyPage({ project, goToPage }) {
   );
 }
 
+function ArticlePage({ article, goToPage }) {
+  if (!article) return null;
+
+  return (
+    <main className="mx-auto max-w-4xl px-6 py-20">
+      <button
+        onClick={() => goToPage("writing")}
+        className="mb-10 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+      >
+        ← Back to Writing
+      </button>
+
+      <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 md:p-14">
+        <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-[#caa177]">
+          <span>Newsletter</span>
+          <span>•</span>
+          <span>{article.readTime}</span>
+        </div>
+
+        <h1 className="mt-6 text-4xl font-light leading-tight text-white md:text-6xl">
+          {article.title}
+        </h1>
+
+        <p className="mt-6 text-xl leading-9 text-zinc-300">
+          {article.subtitle}
+        </p>
+
+        <div className="mt-12 space-y-7 text-lg leading-9 text-zinc-400 whitespace-pre-line">
+          {article.content}
+        </div>
+      </div>
+    </main>
+  );
+}
+
 // function WritingPage() {
 //   const posts = [
 //     "What it takes to build production-grade Agentic AI",
@@ -580,18 +799,19 @@ function NewsletterFeature() {
   );
 }
 
-function WritingPage() {
+function WritingPage({ openArticle }) {
   <NewsletterFeature />
   const posts = [
-    {
-      title: "What NemoClaw Teaches Us About the Future of Agentic AI",
-      type: "Featured Newsletter",
-      readTime: "6 min read",
-      body:
-        "A teaching-first introduction to environment-aware agents, adaptive orchestration, memory, feedback loops, and why the future of AI is operational — not just conversational.",
-      tags: ["NemoClaw", "Agentic AI", "AI Architecture"],
-      featured: true,
-    },
+  {
+    title: newsletterContent.title,
+    slug: newsletterContent.slug,
+    type: "Featured Newsletter",
+    readTime: "6 min read",
+    body:
+      "A teaching-first introduction to environment-aware agents, adaptive orchestration, memory, feedback loops, and why the future of AI is operational — not just conversational.",
+    tags: ["NemoClaw", "Agentic AI", "AI Architecture"],
+    featured: true,
+  },
     {
       title: "Why Most Agentic AI Systems Fail in Production",
       type: "Architecture Note",
@@ -628,9 +848,45 @@ function WritingPage() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {posts.map((post) => (
-          <article
+          // <article
+          //   key={post.title}
+          //   className={`rounded-3xl border p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60 ${
+          //     post.featured
+          //       ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
+          //       : "border-zinc-800 bg-zinc-950/80"
+          //   }`}
+          // >
+          //   <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+          //     <span>{post.type}</span>
+          //     <span>•</span>
+          //     <span>{post.readTime}</span>
+          //   </div>
+
+          //   <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
+          //   <p className="mt-4 text-zinc-400">{post.body}</p>
+
+          //   <div className="mt-6 flex flex-wrap gap-2">
+          //     {post.tags.map((tag) => (
+          //       <span
+          //         key={tag}
+          //         className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
+          //       >
+          //         {tag}
+          //       </span>
+          //     ))}
+          //   </div>
+          // </article>
+          <button
             key={post.title}
-            className={`rounded-3xl border p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60 ${
+            type="button"
+            onClick={() => {
+              if (post.slug) {
+                openArticle({
+                  ...newsletterContent,
+                });
+              }
+            }}
+            className={`group rounded-3xl border p-7 text-left transition duration-300 hover:-translate-y-1 hover:border-[#caa177]/60 ${
               post.featured
                 ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
                 : "border-zinc-800 bg-zinc-950/80"
@@ -642,8 +898,13 @@ function WritingPage() {
               <span>{post.readTime}</span>
             </div>
 
-            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-            <p className="mt-4 text-zinc-400">{post.body}</p>
+            <h2 className="text-2xl font-semibold text-white transition group-hover:text-[#e2c19f]">
+              {post.title}
+            </h2>
+
+            <p className="mt-4 leading-7 text-zinc-400">
+              {post.body}
+            </p>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
@@ -655,7 +916,14 @@ function WritingPage() {
                 </span>
               ))}
             </div>
-          </article>
+
+            {post.slug && (
+              <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-[#caa177] transition group-hover:translate-x-1">
+                Read Full Article
+                <span>→</span>
+              </div>
+            )}
+          </button>
         ))}
       </div>
 
