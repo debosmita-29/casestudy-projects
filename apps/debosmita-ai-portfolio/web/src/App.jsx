@@ -447,53 +447,382 @@ function CaseStudyPage({ project, goToPage }) {
   );
 }
 
+// function WritingPage() {
+//   const posts = [
+//     "What it takes to build production-grade Agentic AI",
+//     "Why enterprise RAG needs observability, not just retrieval",
+//     "From test automation to autonomous engineering intelligence",
+//     "How AI-native SaaS products should be architected"
+//   ];
+
+//   return (
+//     <PageShell eyebrow="Writing" title="Notes on AI engineering, agentic systems, and platform thinking.">
+//       <div className="grid gap-5">
+//         {posts.map((post) => (
+//           <article key={post} className="rounded-3xl border border-zinc-800 bg-zinc-950 p-7 transition hover:border-zinc-600">
+//             <h2 className="text-2xl font-bold">{post}</h2>
+//             <p className="mt-3 leading-7 text-zinc-400">A practical perspective on building useful, reliable, and enterprise-ready AI systems.</p>
+//           </article>
+//         ))}
+//       </div>
+//     </PageShell>
+//   );
+// }
+
+function NewsletterFeature() {
+  return (
+    <section className="mt-16 overflow-hidden rounded-[32px] border border-[#caa177]/30 bg-gradient-to-br from-[#151515] via-[#101010] to-black">
+      <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+        <div className="p-8 md:p-12">
+          <div className="inline-flex items-center rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs uppercase tracking-[0.25em] text-cyan-200">
+            Newsletter • Issue 001
+          </div>
+
+          <h2 className="mt-6 max-w-3xl text-4xl font-semibold leading-tight text-white md:text-5xl">
+            What NemoClaw Teaches Us About the Future of Agentic AI
+          </h2>
+
+          <p className="mt-6 max-w-3xl text-lg leading-8 text-zinc-300">
+            Most AI systems today are still reactive.
+            They answer questions, summarize content, or generate outputs on demand.
+            But the next generation of AI systems will do much more:
+            they will observe environments, reason continuously,
+            coordinate actions, recover from failures,
+            and evolve through feedback loops.
+          </p>
+
+          <p className="mt-5 max-w-3xl leading-8 text-zinc-400">
+            NemoClaw is my teaching framework for explaining how
+            resilient, operational, environment-aware agentic systems
+            are beginning to emerge across engineering platforms,
+            developer tooling, observability systems,
+            and enterprise AI infrastructure.
+          </p>
+
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {[
+              "Adaptive orchestration",
+              "Environment-aware agents",
+              "AI observability",
+              "Feedback-driven workflows",
+              "Long-term memory systems",
+              "Human-in-the-loop governance",
+            ].map((item) => (
+              <div
+                key={item}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] px-5 py-4 text-sm text-zinc-300 backdrop-blur"
+              >
+                {item}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex flex-wrap gap-4">
+            <button className="rounded-2xl bg-[#caa177] px-6 py-3 text-sm font-semibold text-black transition hover:scale-[1.02] hover:bg-[#ddb892]">
+              Read Full Newsletter
+            </button>
+
+            <button className="rounded-2xl border border-zinc-700 px-6 py-3 text-sm font-semibold text-zinc-200 transition hover:border-cyan-300 hover:text-cyan-200">
+              Subscribe
+            </button>
+          </div>
+        </div>
+
+        <div className="relative hidden overflow-hidden border-l border-white/5 lg:block">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(202,161,119,0.18),transparent_55%)]" />
+
+          <div className="absolute -right-20 top-10 h-72 w-72 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#caa177]/10 blur-3xl" />
+
+          <div className="relative flex h-full flex-col justify-between p-10">
+            <div>
+              <p className="text-xs uppercase tracking-[0.3em] text-zinc-500">
+                Teaching Focus
+              </p>
+
+              <div className="mt-8 space-y-5">
+                {[
+                  "Why current AI agents fail in production",
+                  "The evolution from reactive AI to operational AI",
+                  "Memory graphs & orchestration layers",
+                  "Observability-driven AI systems",
+                  "Enterprise readiness for autonomous workflows",
+                ].map((point) => (
+                  <div
+                    key={point}
+                    className="rounded-2xl border border-white/10 bg-black/30 p-5"
+                  >
+                    <p className="text-sm leading-7 text-zinc-300">
+                      {point}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 rounded-3xl border border-cyan-300/20 bg-cyan-300/5 p-6">
+              <p className="text-sm leading-7 text-zinc-300">
+                “The future of AI will not belong to systems
+                that simply generate answers.
+                It will belong to systems that can observe,
+                adapt, recover, coordinate, and operate
+                continuously under real-world constraints.”
+              </p>
+
+              <div className="mt-5 text-xs uppercase tracking-[0.22em] text-cyan-200">
+                — Debosmita Roy
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function WritingPage() {
+  <NewsletterFeature />
   const posts = [
-    "What it takes to build production-grade Agentic AI",
-    "Why enterprise RAG needs observability, not just retrieval",
-    "From test automation to autonomous engineering intelligence",
-    "How AI-native SaaS products should be architected"
+    {
+      title: "What NemoClaw Teaches Us About the Future of Agentic AI",
+      type: "Featured Newsletter",
+      readTime: "6 min read",
+      body:
+        "A teaching-first introduction to environment-aware agents, adaptive orchestration, memory, feedback loops, and why the future of AI is operational — not just conversational.",
+      tags: ["NemoClaw", "Agentic AI", "AI Architecture"],
+      featured: true,
+    },
+    {
+      title: "Why Most Agentic AI Systems Fail in Production",
+      type: "Architecture Note",
+      readTime: "5 min read",
+      body:
+        "A practical breakdown of context fragmentation, brittle tool-calling, missing observability, weak evaluation loops, and governance gaps.",
+      tags: ["Production AI", "Reliability", "Agents"],
+    },
+    {
+      title: "Enterprise RAG Needs Observability, Not Just Retrieval",
+      type: "Technical Essay",
+      readTime: "4 min read",
+      body:
+        "How retrieval quality, answer grounding, telemetry, source traceability, and evaluation should work together in enterprise AI systems.",
+      tags: ["RAG", "Observability", "LLMOps"],
+    },
+    {
+      title: "From Test Automation to Autonomous Engineering Intelligence",
+      type: "Builder Journal",
+      readTime: "5 min read",
+      body:
+        "How modern QA, SDLC automation, build intelligence, and agentic workflows can evolve into AI-native engineering platforms.",
+      tags: ["SDLC AI", "Build Agents", "Automation"],
+    },
   ];
 
   return (
-    <PageShell eyebrow="Writing" title="Notes on AI engineering, agentic systems, and platform thinking.">
-      <div className="grid gap-5">
+    <PageShell eyebrow="Writing" title="AI Notes, Architecture Thinking & Builder Essays">
+      <p className="mb-10 max-w-3xl text-zinc-400">
+        I write to teach how AI systems are designed, evaluated, observed, and productized.
+        My focus is practical: how to move from interesting demos to reliable, explainable,
+        production-ready AI systems.
+      </p>
+
+      <div className="grid gap-6 md:grid-cols-2">
         {posts.map((post) => (
-          <article key={post} className="rounded-3xl border border-zinc-800 bg-zinc-950 p-7 transition hover:border-zinc-600">
-            <h2 className="text-2xl font-bold">{post}</h2>
-            <p className="mt-3 leading-7 text-zinc-400">A practical perspective on building useful, reliable, and enterprise-ready AI systems.</p>
+          <article
+            key={post.title}
+            className={`rounded-3xl border p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60 ${
+              post.featured
+                ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
+                : "border-zinc-800 bg-zinc-950/80"
+            }`}
+          >
+            <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+              <span>{post.type}</span>
+              <span>•</span>
+              <span>{post.readTime}</span>
+            </div>
+
+            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
+            <p className="mt-4 text-zinc-400">{post.body}</p>
+
+            <div className="mt-6 flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </article>
         ))}
       </div>
+
+      <section className="mt-12 rounded-3xl border border-cyan-300/20 bg-cyan-300/5 p-8">
+        <p className="text-sm uppercase tracking-[0.25em] text-cyan-200">
+          First Newsletter
+        </p>
+        <h2 className="mt-3 text-3xl font-semibold text-white">
+          What NemoClaw Teaches Us About the Future of Agentic AI
+        </h2>
+        <p className="mt-5 text-zinc-300">
+          NemoClaw is my teaching lens for explaining the next generation of agentic
+          systems: AI that can observe signals, reason over context, use tools,
+          adapt to feedback, and recover when workflows fail.
+        </p>
+        <p className="mt-4 text-zinc-400">
+          Most AI products today are still reactive. They answer, summarize, or
+          autocomplete. The next wave will be operational: agents that understand
+          systems, coordinate actions, monitor their own outcomes, and stay aligned
+          with human intent.
+        </p>
+        <p className="mt-4 text-zinc-400">
+          Through NemoClaw, I will teach concepts like adaptive orchestration,
+          memory graphs, feedback loops, AI observability, human-in-the-loop
+          governance, and production readiness for multi-agent systems.
+        </p>
+      </section>
     </PageShell>
   );
 }
 
+// function SpeakingPage() {
+//   return (
+//     <PageShell eyebrow="Speaking" title="Invite me to talk about Agentic AI, enterprise RAG, and intelligent automation.">
+//       <div className="grid gap-8 md:grid-cols-3">
+//         {["Agentic AI Strategy", "Enterprise RAG Architecture", "AI-Powered Engineering Platforms"].map((topic) => (
+//           <div key={topic} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
+//             <h2 className="text-2xl font-bold">{topic}</h2>
+//             <p className="mt-4 leading-7 text-zinc-400">
+//               Executive-friendly and engineering-grounded talks designed to connect emerging AI capabilities to measurable business outcomes.
+//             </p>
+//           </div>
+//         ))}
+//       </div>
+//     </PageShell>
+//   );
+// }
+
 function SpeakingPage() {
+  const topics = [
+    {
+      title: "Agentic AI in Enterprise Engineering",
+      desc:
+        "How AI agents can support build intelligence, test generation, release confidence, and operational decision-making.",
+    },
+    {
+      title: "AI-Native Developer Platforms",
+      desc:
+        "How engineering teams can evolve from automation scripts to intelligent platforms that reason, recommend, and act.",
+    },
+    {
+      title: "RAG, Governance & Production Readiness",
+      desc:
+        "How to design trustworthy RAG systems with source grounding, evaluation, observability, and responsible AI controls.",
+    },
+    {
+      title: "Observability-Driven AI Systems",
+      desc:
+        "Why agent telemetry, tool-call traces, feedback loops, and failure classification are essential for production AI.",
+    },
+  ];
+
   return (
-    <PageShell eyebrow="Speaking" title="Invite me to talk about Agentic AI, enterprise RAG, and intelligent automation.">
-      <div className="grid gap-8 md:grid-cols-3">
-        {["Agentic AI Strategy", "Enterprise RAG Architecture", "AI-Powered Engineering Platforms"].map((topic) => (
-          <div key={topic} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
-            <h2 className="text-2xl font-bold">{topic}</h2>
-            <p className="mt-4 leading-7 text-zinc-400">
-              Executive-friendly and engineering-grounded talks designed to connect emerging AI capabilities to measurable business outcomes.
-            </p>
+    <PageShell eyebrow="Speaking" title="Talks, Workshops & AI Leadership Sessions">
+      <p className="mb-10 max-w-3xl text-zinc-400">
+        I speak about AI through the lens of engineering execution: how to design,
+        adopt, govern, and scale AI systems inside real organizations.
+      </p>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {topics.map((topic) => (
+          <div
+            key={topic.title}
+            className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-7 transition hover:-translate-y-1 hover:border-[#caa177]/50"
+          >
+            <h2 className="text-2xl font-semibold text-white">{topic.title}</h2>
+            <p className="mt-4 text-zinc-400">{topic.desc}</p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-12 rounded-3xl border border-[#caa177]/30 bg-[#caa177]/10 p-8">
+        <h2 className="text-2xl font-semibold text-white">
+          Available Speaking Formats
+        </h2>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {["Executive Briefings", "Engineering Workshops", "AI Town Halls"].map((item) => (
+            <div key={item} className="rounded-2xl border border-white/10 bg-black/30 p-5 text-zinc-300">
+              {item}
+            </div>
+          ))}
+        </div>
       </div>
     </PageShell>
   );
 }
 
+// function ResourcesPage() {
+//   return (
+//     <PageShell eyebrow="Resources" title="AI systems, portfolio assets, and learning resources.">
+//       <div className="grid gap-6 md:grid-cols-2">
+//         {["GitHub AI SaaS Monorepo", "Agentic AI Portfolio", "RAG Architecture Notes", "AI Observability Checklist"].map((item) => (
+//           <div key={item} className="rounded-3xl border border-zinc-800 bg-zinc-950 p-7">
+//             <h2 className="text-2xl font-bold">{item}</h2>
+//             <p className="mt-3 leading-7 text-zinc-400">A resource designed to make AI architecture, implementation, and communication easier to understand.</p>
+//           </div>
+//         ))}
+//       </div>
+//     </PageShell>
+//   );
+// }
+
 function ResourcesPage() {
+  const resources = [
+    {
+      title: "Agentic AI Production Readiness Checklist",
+      desc:
+        "A practical checklist for evaluating orchestration, tools, memory, guardrails, telemetry, and failure recovery.",
+    },
+    {
+      title: "RAG Architecture Blueprint",
+      desc:
+        "A reference guide for ingestion, chunking, embeddings, retrieval, reranking, grounding, and evaluation.",
+    },
+    {
+      title: "AI Build Agent Design Notes",
+      desc:
+        "A systems-thinking guide for designing build agents that analyze pipelines, failures, code quality, and release risks.",
+    },
+    {
+      title: "Executive AI Adoption Scorecard",
+      desc:
+        "A leadership-friendly framework to assess business value, risk, maturity, governance, and adoption readiness.",
+    },
+  ];
+
   return (
-    <PageShell eyebrow="Resources" title="AI systems, portfolio assets, and learning resources.">
+    <PageShell eyebrow="Resources" title="Templates, Blueprints & Practical AI Guides">
+      <p className="mb-10 max-w-3xl text-zinc-400">
+        These resources are designed to help engineers, leaders, and builders move
+        from AI curiosity to AI execution.
+      </p>
+
       <div className="grid gap-6 md:grid-cols-2">
-        {["GitHub AI SaaS Monorepo", "Agentic AI Portfolio", "RAG Architecture Notes", "AI Observability Checklist"].map((item) => (
-          <div key={item} className="rounded-3xl border border-zinc-800 bg-zinc-950 p-7">
-            <h2 className="text-2xl font-bold">{item}</h2>
-            <p className="mt-3 leading-7 text-zinc-400">A resource designed to make AI architecture, implementation, and communication easier to understand.</p>
+        {resources.map((resource) => (
+          <div
+            key={resource.title}
+            className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-7 transition hover:-translate-y-1 hover:border-cyan-300/40"
+          >
+            <p className="mb-3 text-xs uppercase tracking-[0.22em] text-cyan-200">
+              Resource
+            </p>
+            <h2 className="text-2xl font-semibold text-white">{resource.title}</h2>
+            <p className="mt-4 text-zinc-400">{resource.desc}</p>
+            <button className="mt-6 rounded-2xl border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:border-cyan-300 hover:text-cyan-200">
+              Coming Soon →
+            </button>
           </div>
         ))}
       </div>
