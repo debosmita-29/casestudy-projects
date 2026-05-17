@@ -515,8 +515,6 @@ const newsletterContent = [
   }
 ];
 
-export default newsletterContent;
-
 export default function App() {
   const [page, setPage] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -895,99 +893,77 @@ function ArticlePage({ article, goToPage }) {
           {article.subtitle}
         </p>
 
-        <div className="mt-12 space-y-7 text-lg leading-9 text-zinc-400 whitespace-pre-line">
-          {article.content}
+        <div className="newsletter-article mt-12">
+             dangerouslySetInnerHTML={{ __html: article.content }}
         </div>
       </div>
     </main>
   );
 }
 
-function WritingPage() {
-  const [selectedPost, setSelectedPost] = useState(null);
-
-  if (selectedPost) {
-    return (
-      <PageShell eyebrow="Newsletter" title={selectedPost.title}>
-        <button
-          onClick={() => setSelectedPost(null)}
-          className="mb-8 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
-        >
-          ← Back to Writing
-        </button>
-
-        <div className="mb-8 text-sm uppercase tracking-[0.2em] text-[#caa177]">
-          {selectedPost.category} • {selectedPost.date} • {selectedPost.readTime}
-        </div>
-
-        {selectedPost.subtitle && (
-          <p className="mb-10 max-w-3xl text-xl leading-8 text-zinc-300">
-            {selectedPost.subtitle}
-          </p>
-        )}
-
-        <article
-          className="newsletter-article"
-          dangerouslySetInnerHTML={{ __html: selectedPost.content }}
-        />
-      </PageShell>
-    );
-  }
-
-  return (
-    <PageShell eyebrow="Writing" title="Ideas on AI, Systems & Engineering">
-      <div className="grid gap-6 md:grid-cols-2">
-        {newsletterContent.map((post) => (
-          <article
-            key={post.slug}
-            className={`newsletter-card ${
-              post.featured ? "md:col-span-2 border-[#caa177]/60" : ""
-            }`}
-          >
-            <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
-              <span>{post.category}</span>
-              <span>•</span>
-              <span>{post.readTime}</span>
-              <span>•</span>
-              <span>{post.date}</span>
-            </div>
-
-            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-
-            {post.subtitle && (
-              <p className="mt-3 text-zinc-400">{post.subtitle}</p>
-            )}
-
-            <p className="mt-4 text-zinc-500">{post.excerpt}</p>
-
-            <button
-              onClick={() => setSelectedPost(post)}
-              className="mt-6 rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]"
-            >
-              Read Newsletter →
-            </button>
-          </article>
-        ))}
-      </div>
-    </PageShell>
-  );
-}
-
 // function WritingPage() {
-//   const posts = [
-//     "What it takes to build production-grade Agentic AI",
-//     "Why enterprise RAG needs observability, not just retrieval",
-//     "From test automation to autonomous engineering intelligence",
-//     "How AI-native SaaS products should be architected"
-//   ];
+//   const [selectedPost, setSelectedPost] = useState(null);
+
+//   if (selectedPost) {
+//     return (
+//       <PageShell eyebrow="Newsletter" title={selectedPost.title}>
+//         <button
+//           onClick={() => setSelectedPost(null)}
+//           className="mb-8 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+//         >
+//           ← Back to Writing
+//         </button>
+
+//         <div className="mb-8 text-sm uppercase tracking-[0.2em] text-[#caa177]">
+//           {selectedPost.category} • {selectedPost.date} • {selectedPost.readTime}
+//         </div>
+
+//         {selectedPost.subtitle && (
+//           <p className="mb-10 max-w-3xl text-xl leading-8 text-zinc-300">
+//             {selectedPost.subtitle}
+//           </p>
+//         )}
+
+//         <article
+//           className="newsletter-article"
+//           dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+//         />
+//       </PageShell>
+//     );
+//   }
 
 //   return (
-//     <PageShell eyebrow="Writing" title="Notes on AI engineering, agentic systems, and platform thinking.">
-//       <div className="grid gap-5">
-//         {posts.map((post) => (
-//           <article key={post} className="rounded-3xl border border-zinc-800 bg-zinc-950 p-7 transition hover:border-zinc-600">
-//             <h2 className="text-2xl font-bold">{post}</h2>
-//             <p className="mt-3 leading-7 text-zinc-400">A practical perspective on building useful, reliable, and enterprise-ready AI systems.</p>
+//     <PageShell eyebrow="Writing" title="Ideas on AI, Systems & Engineering">
+//       <div className="grid gap-6 md:grid-cols-2">
+//         {newsletterContent.map((post) => (
+//           <article
+//             key={post.slug}
+//             className={`newsletter-card ${
+//               post.featured ? "md:col-span-2 border-[#caa177]/60" : ""
+//             }`}
+//           >
+//             <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+//               <span>{post.category}</span>
+//               <span>•</span>
+//               <span>{post.readTime}</span>
+//               <span>•</span>
+//               <span>{post.date}</span>
+//             </div>
+
+//             <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
+
+//             {post.subtitle && (
+//               <p className="mt-3 text-zinc-400">{post.subtitle}</p>
+//             )}
+
+//             <p className="mt-4 text-zinc-500">{post.excerpt}</p>
+
+//             <button
+//               onClick={() => setSelectedPost(post)}
+//               className="mt-6 rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]"
+//             >
+//               Read Newsletter →
+//             </button>
 //           </article>
 //         ))}
 //       </div>
