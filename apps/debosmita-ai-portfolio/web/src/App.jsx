@@ -1107,18 +1107,24 @@ function NewsletterFeature() {
 }
 
 function WritingPage({ openArticle }) {
-  <NewsletterFeature />
   const posts = [
-  {
-    title: newsletterContent.title,
-    slug: newsletterContent.slug,
-    type: "Featured Newsletter",
-    readTime: "6 min read",
-    body:
-      "A teaching-first introduction to environment-aware agents, adaptive orchestration, memory, feedback loops, and why the future of AI is operational — not just conversational.",
-    tags: ["NemoClaw", "Agentic AI", "AI Architecture"],
-    featured: true,
-  },
+    ...newsletterContent.map((newsletter, index) => ({
+      title: newsletter.title,
+      slug: newsletter.slug,
+      type: index === 0 ? "First Newsletter" : "Featured Newsletter",
+      readTime: newsletter.readTime,
+      body:
+        newsletter.excerpt ||
+        newsletter.subtitle ||
+        "A practical essay on AI architecture, agentic systems, enterprise intelligence, and production-ready AI.",
+      tags: [
+        newsletter.category || "Agentic AI",
+        "AI Architecture",
+        "Enterprise AI",
+      ],
+      featured: newsletter.featured || index === 0,
+      article: newsletter,
+    })),
     {
       title: "Why Most Agentic AI Systems Fail in Production",
       type: "Architecture Note",
@@ -1146,51 +1152,24 @@ function WritingPage({ openArticle }) {
   ];
 
   return (
-    <PageShell eyebrow="Writing" title="AI Notes, Architecture Thinking & Builder Essays">
+    <PageShell
+      eyebrow="Writing"
+      title="AI Notes, Architecture Thinking & Builder Essays"
+    >
       <p className="mb-10 max-w-3xl text-zinc-400">
-        I write to teach how AI systems are designed, evaluated, observed, and productized.
-        My focus is practical: how to move from interesting demos to reliable, explainable,
-        production-ready AI systems.
+        I write to teach how AI systems are designed, evaluated, observed, and
+        productized. My focus is practical: how to move from interesting demos
+        to reliable, explainable, production-ready AI systems.
       </p>
 
       <div className="grid gap-6 md:grid-cols-2">
         {posts.map((post) => (
-          // <article
-          //   key={post.title}
-          //   className={`rounded-3xl border p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60 ${
-          //     post.featured
-          //       ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
-          //       : "border-zinc-800 bg-zinc-950/80"
-          //   }`}
-          // >
-          //   <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
-          //     <span>{post.type}</span>
-          //     <span>•</span>
-          //     <span>{post.readTime}</span>
-          //   </div>
-
-          //   <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-          //   <p className="mt-4 text-zinc-400">{post.body}</p>
-
-          //   <div className="mt-6 flex flex-wrap gap-2">
-          //     {post.tags.map((tag) => (
-          //       <span
-          //         key={tag}
-          //         className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
-          //       >
-          //         {tag}
-          //       </span>
-          //     ))}
-          //   </div>
-          // </article>
           <button
-            key={post.title}
+            key={post.slug || post.title}
             type="button"
             onClick={() => {
-              if (post.slug) {
-                openArticle({
-                  ...newsletterContent,
-                });
+              if (post.article) {
+                openArticle(post.article);
               }
             }}
             className={`group rounded-3xl border p-7 text-left transition duration-300 hover:-translate-y-1 hover:border-[#caa177]/60 ${
@@ -1209,9 +1188,7 @@ function WritingPage({ openArticle }) {
               {post.title}
             </h2>
 
-            <p className="mt-4 leading-7 text-zinc-400">
-              {post.body}
-            </p>
+            <p className="mt-4 leading-7 text-zinc-400">{post.body}</p>
 
             <div className="mt-6 flex flex-wrap gap-2">
               {post.tags.map((tag) => (
@@ -1224,7 +1201,7 @@ function WritingPage({ openArticle }) {
               ))}
             </div>
 
-            {post.slug && (
+            {post.article && (
               <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-[#caa177] transition group-hover:translate-x-1">
                 Read Full Article
                 <span>→</span>
@@ -1236,45 +1213,179 @@ function WritingPage({ openArticle }) {
 
       <section className="mt-12 rounded-3xl border border-cyan-300/20 bg-cyan-300/5 p-8">
         <p className="text-sm uppercase tracking-[0.25em] text-cyan-200">
-          First Newsletter
+          Newsletter Series
         </p>
         <h2 className="mt-3 text-3xl font-semibold text-white">
-          What NemoClaw Teaches Us About the Future of Agentic AI
+          Agentic AI, RAG, Observability & Enterprise Intelligence
         </h2>
         <p className="mt-5 text-zinc-300">
-          NemoClaw is my teaching lens for explaining the next generation of agentic
-          systems: AI that can observe signals, reason over context, use tools,
-          adapt to feedback, and recover when workflows fail.
+          This writing series explores how AI systems evolve from reactive demos
+          into operational platforms that can observe signals, reason over
+          context, use tools, adapt to feedback, and recover when workflows fail.
         </p>
         <p className="mt-4 text-zinc-400">
-          Most AI products today are still reactive. They answer, summarize, or
-          autocomplete. The next wave will be operational: agents that understand
-          systems, coordinate actions, monitor their own outcomes, and stay aligned
-          with human intent.
-        </p>
-        <p className="mt-4 text-zinc-400">
-          Through NemoClaw, I will teach concepts like adaptive orchestration,
-          memory graphs, feedback loops, AI observability, human-in-the-loop
-          governance, and production readiness for multi-agent systems.
+          I will continue sharing practical architecture notes on adaptive
+          orchestration, memory graphs, RAG, AI observability,
+          human-in-the-loop governance, and production readiness for multi-agent
+          systems.
         </p>
       </section>
     </PageShell>
   );
 }
 
-// function SpeakingPage() {
+// function WritingPage({ openArticle }) {
+//   <NewsletterFeature />
+//   const posts = [
+//   {
+//     title: newsletterContent.title,
+//     slug: newsletterContent.slug,
+//     type: "Featured Newsletter",
+//     readTime: "6 min read",
+//     body:
+//       "A teaching-first introduction to environment-aware agents, adaptive orchestration, memory, feedback loops, and why the future of AI is operational — not just conversational.",
+//     tags: ["NemoClaw", "Agentic AI", "AI Architecture"],
+//     featured: true,
+//   },
+//     {
+//       title: "Why Most Agentic AI Systems Fail in Production",
+//       type: "Architecture Note",
+//       readTime: "5 min read",
+//       body:
+//         "A practical breakdown of context fragmentation, brittle tool-calling, missing observability, weak evaluation loops, and governance gaps.",
+//       tags: ["Production AI", "Reliability", "Agents"],
+//     },
+//     {
+//       title: "Enterprise RAG Needs Observability, Not Just Retrieval",
+//       type: "Technical Essay",
+//       readTime: "4 min read",
+//       body:
+//         "How retrieval quality, answer grounding, telemetry, source traceability, and evaluation should work together in enterprise AI systems.",
+//       tags: ["RAG", "Observability", "LLMOps"],
+//     },
+//     {
+//       title: "From Test Automation to Autonomous Engineering Intelligence",
+//       type: "Builder Journal",
+//       readTime: "5 min read",
+//       body:
+//         "How modern QA, SDLC automation, build intelligence, and agentic workflows can evolve into AI-native engineering platforms.",
+//       tags: ["SDLC AI", "Build Agents", "Automation"],
+//     },
+//   ];
+
 //   return (
-//     <PageShell eyebrow="Speaking" title="Invite me to talk about Agentic AI, enterprise RAG, and intelligent automation.">
-//       <div className="grid gap-8 md:grid-cols-3">
-//         {["Agentic AI Strategy", "Enterprise RAG Architecture", "AI-Powered Engineering Platforms"].map((topic) => (
-//           <div key={topic} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
-//             <h2 className="text-2xl font-bold">{topic}</h2>
+//     <PageShell eyebrow="Writing" title="AI Notes, Architecture Thinking & Builder Essays">
+//       <p className="mb-10 max-w-3xl text-zinc-400">
+//         I write to teach how AI systems are designed, evaluated, observed, and productized.
+//         My focus is practical: how to move from interesting demos to reliable, explainable,
+//         production-ready AI systems.
+//       </p>
+
+//       <div className="grid gap-6 md:grid-cols-2">
+//         {posts.map((post) => (
+//           // <article
+//           //   key={post.title}
+//           //   className={`rounded-3xl border p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60 ${
+//           //     post.featured
+//           //       ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
+//           //       : "border-zinc-800 bg-zinc-950/80"
+//           //   }`}
+//           // >
+//           //   <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+//           //     <span>{post.type}</span>
+//           //     <span>•</span>
+//           //     <span>{post.readTime}</span>
+//           //   </div>
+
+//           //   <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
+//           //   <p className="mt-4 text-zinc-400">{post.body}</p>
+
+//           //   <div className="mt-6 flex flex-wrap gap-2">
+//           //     {post.tags.map((tag) => (
+//           //       <span
+//           //         key={tag}
+//           //         className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
+//           //       >
+//           //         {tag}
+//           //       </span>
+//           //     ))}
+//           //   </div>
+//           // </article>
+//           <button
+//             key={post.title}
+//             type="button"
+//             onClick={() => {
+//               if (post.slug) {
+//                 openArticle({
+//                   ...newsletterContent,
+//                 });
+//               }
+//             }}
+//             className={`group rounded-3xl border p-7 text-left transition duration-300 hover:-translate-y-1 hover:border-[#caa177]/60 ${
+//               post.featured
+//                 ? "border-[#caa177]/50 bg-[#caa177]/10 md:col-span-2"
+//                 : "border-zinc-800 bg-zinc-950/80"
+//             }`}
+//           >
+//             <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+//               <span>{post.type}</span>
+//               <span>•</span>
+//               <span>{post.readTime}</span>
+//             </div>
+
+//             <h2 className="text-2xl font-semibold text-white transition group-hover:text-[#e2c19f]">
+//               {post.title}
+//             </h2>
+
 //             <p className="mt-4 leading-7 text-zinc-400">
-//               Executive-friendly and engineering-grounded talks designed to connect emerging AI capabilities to measurable business outcomes.
+//               {post.body}
 //             </p>
-//           </div>
+
+//             <div className="mt-6 flex flex-wrap gap-2">
+//               {post.tags.map((tag) => (
+//                 <span
+//                   key={tag}
+//                   className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-300"
+//                 >
+//                   {tag}
+//                 </span>
+//               ))}
+//             </div>
+
+//             {post.slug && (
+//               <div className="mt-8 flex items-center gap-2 text-sm font-semibold text-[#caa177] transition group-hover:translate-x-1">
+//                 Read Full Article
+//                 <span>→</span>
+//               </div>
+//             )}
+//           </button>
 //         ))}
 //       </div>
+
+//       <section className="mt-12 rounded-3xl border border-cyan-300/20 bg-cyan-300/5 p-8">
+//         <p className="text-sm uppercase tracking-[0.25em] text-cyan-200">
+//           First Newsletter
+//         </p>
+//         <h2 className="mt-3 text-3xl font-semibold text-white">
+//           What NemoClaw Teaches Us About the Future of Agentic AI
+//         </h2>
+//         <p className="mt-5 text-zinc-300">
+//           NemoClaw is my teaching lens for explaining the next generation of agentic
+//           systems: AI that can observe signals, reason over context, use tools,
+//           adapt to feedback, and recover when workflows fail.
+//         </p>
+//         <p className="mt-4 text-zinc-400">
+//           Most AI products today are still reactive. They answer, summarize, or
+//           autocomplete. The next wave will be operational: agents that understand
+//           systems, coordinate actions, monitor their own outcomes, and stay aligned
+//           with human intent.
+//         </p>
+//         <p className="mt-4 text-zinc-400">
+//           Through NemoClaw, I will teach concepts like adaptive orchestration,
+//           memory graphs, feedback loops, AI observability, human-in-the-loop
+//           governance, and production readiness for multi-agent systems.
+//         </p>
+//       </section>
 //     </PageShell>
 //   );
 // }
