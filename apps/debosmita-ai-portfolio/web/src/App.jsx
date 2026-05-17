@@ -530,29 +530,93 @@ export default function App() {
   };
 
   const openArticle = (article) => {
-  setSelectedArticle(article);
-  setPage("article");
-  setMenuOpen(false);
+    setSelectedArticle(article);
+    setActiveProjectSlug(null);
+    setPage("article");
+    setMenuOpen(false);
 
-  window.history.replaceState(
-    { page: "article", slug: article.slug },
-    "",
-    `#writing-${article.slug}`
-  );
+    window.history.pushState(
+      { page: "article", slug: article.slug },
+      "",
+      `#writing-${article.slug}`
+    );
 
-  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-};
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, 0);
+  };
+
+//   const openArticle = (article) => {
+//   if (!article) return;
+
+//   setSelectedArticle(article);
+//   setPage("article");
+//   setMenuOpen(false);
+
+//   window.history.replaceState(
+//     { page: "article", slug: article.slug },
+//     "",
+//     `#writing-${article.slug}`
+//   );
+
+//   setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+// };
+
+//   const openArticle = (article) => {
+//   setSelectedArticle(article);
+//   setPage("article");
+//   setMenuOpen(false);
+
+//   window.history.replaceState(
+//     { page: "article", slug: article.slug },
+//     "",
+//     `#writing-${article.slug}`
+//   );
+
+//   setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+// };
 
   useEffect(() => {
     const openFromHash = () => {
-      const hash = window.location.hash.replace("#project-", "");
-      const matchedProject = projects.find((project) => project.slug === hash);
+      const hash = window.location.hash;
+
+    if (hash.startsWith("#project-")) {
+      const slug = hash.replace("#project-", "");
+      const matchedProject = projects.find((project) => project.slug === slug);
+
       if (matchedProject) {
         setActiveProjectSlug(matchedProject.slug);
+        setSelectedArticle(null);
         setPage("caseStudy");
         setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
       }
-    };
+
+      return;
+    }
+
+    if (hash.startsWith("#writing-")) {
+      const slug = hash.replace("#writing-", "");
+      const matchedArticle = newsletterContent.find(
+        (article) => article.slug === slug
+      );
+
+      if (matchedArticle) {
+        setSelectedArticle(matchedArticle);
+        setActiveProjectSlug(null);
+        setPage("article");
+        setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+    }
+  }
+};
+    // const openFromHash = () => {
+    //   const hash = window.location.hash.replace("#project-", "");
+    //   const matchedProject = projects.find((project) => project.slug === hash);
+    //   if (matchedProject) {
+    //     setActiveProjectSlug(matchedProject.slug);
+    //     setPage("caseStudy");
+    //     setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+    //   }
+    // };
 
     openFromHash();
     window.addEventListener("hashchange", openFromHash);
@@ -564,14 +628,27 @@ export default function App() {
   }, []);
 
   const goToPage = (nextPage) => {
-    setActiveProjectSlug(null);
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-    setPage(nextPage);
-    setMenuOpen(false);
-    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-  };
+  setActiveProjectSlug(null);
+  setSelectedArticle(null);
+
+  if (window.location.hash) {
+    window.history.replaceState(null, "", window.location.pathname);
+  }
+
+  setPage(nextPage);
+  setMenuOpen(false);
+  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+};
+
+  // const goToPage = (nextPage) => {
+  //   setActiveProjectSlug(null);
+  //   if (window.location.hash) {
+  //     window.history.replaceState(null, "", window.location.pathname);
+  //   }
+  //   setPage(nextPage);
+  //   setMenuOpen(false);
+  //   setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+  // };
 
   return (
     <div className="min-h-screen bg-[#050505] text-white selection:bg-[#caa177]/30 selection:text-white">
@@ -867,7 +944,27 @@ function CaseStudyPage({ project, goToPage }) {
 }
 
 function ArticlePage({ article, goToPage }) {
-  if (!article) return null;
+  if (!article) {
+    return (
+      <main className="mx-auto max-w-4xl px-6 py-20">
+        <button
+          onClick={() => goToPage("writing")}
+          className="mb-10 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+        >
+          ← Back to Writing
+        </button>
+
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
+          <h1 className="text-3xl font-semibold text-white">
+            Article not found
+          </h1>
+          <p className="mt-4 text-zinc-400">
+            Please go back to the Writing page and select an article again.
+          </p>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="mx-auto max-w-4xl px-6 py-20">
@@ -880,26 +977,70 @@ function ArticlePage({ article, goToPage }) {
 
       <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 md:p-14">
         <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-[#caa177]">
-          <span>Newsletter</span>
+          <span>{article.category || "Newsletter"}</span>
           <span>•</span>
           <span>{article.readTime}</span>
+          {article.date && (
+            <>
+              <span>•</span>
+              <span>{article.date}</span>
+            </>
+          )}
         </div>
 
         <h1 className="mt-6 text-4xl font-light leading-tight text-white md:text-6xl">
           {article.title}
         </h1>
 
-        <p className="mt-6 text-xl leading-9 text-zinc-300">
-          {article.subtitle}
-        </p>
+        {article.subtitle && (
+          <p className="mt-6 text-xl leading-9 text-zinc-300">
+            {article.subtitle}
+          </p>
+        )}
 
-        <div className="newsletter-article mt-12">
-             dangerouslySetInnerHTML={{ __html: article.content }}
-        </div>
+        <article
+          className="newsletter-article mt-12"
+          dangerouslySetInnerHTML={{ __html: article.content }}
+        />
       </div>
     </main>
   );
 }
+
+// function ArticlePage({ article, goToPage }) {
+//   if (!article) return null;
+
+//   return (
+//     <main className="mx-auto max-w-4xl px-6 py-20">
+//       <button
+//         onClick={() => goToPage("writing")}
+//         className="mb-10 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+//       >
+//         ← Back to Writing
+//       </button>
+
+//       <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 md:p-14">
+//         <div className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.25em] text-[#caa177]">
+//           <span>Newsletter</span>
+//           <span>•</span>
+//           <span>{article.readTime}</span>
+//         </div>
+
+//         <h1 className="mt-6 text-4xl font-light leading-tight text-white md:text-6xl">
+//           {article.title}
+//         </h1>
+
+//         <p className="mt-6 text-xl leading-9 text-zinc-300">
+//           {article.subtitle}
+//         </p>
+
+//         <div className="newsletter-article mt-12">
+//              dangerouslySetInnerHTML={{ __html: article.content }}
+//         </div>
+//       </div>
+//     </main>
+//   );
+// }
 
 // function WritingPage() {
 //   const [selectedPost, setSelectedPost] = useState(null);
