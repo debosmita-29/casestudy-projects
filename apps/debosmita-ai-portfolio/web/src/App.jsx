@@ -119,170 +119,179 @@ const pages = {
 
 const newsletterContent = [
   {
-  slug: "nemoclaw-future-agentic-ai",
+    slug: "nemoclaw-future-agentic-ai",
+    title: "What NemoClaw Teaches Us About the Future of Agentic AI",
+    subtitle:
+      "Why the next generation of AI systems will be operational, adaptive, and environment-aware.",
+    date: "May 10, 2026",
+    readTime: "6 min read",
+    category: "Agentic AI",
+    featured: false,
+    excerpt:
+      "Why operational intelligence, observability, and orchestration will define the next generation of enterprise AI systems.",
+    content: `
+      <p>Most AI systems today are still fundamentally reactive.</p>
 
-  title: "What NemoClaw Teaches Us About the Future of Agentic AI",
+      <p>They answer questions. Generate text. Summarize documents. Produce outputs when prompted.</p>
 
-  subtitle:
-    "Why the next generation of AI systems will be operational, adaptive, and environment-aware.",
+      <p>But the next generation of AI systems will not simply respond.</p>
 
-  readTime: "6 min read",
+      <p>They will observe, reason, adapt, recover, and continuously operate inside dynamic environments.</p>
 
-  content: `
-Most AI systems today are still fundamentally reactive.
+      <p>That shift changes everything.</p>
 
-They answer questions.
-Generate text.
-Summarize documents.
-Produce outputs when prompted.
+      <p>NemoClaw is my teaching framework for understanding what this new generation of AI systems may look like.</p>
 
-But the next generation of AI systems will not simply respond.
-They will observe, reason, adapt, recover, and continuously operate inside dynamic environments.
+      <p>Not as another chatbot. Not as another prompt wrapper. But as a resilient operational intelligence architecture.</p>
 
-That shift changes everything.
+      <h2>The Misconception Around Intelligent Systems</h2>
 
-NemoClaw is my teaching framework for understanding what this new generation of AI systems may look like.
+      <p>The biggest misconception in AI today is that better prompts alone create intelligent systems.</p>
 
-Not as another chatbot.
-Not as another prompt wrapper.
-But as a resilient operational intelligence architecture.
+      <p>They do not.</p>
 
-The biggest misconception in AI today is that better prompts alone create intelligent systems.
+      <p>Production-grade AI systems require memory, orchestration, telemetry, evaluation, feedback loops, and environmental awareness.</p>
 
-They do not.
+      <p>Without those capabilities, most AI agents remain fragile demos.</p>
 
-Production-grade AI systems require memory, orchestration, telemetry, evaluation, feedback loops, and environmental awareness.
+      <p>This is why many enterprise AI initiatives fail after initial excitement.</p>
 
-Without those capabilities, most AI agents remain fragile demos.
+      <p>The problem is rarely model intelligence alone.</p>
 
-This is why many enterprise AI initiatives fail after initial excitement.
+      <p>The real challenge is operational intelligence.</p>
 
-The problem is rarely model intelligence alone.
+      <h2>Why Modern AI Agents Break</h2>
 
-The real challenge is operational intelligence.
+      <p>Modern AI agents break because they lose context, fail silently, hallucinate tool outputs, and cannot recover from unexpected workflow states.</p>
 
-Modern AI agents break because they lose context, fail silently, hallucinate tool outputs, and cannot recover from unexpected workflow states.
+      <p>Many systems today still operate like isolated reasoning engines disconnected from the environments they are supposed to support.</p>
 
-Many systems today still operate like isolated reasoning engines disconnected from the environments they are supposed to support.
+      <p>NemoClaw represents a different philosophy.</p>
 
-NemoClaw represents a different philosophy.
+      <p>An environment-aware agent should understand signals beyond the immediate prompt.</p>
 
-An environment-aware agent should understand signals beyond the immediate prompt.
+      <ul>
+        <li>system state</li>
+        <li>workflow history</li>
+        <li>operational telemetry</li>
+        <li>user intent persistence</li>
+        <li>feedback loops</li>
+        <li>tool reliability</li>
+        <li>failure patterns</li>
+        <li>governance boundaries</li>
+      </ul>
 
-It should understand:
+      <p>This is where the future of agentic AI begins.</p>
 
-• system state
-• workflow history
-• operational telemetry
-• user intent persistence
-• feedback loops
-• tool reliability
-• failure patterns
-• governance boundaries
+      <h2>The Rise of Orchestrated Intelligence</h2>
 
-This is where the future of agentic AI begins.
+      <p>The next evolution of AI systems will involve orchestration layers capable of coordinating specialized agents together.</p>
 
-The next evolution of AI systems will involve orchestration layers capable of coordinating specialized agents together.
+      <p>One agent may retrieve knowledge. Another may validate evidence. Another may score risk. Another may monitor observability signals. Another may summarize actions for human review.</p>
 
-One agent may retrieve knowledge.
-Another may validate evidence.
-Another may score risk.
-Another may monitor observability signals.
-Another may summarize actions for human review.
+      <p>The intelligence emerges not from a single model, but from coordinated operational behavior.</p>
 
-The intelligence emerges not from a single model, but from coordinated operational behavior.
+      <p>This is extremely important for enterprise systems.</p>
 
-This is extremely important for enterprise systems.
+      <p>Enterprises do not simply need AI that sounds intelligent.</p>
 
-Enterprises do not simply need AI that sounds intelligent.
+      <p>They need AI systems that are:</p>
 
-They need AI systems that are:
+      <ul>
+        <li>observable</li>
+        <li>traceable</li>
+        <li>governable</li>
+        <li>resilient</li>
+        <li>measurable</li>
+        <li>explainable</li>
+        <li>recoverable</li>
+      </ul>
 
-• observable
-• traceable
-• governable
-• resilient
-• measurable
-• explainable
-• recoverable
+      <h2>Why Observability Becomes Foundational</h2>
 
-Without these properties, AI cannot safely scale inside operational ecosystems.
+      <p>Without these properties, AI cannot safely scale inside operational ecosystems.</p>
 
-This is why observability becomes one of the most important foundations of modern agentic systems.
+      <p>This is why observability becomes one of the most important foundations of modern agentic systems.</p>
 
-In traditional software systems, observability helps engineers understand failures, latency, bottlenecks, and system health.
+      <p>In traditional software systems, observability helps engineers understand failures, latency, bottlenecks, and system health.</p>
 
-In AI systems, observability must evolve further.
+      <p>In AI systems, observability must evolve further.</p>
 
-We need visibility into:
+      <p>We need visibility into:</p>
 
-• hallucination patterns
-• retrieval quality
-• reasoning traces
-• tool-call reliability
-• agent coordination behavior
-• prompt drift
-• memory corruption
-• context fragmentation
+      <ul>
+        <li>hallucination patterns</li>
+        <li>retrieval quality</li>
+        <li>reasoning traces</li>
+        <li>tool-call reliability</li>
+        <li>agent coordination behavior</li>
+        <li>prompt drift</li>
+        <li>memory corruption</li>
+        <li>context fragmentation</li>
+      </ul>
 
-The future AI stack will increasingly resemble distributed systems engineering.
+      <p>The future AI stack will increasingly resemble distributed systems engineering.</p>
 
-This is where many organizations are currently underestimating the complexity ahead.
+      <h2>Feedback-Native Intelligence</h2>
 
-Most current AI discussions still focus heavily on prompts and models.
+      <p>NemoClaw also introduces the idea of feedback-native intelligence.</p>
 
-But the long-term competitive advantage will come from operational architectures.
+      <p>A modern AI system should not operate as a one-time reasoning engine.</p>
 
-The winners will be the organizations that can design systems capable of continuous adaptation.
+      <p>It should continuously learn from outcomes.</p>
 
-NemoClaw also introduces the idea of feedback-native intelligence.
+      <ul>
+        <li>Did the workflow succeed?</li>
+        <li>Did the user correct the response?</li>
+        <li>Did the retrieval contain contradictions?</li>
+        <li>Did a downstream system fail?</li>
+        <li>Did the orchestration layer recover correctly?</li>
+      </ul>
 
-A modern AI system should not operate as a one-time reasoning engine.
+      <p>These signals matter enormously.</p>
 
-It should continuously learn from outcomes.
+      <p>Over time, feedback-aware systems become operationally smarter.</p>
 
-Did the workflow succeed?
-Did the user correct the response?
-Did the retrieval contain contradictions?
-Did a downstream system fail?
-Did the orchestration layer recover correctly?
+      <h2>The Role of Memory</h2>
 
-These signals matter enormously.
+      <p>Another major shift will involve memory.</p>
 
-Over time, feedback-aware systems become operationally smarter.
+      <p>Most AI systems today still operate with extremely limited continuity.</p>
 
-Another major shift will involve memory.
+      <p>But future systems will increasingly use memory graphs, persistent context layers, and long-term interaction histories.</p>
 
-Most AI systems today still operate with extremely limited continuity.
+      <p>This changes how agents reason.</p>
 
-But future systems will increasingly use memory graphs, persistent context layers, and long-term interaction histories.
+      <p>Instead of isolated responses, they begin operating with accumulated situational awareness.</p>
 
-This changes how agents reason.
+      <p>This creates opportunities for:</p>
 
-Instead of isolated responses, they begin operating with accumulated situational awareness.
+      <ul>
+        <li>adaptive workflows</li>
+        <li>personalized orchestration</li>
+        <li>autonomous recovery</li>
+        <li>proactive recommendations</li>
+        <li>operational prediction</li>
+      </ul>
 
-This creates opportunities for:
+      <h2>The Bigger Shift</h2>
 
-• adaptive workflows
-• personalized orchestration
-• autonomous recovery
-• proactive recommendations
-• operational prediction
+      <p>This is where AI starts moving from conversational systems toward operational systems.</p>
 
-This is where AI starts moving from conversational systems toward operational systems.
+      <p>And that transition is the most important shift happening in AI engineering right now.</p>
 
-And that transition is the most important shift happening in AI engineering right now.
+      <p>The future of AI will not belong to systems that simply generate answers.</p>
 
-The future of AI will not belong to systems that simply generate answers.
+      <p>It will belong to systems that can observe, adapt, recover, coordinate, and continuously operate under real-world constraints.</p>
 
-It will belong to systems that can observe, adapt, recover, coordinate, and continuously operate under real-world constraints.
-
-That is the direction NemoClaw is designed to explore.
-`
-},
-{
+      <p>That is the direction NemoClaw is designed to explore.</p>
+    `
+  },
+  {
     slug: "future-of-ai-is-systems",
     title: "The Future of AI Is Not Models. It Is Systems.",
+    subtitle:
+      "Why the next competitive advantage in AI will come from architecture, orchestration, and intelligent systems.",
     date: "May 16, 2026",
     readTime: "8 min read",
     category: "Agentic AI",
@@ -290,43 +299,25 @@ That is the direction NemoClaw is designed to explore.
     excerpt:
       "The future of AI will not be defined by models alone. It will be defined by intelligent systems, orchestration, memory, reasoning, and autonomous execution.",
     content: `
-      <h1>The Future of AI Is Not Models. It Is Systems.</h1>
-
       <p>For the last few years, the AI industry has been obsessed with one question:</p>
 
       <blockquote>“Which model is the smartest?”</blockquote>
 
-      <p>
-        GPT-4. Claude. Gemini. Open-source models. Benchmarks. Leaderboards.
-      </p>
+      <p>GPT-4. Claude. Gemini. Open-source models. Benchmarks. Leaderboards.</p>
 
-      <p>
-        But something much bigger is quietly happening underneath all of this.
-      </p>
+      <p>But something much bigger is quietly happening underneath all of this.</p>
 
-      <p>
-        The future of AI will not be defined by models alone.
-      </p>
+      <p>The future of AI will not be defined by models alone.</p>
 
-      <p>
-        It will be defined by systems.
-      </p>
+      <p>It will be defined by systems.</p>
 
-      <p>
-        And the companies that understand this early will build the next generation of enterprise intelligence.
-      </p>
-
-      <hr />
+      <p>And the companies that understand this early will build the next generation of enterprise intelligence.</p>
 
       <h2>Models Are Becoming Commoditized</h2>
 
-      <p>
-        This is the uncomfortable truth many organizations are starting to realize.
-      </p>
+      <p>This is the uncomfortable truth many organizations are starting to realize.</p>
 
-      <p>
-        A model alone is no longer the competitive advantage.
-      </p>
+      <p>A model alone is no longer the competitive advantage.</p>
 
       <p>Because eventually:</p>
 
@@ -337,13 +328,15 @@ That is the direction NemoClaw is designed to explore.
         <li>everyone can build a chatbot</li>
       </ul>
 
-      <p>
-        The differentiator is shifting elsewhere.
-      </p>
+      <p>The differentiator is shifting elsewhere.</p>
 
-      <blockquote>
-        “Who built the best AI operating system around the model?”
-      </blockquote>
+      <p>Not toward:</p>
+
+      <blockquote>“Who has the best model?”</blockquote>
+
+      <p>But toward:</p>
+
+      <blockquote>“Who built the best AI operating system around the model?”</blockquote>
 
       <p>That means:</p>
 
@@ -360,17 +353,11 @@ That is the direction NemoClaw is designed to explore.
         <li>autonomous execution</li>
       </ul>
 
-      <p>
-        The intelligence is moving into the architecture itself.
-      </p>
-
-      <hr />
+      <p>The intelligence is moving into the architecture itself.</p>
 
       <h2>The Real AI Stack Is Much Bigger Than Prompting</h2>
 
-      <p>
-        Most people still think AI engineering is primarily:
-      </p>
+      <p>Most people still think AI engineering is primarily:</p>
 
       <ul>
         <li>prompt engineering</li>
@@ -378,13 +365,9 @@ That is the direction NemoClaw is designed to explore.
         <li>fine-tuning</li>
       </ul>
 
-      <p>
-        But production AI systems are fundamentally distributed systems problems.
-      </p>
+      <p>But production AI systems are fundamentally distributed systems problems.</p>
 
-      <p>
-        Because real enterprise AI must solve:
-      </p>
+      <p>Because real enterprise AI must solve:</p>
 
       <ul>
         <li>context management</li>
@@ -399,21 +382,13 @@ That is the direction NemoClaw is designed to explore.
         <li>system observability</li>
       </ul>
 
-      <p>
-        This is why many “AI demos” never become real products.
-      </p>
+      <p>This is why many “AI demos” never become real products.</p>
 
-      <blockquote>
-        The model works. The system does not.
-      </blockquote>
-
-      <hr />
+      <blockquote>The model works. The system does not.</blockquote>
 
       <h2>We Are Entering the Era of Compound AI Systems</h2>
 
-      <p>
-        The most important shift happening right now is the movement from:
-      </p>
+      <p>The most important shift happening right now is the movement from:</p>
 
       <blockquote>single-model interactions</blockquote>
 
@@ -421,9 +396,7 @@ That is the direction NemoClaw is designed to explore.
 
       <blockquote>compound AI systems</blockquote>
 
-      <p>
-        Where multiple components work together dynamically.
-      </p>
+      <p>Where multiple components work together dynamically.</p>
 
       <p>For example:</p>
 
@@ -438,21 +411,13 @@ That is the direction NemoClaw is designed to explore.
         <li>observability layers</li>
       </ul>
 
-      <p>
-        all collaborating together.
-      </p>
+      <p>all collaborating together.</p>
 
-      <p>
-        This is where AI starts behaving less like a chatbot and more like an operating system.
-      </p>
-
-      <hr />
+      <p>This is where AI starts behaving less like a chatbot and more like an operating system.</p>
 
       <h2>Why Autonomous Agents Matter</h2>
 
-      <p>
-        Autonomous agents are not simply “LLMs with tools.”
-      </p>
+      <p>Autonomous agents are not simply “LLMs with tools.”</p>
 
       <p>They are systems capable of:</p>
 
@@ -466,29 +431,17 @@ That is the direction NemoClaw is designed to explore.
         <li>coordinating workflows</li>
       </ul>
 
-      <p>
-        This changes AI from passive intelligence to operational intelligence.
-      </p>
+      <p>This changes AI from passive intelligence to operational intelligence.</p>
 
-      <p>
-        And operational intelligence is where enterprise transformation truly begins.
-      </p>
-
-      <hr />
+      <p>And operational intelligence is where enterprise transformation truly begins.</p>
 
       <h2>The Most Underrated Skill in AI Engineering</h2>
 
-      <p>
-        The highest leverage skill in AI right now is not prompt engineering.
-      </p>
+      <p>The highest leverage skill in AI right now is not prompt engineering.</p>
 
-      <p>
-        It is systems thinking.
-      </p>
+      <p>It is systems thinking.</p>
 
-      <p>
-        The engineers who will shape the future are the ones who understand how to combine:
-      </p>
+      <p>The engineers who will shape the future are the ones who understand how to combine:</p>
 
       <ul>
         <li>distributed systems</li>
@@ -502,17 +455,11 @@ That is the direction NemoClaw is designed to explore.
         <li>human feedback loops</li>
       </ul>
 
-      <p>
-        into cohesive AI platforms.
-      </p>
-
-      <hr />
+      <p>into cohesive AI platforms.</p>
 
       <h2>The Companies That Win Will Build AI Infrastructure, Not AI Features</h2>
 
-      <p>
-        Most organizations are still building isolated AI features:
-      </p>
+      <p>Most organizations are still building isolated AI features:</p>
 
       <ul>
         <li>chatbots</li>
@@ -521,9 +468,7 @@ That is the direction NemoClaw is designed to explore.
         <li>summarizers</li>
       </ul>
 
-      <p>
-        But the companies that dominate the next decade will build reusable AI infrastructure.
-      </p>
+      <p>But the companies that dominate the next decade will build reusable AI infrastructure.</p>
 
       <p>Internal platforms that provide:</p>
 
@@ -539,65 +484,38 @@ That is the direction NemoClaw is designed to explore.
         <li>security boundaries</li>
       </ul>
 
-      <blockquote>
-        AI platforms, not AI experiments.
-      </blockquote>
-
-      <hr />
+      <blockquote>AI platforms, not AI experiments.</blockquote>
 
       <h2>The Bigger Shift Nobody Is Talking About</h2>
 
-      <p>
-        We are moving from:
-      </p>
+      <p>We are moving from:</p>
 
-      <blockquote>
-        software that waits for instructions
-      </blockquote>
+      <blockquote>software that waits for instructions</blockquote>
 
       <p>to</p>
 
-      <blockquote>
-        systems that pursue outcomes
-      </blockquote>
+      <blockquote>systems that pursue outcomes</blockquote>
 
-      <p>
-        That is a profound architectural change.
-      </p>
+      <p>That is a profound architectural change.</p>
 
-      <p>
-        And it will redefine engineering, operations, enterprise workflows, product design, and decision-making itself.
-      </p>
+      <p>And it will redefine engineering, operations, enterprise workflows, product design, and decision-making itself.</p>
 
-      <p>
-        The next generation of AI systems will not just assist humans.
-      </p>
+      <p>The next generation of AI systems will not just assist humans.</p>
 
-      <p>
-        They will collaborate with humans. Reason with humans. Operate alongside humans.
-      </p>
+      <p>They will collaborate with humans. Reason with humans. Operate alongside humans.</p>
 
-      <p>
-        The future of AI is not one model.
-      </p>
+      <p>The future of AI is not one model.</p>
 
-      <p>
-        It is intelligent systems working together.
-      </p>
+      <p>It is intelligent systems working together.</p>
 
-      <p>
-        That is where the real revolution begins.
-      </p>
+      <p>That is where the real revolution begins.</p>
 
-      <br />
-
-      <p>
-        — Debosmita Roy<br />
-        AI Systems Architect | Agentic AI | Enterprise Intelligence
-      </p>
+      <p><strong>— Debosmita Roy</strong><br />AI Systems Architect | Agentic AI | Enterprise Intelligence</p>
     `
   }
 ];
+
+export default newsletterContent;
 
 export default function App() {
   const [page, setPage] = useState("home");
@@ -982,6 +900,76 @@ function ArticlePage({ article, goToPage }) {
         </div>
       </div>
     </main>
+  );
+}
+
+function WritingPage() {
+  const [selectedPost, setSelectedPost] = useState(null);
+
+  if (selectedPost) {
+    return (
+      <PageShell eyebrow="Newsletter" title={selectedPost.title}>
+        <button
+          onClick={() => setSelectedPost(null)}
+          className="mb-8 rounded-full border border-zinc-700 px-5 py-3 text-zinc-300 transition hover:border-zinc-500 hover:text-white"
+        >
+          ← Back to Writing
+        </button>
+
+        <div className="mb-8 text-sm uppercase tracking-[0.2em] text-[#caa177]">
+          {selectedPost.category} • {selectedPost.date} • {selectedPost.readTime}
+        </div>
+
+        {selectedPost.subtitle && (
+          <p className="mb-10 max-w-3xl text-xl leading-8 text-zinc-300">
+            {selectedPost.subtitle}
+          </p>
+        )}
+
+        <article
+          className="newsletter-article"
+          dangerouslySetInnerHTML={{ __html: selectedPost.content }}
+        />
+      </PageShell>
+    );
+  }
+
+  return (
+    <PageShell eyebrow="Writing" title="Ideas on AI, Systems & Engineering">
+      <div className="grid gap-6 md:grid-cols-2">
+        {newsletterContent.map((post) => (
+          <article
+            key={post.slug}
+            className={`newsletter-card ${
+              post.featured ? "md:col-span-2 border-[#caa177]/60" : ""
+            }`}
+          >
+            <div className="mb-4 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.2em] text-[#caa177]">
+              <span>{post.category}</span>
+              <span>•</span>
+              <span>{post.readTime}</span>
+              <span>•</span>
+              <span>{post.date}</span>
+            </div>
+
+            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
+
+            {post.subtitle && (
+              <p className="mt-3 text-zinc-400">{post.subtitle}</p>
+            )}
+
+            <p className="mt-4 text-zinc-500">{post.excerpt}</p>
+
+            <button
+              onClick={() => setSelectedPost(post)}
+              className="mt-6 rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]"
+            >
+              Read Newsletter →
+            </button>
+          </article>
+        ))}
+      </div>
+    </PageShell>
   );
 }
 
