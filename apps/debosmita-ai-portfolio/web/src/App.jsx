@@ -117,7 +117,8 @@ const pages = {
   resources: "Resources"
 };
 
-const newsletterContent = {
+const newsletterContent = [
+  {
   slug: "nemoclaw-future-agentic-ai",
 
   title: "What NemoClaw Teaches Us About the Future of Agentic AI",
@@ -278,7 +279,325 @@ It will belong to systems that can observe, adapt, recover, coordinate, and cont
 
 That is the direction NemoClaw is designed to explore.
 `
-};
+},
+{
+    slug: "future-of-ai-is-systems",
+    title: "The Future of AI Is Not Models. It Is Systems.",
+    date: "May 16, 2026",
+    readTime: "8 min read",
+    category: "Agentic AI",
+    featured: true,
+    excerpt:
+      "The future of AI will not be defined by models alone. It will be defined by intelligent systems, orchestration, memory, reasoning, and autonomous execution.",
+    content: `
+      <h1>The Future of AI Is Not Models. It Is Systems.</h1>
+
+      <p>For the last few years, the AI industry has been obsessed with one question:</p>
+
+      <blockquote>“Which model is the smartest?”</blockquote>
+
+      <p>
+        GPT-4. Claude. Gemini. Open-source models. Benchmarks. Leaderboards.
+      </p>
+
+      <p>
+        But something much bigger is quietly happening underneath all of this.
+      </p>
+
+      <p>
+        The future of AI will not be defined by models alone.
+      </p>
+
+      <p>
+        It will be defined by systems.
+      </p>
+
+      <p>
+        And the companies that understand this early will build the next generation of enterprise intelligence.
+      </p>
+
+      <hr />
+
+      <h2>Models Are Becoming Commoditized</h2>
+
+      <p>
+        This is the uncomfortable truth many organizations are starting to realize.
+      </p>
+
+      <p>
+        A model alone is no longer the competitive advantage.
+      </p>
+
+      <p>Because eventually:</p>
+
+      <ul>
+        <li>everyone gets access to powerful LLMs</li>
+        <li>everyone can call APIs</li>
+        <li>everyone can generate text, code, or summaries</li>
+        <li>everyone can build a chatbot</li>
+      </ul>
+
+      <p>
+        The differentiator is shifting elsewhere.
+      </p>
+
+      <blockquote>
+        “Who built the best AI operating system around the model?”
+      </blockquote>
+
+      <p>That means:</p>
+
+      <ul>
+        <li>orchestration</li>
+        <li>memory</li>
+        <li>retrieval</li>
+        <li>evaluation</li>
+        <li>observability</li>
+        <li>reasoning loops</li>
+        <li>tool ecosystems</li>
+        <li>governance</li>
+        <li>feedback systems</li>
+        <li>autonomous execution</li>
+      </ul>
+
+      <p>
+        The intelligence is moving into the architecture itself.
+      </p>
+
+      <hr />
+
+      <h2>The Real AI Stack Is Much Bigger Than Prompting</h2>
+
+      <p>
+        Most people still think AI engineering is primarily:
+      </p>
+
+      <ul>
+        <li>prompt engineering</li>
+        <li>model selection</li>
+        <li>fine-tuning</li>
+      </ul>
+
+      <p>
+        But production AI systems are fundamentally distributed systems problems.
+      </p>
+
+      <p>
+        Because real enterprise AI must solve:
+      </p>
+
+      <ul>
+        <li>context management</li>
+        <li>latency</li>
+        <li>reliability</li>
+        <li>hallucination reduction</li>
+        <li>authorization</li>
+        <li>traceability</li>
+        <li>human approval workflows</li>
+        <li>state management</li>
+        <li>failure recovery</li>
+        <li>system observability</li>
+      </ul>
+
+      <p>
+        This is why many “AI demos” never become real products.
+      </p>
+
+      <blockquote>
+        The model works. The system does not.
+      </blockquote>
+
+      <hr />
+
+      <h2>We Are Entering the Era of Compound AI Systems</h2>
+
+      <p>
+        The most important shift happening right now is the movement from:
+      </p>
+
+      <blockquote>single-model interactions</blockquote>
+
+      <p>to</p>
+
+      <blockquote>compound AI systems</blockquote>
+
+      <p>
+        Where multiple components work together dynamically.
+      </p>
+
+      <p>For example:</p>
+
+      <ul>
+        <li>planners</li>
+        <li>retrievers</li>
+        <li>evaluators</li>
+        <li>tool executors</li>
+        <li>memory systems</li>
+        <li>workflow engines</li>
+        <li>specialized agents</li>
+        <li>observability layers</li>
+      </ul>
+
+      <p>
+        all collaborating together.
+      </p>
+
+      <p>
+        This is where AI starts behaving less like a chatbot and more like an operating system.
+      </p>
+
+      <hr />
+
+      <h2>Why Autonomous Agents Matter</h2>
+
+      <p>
+        Autonomous agents are not simply “LLMs with tools.”
+      </p>
+
+      <p>They are systems capable of:</p>
+
+      <ul>
+        <li>reasoning over goals</li>
+        <li>planning execution</li>
+        <li>interacting with environments</li>
+        <li>observing outcomes</li>
+        <li>adapting behavior</li>
+        <li>retrying failures</li>
+        <li>coordinating workflows</li>
+      </ul>
+
+      <p>
+        This changes AI from passive intelligence to operational intelligence.
+      </p>
+
+      <p>
+        And operational intelligence is where enterprise transformation truly begins.
+      </p>
+
+      <hr />
+
+      <h2>The Most Underrated Skill in AI Engineering</h2>
+
+      <p>
+        The highest leverage skill in AI right now is not prompt engineering.
+      </p>
+
+      <p>
+        It is systems thinking.
+      </p>
+
+      <p>
+        The engineers who will shape the future are the ones who understand how to combine:
+      </p>
+
+      <ul>
+        <li>distributed systems</li>
+        <li>data infrastructure</li>
+        <li>orchestration</li>
+        <li>retrieval</li>
+        <li>memory architectures</li>
+        <li>agent workflows</li>
+        <li>evaluation pipelines</li>
+        <li>observability</li>
+        <li>human feedback loops</li>
+      </ul>
+
+      <p>
+        into cohesive AI platforms.
+      </p>
+
+      <hr />
+
+      <h2>The Companies That Win Will Build AI Infrastructure, Not AI Features</h2>
+
+      <p>
+        Most organizations are still building isolated AI features:
+      </p>
+
+      <ul>
+        <li>chatbots</li>
+        <li>copilots</li>
+        <li>assistants</li>
+        <li>summarizers</li>
+      </ul>
+
+      <p>
+        But the companies that dominate the next decade will build reusable AI infrastructure.
+      </p>
+
+      <p>Internal platforms that provide:</p>
+
+      <ul>
+        <li>shared memory systems</li>
+        <li>reusable retrieval pipelines</li>
+        <li>orchestration frameworks</li>
+        <li>agent governance</li>
+        <li>evaluation tooling</li>
+        <li>observability dashboards</li>
+        <li>model routing</li>
+        <li>enterprise grounding</li>
+        <li>security boundaries</li>
+      </ul>
+
+      <blockquote>
+        AI platforms, not AI experiments.
+      </blockquote>
+
+      <hr />
+
+      <h2>The Bigger Shift Nobody Is Talking About</h2>
+
+      <p>
+        We are moving from:
+      </p>
+
+      <blockquote>
+        software that waits for instructions
+      </blockquote>
+
+      <p>to</p>
+
+      <blockquote>
+        systems that pursue outcomes
+      </blockquote>
+
+      <p>
+        That is a profound architectural change.
+      </p>
+
+      <p>
+        And it will redefine engineering, operations, enterprise workflows, product design, and decision-making itself.
+      </p>
+
+      <p>
+        The next generation of AI systems will not just assist humans.
+      </p>
+
+      <p>
+        They will collaborate with humans. Reason with humans. Operate alongside humans.
+      </p>
+
+      <p>
+        The future of AI is not one model.
+      </p>
+
+      <p>
+        It is intelligent systems working together.
+      </p>
+
+      <p>
+        That is where the real revolution begins.
+      </p>
+
+      <br />
+
+      <p>
+        — Debosmita Roy<br />
+        AI Systems Architect | Agentic AI | Enterprise Intelligence
+      </p>
+    `
+  }
+];
 
 export default function App() {
   const [page, setPage] = useState("home");
