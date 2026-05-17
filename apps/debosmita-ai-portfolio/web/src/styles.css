@@ -19,3 +19,55 @@ body {
 button, a {
   font-family: inherit;
 }
+
+.newsletter-article {
+  max-width: 820px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+  color: #d4d4d8;
+}
+
+.newsletter-article p {
+  margin: 1.1rem 0;
+}
+
+.newsletter-article h2 {
+  margin-top: 2.8rem;
+  margin-bottom: 1rem;
+  font-size: 1.65rem;
+  line-height: 1.25;
+  color: #ffffff;
+}
+
+.newsletter-article ul {
+  margin: 1rem 0 1.5rem 1.5rem;
+  padding-left: 1rem;
+  list-style-type: disc;
+}
+
+.newsletter-article li {
+  margin: 0.45rem 0;
+}
+
+.newsletter-article blockquote {
+  margin: 1.8rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid #caa177;
+  background: rgba(202, 161, 119, 0.08);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.newsletter-card {
+  border: 1px solid rgba(202, 161, 119, 0.25);
+  border-radius: 24px;
+  padding: 1.75rem;
+  background: rgba(9, 9, 11, 0.85);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.newsletter-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(202, 161, 119, 0.08);
+}
