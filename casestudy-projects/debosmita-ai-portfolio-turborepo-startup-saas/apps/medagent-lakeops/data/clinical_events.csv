@@ -1,0 +1,7 @@
+patient_id,event_type,source_system,standard,latency_min,normalized,governance_status
+p-1001,encounter,EHR,FHIR,19,true,approved
+p-1001,lab_result,LIS,HL7,22,true,approved
+p-1002,radiology_study,PACS,DICOM,7,true,approved
+p-1003,claim,Billing,OMOP,28,false,review
+p-1004,wearable_signal,Patient App,FHIR,16,true,approved
+p-1005,medication,EHR,FHIR,21,true,approved

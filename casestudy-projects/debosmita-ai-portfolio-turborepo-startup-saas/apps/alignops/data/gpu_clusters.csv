@@ -1,0 +1,5 @@
+cluster_id,gpu_type,gpu_count,utilization_pct,memory_utilization_pct,communication_overhead_pct,cost_per_hour,training_stability_pct
+cluster-a,NVIDIA H100,128,96,88,17,512,93
+cluster-b,NVIDIA A100,96,82,79,24,288,86
+cluster-c,NVIDIA L40S,64,71,68,29,128,78
+cluster-d,Mixed Accelerator,48,58,61,34,96,71

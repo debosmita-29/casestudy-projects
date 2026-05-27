@@ -1,0 +1,6 @@
+study_id,patient_id,modality,body_region,metadata_quality,retrieval_time_sec,semantic_tags
+rad-001,p-1002,CT,chest,0.93,7,"nodule;follow-up;thoracic"
+rad-002,p-1006,MRI,brain,0.89,8,"lesion;neurology;contrast"
+rad-003,p-1007,XR,knee,0.82,10,"orthopedic;fracture-check"
+rad-004,p-1008,US,abdomen,0.87,9,"hepatic;screening"
+rad-005,p-1009,CT,abdomen,0.91,7,"oncology;staging"

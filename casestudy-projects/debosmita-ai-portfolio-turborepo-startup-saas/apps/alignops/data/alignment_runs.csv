@@ -1,0 +1,6 @@
+run_id,method,reward_score,policy_loss,stability_score,safety_score,gpu_hours,checkpoint_recovery_min
+align-001,PPO,0.81,0.34,0.74,0.88,420,18
+align-002,DPO,0.86,0.28,0.82,0.91,360,11
+align-003,GRPO,0.89,0.22,0.93,0.94,315,5
+align-004,PPO,0.77,0.39,0.71,0.84,455,20
+align-005,DPO,0.84,0.31,0.87,0.9,340,8

@@ -1,0 +1,6 @@
+workload_id,modality,baseline_latency_ms,optimized_latency_ms,baseline_throughput,optimized_throughput,batch_efficiency_pct
+inf-001,text,420,210,140,395,89
+inf-002,image,780,460,72,231,84
+inf-003,video,1680,980,24,91,76
+inf-004,audio,610,350,96,304,86
+inf-005,diffusion,2450,1445,18,67,81

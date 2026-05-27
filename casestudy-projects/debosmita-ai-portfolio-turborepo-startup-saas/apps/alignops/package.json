@@ -1,0 +1,11 @@
+{
+  "name": "@portfolio/alignops",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "uvicorn src.main:app --reload --port 8006",
+    "build": "python -m py_compile src/main.py src/platform.py",
+    "lint": "python -m py_compile src/main.py src/platform.py",
+    "test": "python -m py_compile src/main.py src/platform.py"
+  }
+}

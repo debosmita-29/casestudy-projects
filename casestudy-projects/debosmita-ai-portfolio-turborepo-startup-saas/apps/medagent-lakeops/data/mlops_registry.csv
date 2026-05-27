@@ -1,0 +1,5 @@
+model_id,use_case,feature_consistency_pct,drift_detection_accuracy_pct,monitoring_coverage_pct,automated_remediation_pct,deployment_readiness_hours
+model-risk-001,patient risk prediction,86,82,91,71,2.1
+model-rad-002,radiology prioritization,84,79,88,68,2.4
+model-ops-003,operational forecasting,79,76,83,64,3.2
+model-care-004,care gap detection,88,84,92,73,2.0
