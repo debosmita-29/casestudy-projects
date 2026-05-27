@@ -1,56 +1,56 @@
 import { useEffect, useRef, useState } from "react";
 
 const projects = [
+    {
+    slug: "alignops",
+    title: "AlignOps",
+    subtitle: "Distributed AI Infrastructure for Alignment, Multimodal AI & GPU Optimization",
+    desc: "A distributed AI infrastructure framework for reinforcement learning alignment, multimodal foundation models, diffusion serving, and hyperscale GPU orchestration.",
+    detail:
+      "AlignOps operationalizes PPO, DPO, GRPO, distributed training, asynchronous multimodal inference, and hardware-aware optimization across heterogeneous GPU clusters.",
+    included: [
+      "Post-training alignment orchestration using PPO, DPO, and GRPO",
+      "Fault-tolerant distributed training with FSDP, tensor parallelism, pipeline parallelism, and context parallelism",
+      "Asynchronous multimodal and diffusion serving with adaptive batching",
+      "GPU orchestration, memory placement, checkpoint recovery, and infrastructure cost intelligence",
+      "Hardware evaluation framework for GPUs and emerging accelerators"
+    ],
+    impact: [
+      "38% improvement in GPU utilization",
+      "44% reduction in distributed training instability",
+      "3.7x acceleration in multimodal inference throughput",
+      "31% reduction in operational infrastructure costs"
+    ],
+    tags: ["Distributed AI", "RLHF", "PPO/DPO/GRPO", "GPU Optimization", "Multimodal AI", "MLOps"],
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+    githubLink: "https://github.com/debosmita-29/casestudy-projects",
+    paperLink: "/papers/AlignOps_IEEE.pdf"
+  },
   {
-  slug: "alignops",
-  title: "AlignOps",
-  subtitle: "Distributed AI Infrastructure for Alignment, Multimodal AI & GPU Optimization",
-  desc: "A distributed AI infrastructure framework for reinforcement learning alignment, multimodal foundation models, diffusion serving, and hyperscale GPU orchestration.",
-  detail:
-    "AlignOps operationalizes PPO, DPO, GRPO, distributed training, asynchronous multimodal inference, and hardware-aware optimization across heterogeneous GPU clusters.",
-  included: [
-    "Post-training alignment orchestration using PPO, DPO, and GRPO",
-    "Fault-tolerant distributed training with FSDP, tensor parallelism, pipeline parallelism, and context parallelism",
-    "Asynchronous multimodal and diffusion serving with adaptive batching",
-    "GPU orchestration, memory placement, checkpoint recovery, and infrastructure cost intelligence",
-    "Hardware evaluation framework for GPUs and emerging accelerators"
-  ],
-  impact: [
-    "38% improvement in GPU utilization",
-    "44% reduction in distributed training instability",
-    "3.7x acceleration in multimodal inference throughput",
-    "31% reduction in operational infrastructure costs"
-  ],
-  tags: ["Distributed AI", "RLHF", "PPO/DPO/GRPO", "GPU Optimization", "Multimodal AI", "MLOps"],
-  image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
-  githubLink: "https://github.com/debosmita-29/casestudy-projects",
-  paperLink: "/papers/AlignOps_IEEE.pdf"
-},
-{
-  slug: "medagent-lakeops",
-  title: "MedAgent LakeOps",
-  subtitle: "Agentic MLOps for Clinical Data Lakes & Healthcare Intelligence",
-  desc: "An agentic MLOps framework that orchestrates EHR, radiology, laboratory, operational, and wearable healthcare data into a governed clinical lakehouse.",
-  detail:
-    "MedAgent LakeOps combines autonomous healthcare agents, semantic interoperability, clinical lakehouse architecture, observability intelligence, and governance-aware MLOps for healthcare AI readiness.",
-  included: [
-    "Autonomous agents for clinical ingestion, metadata enrichment, semantic normalization, observability, and orchestration",
-    "FHIR, DICOM, HL7, and OMOP-inspired interoperability workflows",
-    "Clinical lakehouse zones for raw data, standardized healthcare data, feature engineering, model readiness, and governance audits",
-    "Agentic MLOps pipeline for training, deployment, monitoring, drift detection, and autonomous remediation",
-    "Patient intelligence flow connecting clinical systems, lakehouse pipelines, ML inference, and physician dashboards"
-  ],
-  impact: [
-    "43% reduction in clinical data processing latency",
-    "37% improvement in radiology metadata retrieval efficiency",
-    "52% reduction in manual operational intervention",
-    "4.3x acceleration in healthcare AI model deployment readiness"
-  ],
-  tags: ["Healthcare AI", "Agentic MLOps", "Clinical Lakehouse", "FHIR", "DICOM", "LangGraph"],
-  image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
-  githubLink: "https://github.com/debosmita-29/casestudy-projects",
-  paperLink: "/papers/MedAgent-LakeOps-Agentic-MLOps-for-Clinical-Data.pdf"
-}
+    slug: "medagent-lakeops",
+    title: "MedAgent LakeOps",
+    subtitle: "Agentic MLOps for Clinical Data Lakes & Healthcare Intelligence",
+    desc: "An agentic MLOps framework that orchestrates EHR, radiology, laboratory, operational, and wearable healthcare data into a governed clinical lakehouse.",
+    detail:
+      "MedAgent LakeOps combines autonomous healthcare agents, semantic interoperability, clinical lakehouse architecture, observability intelligence, and governance-aware MLOps for healthcare AI readiness.",
+    included: [
+      "Autonomous agents for clinical ingestion, metadata enrichment, semantic normalization, observability, and orchestration",
+      "FHIR, DICOM, HL7, and OMOP-inspired interoperability workflows",
+      "Clinical lakehouse zones for raw data, standardized healthcare data, feature engineering, model readiness, and governance audits",
+      "Agentic MLOps pipeline for training, deployment, monitoring, drift detection, and autonomous remediation",
+      "Patient intelligence flow connecting clinical systems, lakehouse pipelines, ML inference, and physician dashboards"
+    ],
+    impact: [
+      "43% reduction in clinical data processing latency",
+      "37% improvement in radiology metadata retrieval efficiency",
+      "52% reduction in manual operational intervention",
+      "4.3x acceleration in healthcare AI model deployment readiness"
+    ],
+    tags: ["Healthcare AI", "Agentic MLOps", "Clinical Lakehouse", "FHIR", "DICOM", "LangGraph"],
+    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+    githubLink: "https://github.com/debosmita-29/casestudy-projects",
+    paperLink: "/papers/MedAgent-LakeOps-Agentic-MLOps-for-Clinical-Data.pdf"
+  }
   {
     slug: "cogniintel",
     title: "CogniIntel",
