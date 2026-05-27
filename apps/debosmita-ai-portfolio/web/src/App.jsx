@@ -1022,7 +1022,10 @@ function ProjectsPage({ openCaseStudy }) {
     <PageShell eyebrow="Projects" title="AI product case studies built as a production-inspired portfolio.">
       <div className="grid gap-8 md:grid-cols-2">
         {projects.map((project) => (
-          <article key={project.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 transition hover:-translate-y-1 hover:border-zinc-600">
+          <article
+            key={project.title}
+            className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 transition hover:-translate-y-1 hover:border-zinc-600"
+          >
             <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">{project.subtitle}</p>
             <h2 className="mt-4 text-3xl font-bold">{project.title}</h2>
             <p className="mt-5 leading-8 text-zinc-400">{project.desc}</p>
@@ -1036,12 +1039,35 @@ function ProjectsPage({ openCaseStudy }) {
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
-              <button type="button" onClick={() => openCaseStudy(project.slug)} className="inline-flex rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]">
+              <button
+                type="button"
+                onClick={() => openCaseStudy(project.slug)}
+                className="inline-flex rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]"
+              >
                 Open Case Study →
               </button>
-              <a href={project.githubLink} target="_blank" rel="noreferrer" className="inline-flex rounded-2xl border border-zinc-700 px-5 py-3 font-semibold text-white transition hover:border-zinc-500 hover:bg-zinc-900">
-                GitHub →
-              </a>
+
+              {project.githubLink && (
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-2xl border border-zinc-700 px-5 py-3 font-semibold text-white transition hover:border-zinc-500 hover:bg-zinc-900"
+                >
+                  GitHub →
+                </a>
+              )}
+
+              {project.paperLink && (
+                <a
+                  href={project.paperLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex rounded-2xl border border-[#caa177]/60 px-5 py-3 font-semibold text-[#caa177] transition hover:bg-[#caa177] hover:text-black"
+                >
+                  IEEE Paper →
+                </a>
+              )}
             </div>
           </article>
         ))}
@@ -1049,6 +1075,39 @@ function ProjectsPage({ openCaseStudy }) {
     </PageShell>
   );
 }
+
+// function ProjectsPage({ openCaseStudy }) {
+//   return (
+//     <PageShell eyebrow="Projects" title="AI product case studies built as a production-inspired portfolio.">
+//       <div className="grid gap-8 md:grid-cols-2">
+//         {projects.map((project) => (
+//           <article key={project.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8 transition hover:-translate-y-1 hover:border-zinc-600">
+//             <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">{project.subtitle}</p>
+//             <h2 className="mt-4 text-3xl font-bold">{project.title}</h2>
+//             <p className="mt-5 leading-8 text-zinc-400">{project.desc}</p>
+
+//             <div className="mt-6 flex flex-wrap gap-2">
+//               {project.tags.map((tag) => (
+//                 <span key={tag} className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400">
+//                   {tag}
+//                 </span>
+//               ))}
+//             </div>
+
+//             <div className="mt-7 flex flex-wrap gap-3">
+//               <button type="button" onClick={() => openCaseStudy(project.slug)} className="inline-flex rounded-2xl bg-white px-5 py-3 font-semibold text-black transition hover:scale-[1.02]">
+//                 Open Case Study →
+//               </button>
+//               <a href={project.githubLink} target="_blank" rel="noreferrer" className="inline-flex rounded-2xl border border-zinc-700 px-5 py-3 font-semibold text-white transition hover:border-zinc-500 hover:bg-zinc-900">
+//                 GitHub →
+//               </a>
+//             </div>
+//           </article>
+//         ))}
+//       </div>
+//     </PageShell>
+//   );
+// }
 
 function CaseStudyPage({ project, goToPage }) {
   return (
