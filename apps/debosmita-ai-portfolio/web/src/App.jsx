@@ -50,7 +50,7 @@ const projects = [
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
     githubLink: "https://github.com/debosmita-29/casestudy-projects",
     paperLink: "/papers/MedAgent-LakeOps-Agentic-MLOps-for-Clinical-Data.pdf"
-  }
+  },
   {
     slug: "cogniintel",
     title: "CogniIntel",
