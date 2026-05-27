@@ -2,6 +2,56 @@ import { useEffect, useRef, useState } from "react";
 
 const projects = [
   {
+  slug: "alignops",
+  title: "AlignOps",
+  subtitle: "Distributed AI Infrastructure for Alignment, Multimodal AI & GPU Optimization",
+  desc: "A distributed AI infrastructure framework for reinforcement learning alignment, multimodal foundation models, diffusion serving, and hyperscale GPU orchestration.",
+  detail:
+    "AlignOps operationalizes PPO, DPO, GRPO, distributed training, asynchronous multimodal inference, and hardware-aware optimization across heterogeneous GPU clusters.",
+  included: [
+    "Post-training alignment orchestration using PPO, DPO, and GRPO",
+    "Fault-tolerant distributed training with FSDP, tensor parallelism, pipeline parallelism, and context parallelism",
+    "Asynchronous multimodal and diffusion serving with adaptive batching",
+    "GPU orchestration, memory placement, checkpoint recovery, and infrastructure cost intelligence",
+    "Hardware evaluation framework for GPUs and emerging accelerators"
+  ],
+  impact: [
+    "38% improvement in GPU utilization",
+    "44% reduction in distributed training instability",
+    "3.7x acceleration in multimodal inference throughput",
+    "31% reduction in operational infrastructure costs"
+  ],
+  tags: ["Distributed AI", "RLHF", "PPO/DPO/GRPO", "GPU Optimization", "Multimodal AI", "MLOps"],
+  image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1600&q=80",
+  githubLink: "https://github.com/debosmita-29/casestudy-projects",
+  paperLink: "/papers/AlignOps_IEEE.pdf"
+},
+{
+  slug: "medagent-lakeops",
+  title: "MedAgent LakeOps",
+  subtitle: "Agentic MLOps for Clinical Data Lakes & Healthcare Intelligence",
+  desc: "An agentic MLOps framework that orchestrates EHR, radiology, laboratory, operational, and wearable healthcare data into a governed clinical lakehouse.",
+  detail:
+    "MedAgent LakeOps combines autonomous healthcare agents, semantic interoperability, clinical lakehouse architecture, observability intelligence, and governance-aware MLOps for healthcare AI readiness.",
+  included: [
+    "Autonomous agents for clinical ingestion, metadata enrichment, semantic normalization, observability, and orchestration",
+    "FHIR, DICOM, HL7, and OMOP-inspired interoperability workflows",
+    "Clinical lakehouse zones for raw data, standardized healthcare data, feature engineering, model readiness, and governance audits",
+    "Agentic MLOps pipeline for training, deployment, monitoring, drift detection, and autonomous remediation",
+    "Patient intelligence flow connecting clinical systems, lakehouse pipelines, ML inference, and physician dashboards"
+  ],
+  impact: [
+    "43% reduction in clinical data processing latency",
+    "37% improvement in radiology metadata retrieval efficiency",
+    "52% reduction in manual operational intervention",
+    "4.3x acceleration in healthcare AI model deployment readiness"
+  ],
+  tags: ["Healthcare AI", "Agentic MLOps", "Clinical Lakehouse", "FHIR", "DICOM", "LangGraph"],
+  image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=1600&q=80",
+  githubLink: "https://github.com/debosmita-29/casestudy-projects",
+  paperLink: "/papers/MedAgent-LakeOps-Agentic-MLOps-for-Clinical-Data.pdf"
+}
+  {
     slug: "cogniintel",
     title: "CogniIntel",
     subtitle: "Enterprise RAG + Multi-Agent Knowledge System",
@@ -107,6 +157,114 @@ const projects = [
     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/neurorecruit"
   }
 ];
+
+// const projects = [
+//   {
+//     slug: "cogniintel",
+//     title: "CogniIntel",
+//     subtitle: "Enterprise RAG + Multi-Agent Knowledge System",
+//     desc: "Autonomous enterprise knowledge extraction using multi-agent RAG systems.",
+//     detail: "CogniIntel is a multi-agent RAG system designed to unify fragmented enterprise knowledge.",
+//     included: [
+//       "Document ingestion over policy and support datasets",
+//       "TF-IDF retrieval baseline",
+//       "Agent planner, retriever, critic, and answer composer",
+//       "Evaluation harness for grounded answers"
+//     ],
+//     impact: [
+//       "Faster knowledge lookup",
+//       "Reduced manual document triage",
+//       "Better traceability from answer to source"
+//     ],
+//     tags: ["RAG", "FAISS-like retrieval", "Agent orchestration"],
+//     image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80",
+//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/cogniintel"
+//   },
+//   {
+//     slug: "quantumroute-ai",
+//     title: "QuantumRoute AI",
+//     subtitle: "Optimization Engine for Complex Scheduling",
+//     desc: "Quantum-inspired optimization for enterprise scheduling and resource allocation.",
+//     detail: "QuantumRoute AI solves combinatorial scheduling problems using quantum-inspired search.",
+//     included: [
+//       "Resource, task, and constraint dataset",
+//       "Simulated annealing optimizer",
+//       "Constraint-aware scoring engine",
+//       "Allocation report generator"
+//     ],
+//     impact: [
+//       "Better allocation visibility",
+//       "Faster planning cycles",
+//       "Scenario-based scheduling decisions"
+//     ],
+//     tags: ["Optimization", "Scheduling", "Heuristics"],
+//     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1600&q=80",
+//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/quantumroute-ai"
+//   },
+//   {
+//     slug: "agentops-sentinel",
+//     title: "AgentOps Sentinel",
+//     subtitle: "Observability for Agentic AI Systems",
+//     desc: "Observability platform for monitoring multi-agent AI systems in production.",
+//     detail: "AgentOps Sentinel provides observability for agentic AI systems.",
+//     included: [
+//       "Agent telemetry parser",
+//       "Hallucination and tool failure risk scoring",
+//       "Token efficiency analytics",
+//       "Executive summary report"
+//     ],
+//     impact: [
+//       "Improved AI reliability visibility",
+//       "Faster debugging of agent failures",
+//       "Better governance for production agents"
+//     ],
+//     tags: ["Observability", "Risk scoring", "Telemetry"],
+//     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
+//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/agentops-sentinel"
+//   },
+//   {
+//     slug: "insightforge",
+//     title: "InsightForge",
+//     subtitle: "Autonomous BI + NL-to-SQL Analytics",
+//     desc: "Autonomous BI system converting natural language into SQL and insights.",
+//     detail: "InsightForge is an autonomous analytics engine.",
+//     included: [
+//       "SQLite analytics layer over sample sales data",
+//       "NL-to-SQL pattern engine",
+//       "Insight summarizer",
+//       "KPI report output"
+//     ],
+//     impact: [
+//       "Faster access to business insights",
+//       "Reduced dashboard dependency",
+//       "Natural language analytics workflow"
+//     ],
+//     tags: ["Analytics", "SQL", "BI automation"],
+//     image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80",
+//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/insightforge"
+//   },
+//   {
+//     slug: "neurorecruit",
+//     title: "NeuroRecruit",
+//     subtitle: "AI Talent Intelligence + Skill Matching",
+//     desc: "AI-powered talent intelligence and job-candidate matching engine.",
+//     detail: "NeuroRecruit matches candidates to roles using skill graph embeddings.",
+//     included: [
+//       "Candidate and job datasets",
+//       "Skill normalization",
+//       "Cosine similarity ranking",
+//       "Explainable match reasons"
+//     ],
+//     impact: [
+//       "Improved role-to-skill matching",
+//       "More explainable recruiting decisions",
+//       "Reduced manual screening effort"
+//     ],
+//     tags: ["Embeddings", "Skill graph", "Ranking"],
+//     image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80",
+//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/neurorecruit"
+//   }
+// ];
 
 const pages = {
   home: "Home",
