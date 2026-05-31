@@ -1909,13 +1909,13 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       </div>
 
       {introOpen && (
-        <div className="fixed inset-0 z-[96] flex items-center justify-center overflow-y-auto bg-black/85 px-4 py-8 backdrop-blur-md">
-          <div className="relative w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
+        <div className="fixed inset-0 z-[96] flex items-start justify-center overflow-y-auto bg-black/85 px-5 py-6 backdrop-blur-md lg:items-center lg:px-8">
+          <div className="relative my-auto max-h-[calc(100vh-3rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_24%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_20%_74%,rgba(202,161,119,0.16),transparent_28%),linear-gradient(135deg,rgba(8,47,73,0.72),rgba(0,0,0,0.95))]" />
             <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(103,232,249,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.55)_1px,transparent_1px)] [background-size:54px_54px] [transform:perspective(900px)_rotateX(58deg)_translateY(-12rem)_scale(1.25)]" />
 
-            <div className="relative grid gap-6 p-5 md:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-              <div>
+            <div className="relative grid gap-6 p-5 md:p-7 xl:grid-cols-[0.95fr_1.05fr] xl:items-center">
+              <div className="min-w-0">
                 <div className="inline-flex rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-cyan-200">
                   Veda Live Guide
                 </div>
@@ -1966,7 +1966,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                 </div>
               </div>
 
-              <div className="relative">
+              <div className="relative min-w-0">
                 <CinematicVedaRobot stages={stages} signalCards={signalCards} />
               </div>
             </div>
