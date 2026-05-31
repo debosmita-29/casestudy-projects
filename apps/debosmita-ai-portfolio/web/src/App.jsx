@@ -1323,7 +1323,7 @@ export default function App() {
 
       </header>
 
-      {["learning", "aiLab", "resources"].includes(page) && (
+      {["home", "learning", "aiLab", "resources"].includes(page) && (
         <LearningPortalOrbMenu page={page} goToPage={goToPage} />
       )}
 
@@ -1378,7 +1378,7 @@ function LearningPortalOrbMenu({ page, goToPage }) {
 
   return (
     <>
-      <nav className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block" aria-label="Debosmita AI Learning Portal">
+      <nav className="fixed right-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block" aria-label="Debosmita AI Learning Portal">
         <div className="relative flex flex-col items-center gap-4 rounded-full border border-cyan-300/20 bg-black/50 p-3 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
           <div className="absolute inset-y-10 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-cyan-300/40 to-transparent" />
           <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 text-cyan-200 shadow-[0_0_28px_rgba(34,211,238,0.22)]">
@@ -1390,14 +1390,14 @@ function LearningPortalOrbMenu({ page, goToPage }) {
               key={key}
               type="button"
               onClick={() => goToPage(key)}
-              className={`group relative flex h-16 w-16 items-center justify-center rounded-full border text-[0.62rem] font-black uppercase tracking-[0.12em] transition ${
+              className={`group relative flex h-20 w-20 items-center justify-center rounded-full border text-[0.58rem] font-black uppercase tracking-[0.04em] transition ${
                 page === key
                   ? "border-cyan-300 bg-cyan-300 text-black shadow-[0_0_30px_rgba(34,211,238,0.34)]"
                   : "border-cyan-300/25 bg-cyan-300/10 text-cyan-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-black"
               }`}
               aria-label={`Open ${label}`}
             >
-              <span className="text-center leading-3">{shortLabel}</span>
+              <span className="w-full px-1 text-center leading-3">{shortLabel}</span>
               <span className="pointer-events-none absolute right-20 hidden whitespace-nowrap rounded-full border border-cyan-300/25 bg-black/80 px-3 py-2 text-xs text-cyan-100 shadow-xl shadow-cyan-500/10 group-hover:block">
                 {label}
               </span>
@@ -2128,8 +2128,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       </div>
 
       {introOpen && (
-        <div className="veda-modal-backdrop fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/85 px-5 pb-8 pt-28 backdrop-blur-md lg:px-8 lg:pt-32">
-          <div className="veda-modal-panel relative max-h-[calc(100vh-9rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
+        <div className="veda-modal-backdrop fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/85 px-5 pb-10 pt-44 backdrop-blur-md lg:px-8 lg:pt-48">
+          <div className="veda-modal-panel relative max-h-[calc(100vh-14rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_24%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_20%_74%,rgba(202,161,119,0.16),transparent_28%),linear-gradient(135deg,rgba(8,47,73,0.72),rgba(0,0,0,0.95))]" />
             <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(103,232,249,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.55)_1px,transparent_1px)] [background-size:54px_54px] [transform:perspective(900px)_rotateX(58deg)_translateY(-12rem)_scale(1.25)]" />
 
@@ -2209,8 +2209,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       )}
 
       {tourOpen && (
-        <div className="fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/80 px-4 pb-8 pt-28 backdrop-blur-md lg:pt-32">
-          <div className="max-h-[calc(100vh-9rem)] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-cyan-300/40 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
+        <div className="fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/80 px-4 pb-10 pt-44 backdrop-blur-md lg:pt-48">
+          <div className="max-h-[calc(100vh-14rem)] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-cyan-300/40 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
             <div className="flex items-center justify-between border-b border-zinc-800 bg-[#070b12] px-6 py-5">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.25em] text-cyan-200">Veda Guided Journey</p>
