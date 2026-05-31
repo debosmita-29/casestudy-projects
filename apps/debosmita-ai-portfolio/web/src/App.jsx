@@ -3458,6 +3458,27 @@ function PageShell({ eyebrow, title, children }) {
 }
 
 function NewsletterSection() {
+  const [subscriberEmail, setSubscriberEmail] = useState("");
+  const [subscribeMessage, setSubscribeMessage] = useState("");
+
+  const handleNewsletterSubmit = (event) => {
+    event.preventDefault();
+
+    const email = subscriberEmail.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSubscribeMessage("Please enter a valid email address.");
+      return;
+    }
+
+    const subject = encodeURIComponent("Subscribe me to Debosmita's Newsletter");
+    const body = encodeURIComponent(
+      `Hi Debosmita,\n\nPlease add me to Debosmita's Newsletter.\n\nSubscriber email: ${email}\n\nThank you.`
+    );
+
+    setSubscribeMessage("Opening your email app to confirm the subscription request.");
+    window.location.href = `mailto:debosmitaroy.ai@gmail.com?subject=${subject}&body=${body}`;
+  };
+
   return (
     <section className="mx-auto max-w-7xl px-6 pb-24 pt-4">
       <div className="relative overflow-hidden rounded-[2rem] border border-cyan-400/20 bg-[#070b12] px-6 py-16 text-center shadow-2xl md:px-12">
@@ -3477,15 +3498,32 @@ function NewsletterSection() {
 
         <p className="relative mt-2 text-xs font-semibold text-zinc-400">By Debosmita Roy</p>
 
-        <form onSubmit={(event) => event.preventDefault()} className="relative mx-auto mt-8 flex max-w-xl flex-col gap-3 rounded-2xl border border-cyan-300/30 bg-black/50 p-2 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl sm:flex-row">
-          <input type="email" placeholder="Type your email..." className="min-h-14 flex-1 rounded-xl border border-zinc-800 bg-zinc-950/80 px-5 text-base text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/70 focus:ring-2 focus:ring-cyan-300/20" aria-label="Email address" />
+        <form onSubmit={handleNewsletterSubmit} className="relative mx-auto mt-8 flex max-w-xl flex-col gap-3 rounded-2xl border border-cyan-300/30 bg-black/50 p-2 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl sm:flex-row">
+          <input
+            type="email"
+            value={subscriberEmail}
+            onChange={(event) => {
+              setSubscriberEmail(event.target.value);
+              setSubscribeMessage("");
+            }}
+            placeholder="Type your email..."
+            className="min-h-14 flex-1 rounded-xl border border-zinc-800 bg-zinc-950/80 px-5 text-base text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300/70 focus:ring-2 focus:ring-cyan-300/20"
+            aria-label="Email address"
+            required
+          />
           <button type="submit" className="min-h-14 rounded-xl bg-gradient-to-r from-cyan-300 to-fuchsia-400 px-7 text-base font-bold text-black transition hover:scale-[1.02] hover:shadow-lg hover:shadow-cyan-500/20">
             Subscribe
           </button>
         </form>
 
+        {subscribeMessage && (
+          <p className="relative mx-auto mt-4 max-w-xl text-sm font-semibold text-cyan-200" role="status">
+            {subscribeMessage}
+          </p>
+        )}
+
         <p className="relative mx-auto mt-7 max-w-2xl text-sm leading-6 text-zinc-500">
-          By subscribing, you agree to receive occasional AI insights, engineering notes, and future updates from Debosmita Roy.
+          By subscribing, you agree to receive occasional AI insights, engineering notes, and future updates from Debosmita Roy. Your email app will open so you can confirm the request.
         </p>
       </div>
     </section>
