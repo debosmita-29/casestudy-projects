@@ -1321,9 +1321,20 @@ export default function App() {
           </nav>
         </div>
 
-        <div className="hidden border-t border-cyan-300/10 bg-[#061018]/95 px-6 py-3 lg:block">
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4">
-            <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200">Debosmita AI Learning Portal</p>
+        <div className="relative hidden overflow-hidden border-t border-cyan-300/10 bg-[#061018]/95 px-6 py-3 lg:block">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_50%,rgba(34,211,238,0.16),transparent_20%),radial-gradient(circle_at_82%_50%,rgba(202,161,119,0.12),transparent_18%)]" />
+          <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/35 to-transparent" />
+          <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <span className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/10 text-cyan-200 shadow-lg shadow-cyan-500/10">
+                <ChatOrbitIcon />
+                <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
+              </span>
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200">Debosmita AI Learning Portal</p>
+                <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-zinc-500">Veda neural routing console</p>
+              </div>
+            </div>
             <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]">
               {learningPortalPages.map(([key, label]) => (
                 <button
@@ -2006,6 +2017,10 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
     }, 120);
   };
 
+  const openPrimaryFeature = () => {
+    navigateToFeature(routeOptions[0]);
+  };
+
   return (
     <section className="relative mt-6 scroll-mt-56 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-[#050b12] p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_85%_10%,rgba(202,161,119,0.18),transparent_30%),linear-gradient(135deg,rgba(8,47,73,0.5),rgba(0,0,0,0.92))]" />
@@ -2027,9 +2042,9 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
             </button>
             <button
               type="button"
-              onClick={openTour}
+              onClick={openPrimaryFeature}
               className="inline-flex items-center rounded-2xl border border-[#caa177]/40 px-5 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#caa177] transition hover:bg-[#caa177] hover:text-black"
-              aria-label={`Start guided tour for ${modeLabel}`}
+              aria-label={`Open ${modeLabel} learning material`}
             >
               {modeLabel}
             </button>
@@ -2093,13 +2108,6 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                 </div>
 
                 <div className="sticky bottom-0 z-20 -mx-5 mt-5 flex flex-wrap gap-3 border-t border-cyan-300/10 bg-[#050b12]/95 px-5 py-4 backdrop-blur md:-mx-7 md:px-7">
-                  <button
-                    type="button"
-                    onClick={() => startCosmicAudio(true)}
-                    className="rounded-2xl border border-cyan-300/50 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black"
-                  >
-                    Play Cosmic Audio
-                  </button>
                   <button
                     type="button"
                     onClick={openTour}
