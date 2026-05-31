@@ -1502,61 +1502,112 @@ function FloatingVedaChat({ hidden = false }) {
     }
   ]);
 
+  const normalizeQuestion = (question) => question.toLowerCase().replace(/[^a-z0-9\s-]/g, " ");
+  const includesAny = (question, terms) => terms.some((term) => question.includes(term));
+
   const scoreKnowledge = (question) => {
+    const ignoredTerms = new Set([
+      "about",
+      "answer",
+      "asked",
+      "can",
+      "could",
+      "debosmita",
+      "does",
+      "first",
+      "from",
+      "guide",
+      "have",
+      "how",
+      "learn",
+      "like",
+      "me",
+      "need",
+      "please",
+      "should",
+      "site",
+      "start",
+      "that",
+      "the",
+      "this",
+      "veda",
+      "website",
+      "what",
+      "where",
+      "which",
+      "with",
+      "you"
+    ]);
     const terms = question
       .toLowerCase()
       .replace(/[^a-z0-9\s-]/g, " ")
       .split(/\s+/)
-      .filter((term) => term.length > 2);
+      .filter((term) => term.length > 2 && !ignoredTerms.has(term));
 
     return siteKnowledge
       .map((item) => {
         const searchable = `${item.title} ${item.type} ${item.keywords}`.toLowerCase();
-        const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
+        const title = item.title.toLowerCase();
+        const score = terms.reduce((total, term) => {
+          if (title.includes(term)) {
+            return total + 3;
+          }
+          if (searchable.includes(term)) {
+            return total + 1;
+          }
+          return total;
+        }, 0);
         return { ...item, score };
       })
-      .filter((item) => item.score > 0)
+      .filter((item) => item.score > 1)
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
   };
 
   const getAssistantReply = (question) => {
-    const normalizedQuestion = question.toLowerCase();
+    const normalizedQuestion = ` ${normalizeQuestion(question).trim()} `;
     const matches = scoreKnowledge(question);
 
-    if (normalizedQuestion.includes("career") || normalizedQuestion.includes("track") || normalizedQuestion.includes("job")) {
+    if (
+      includesAny(normalizedQuestion, ["how can i learn", "learn ai", "start ai", "beginner ai", "new to ai", "study ai"]) ||
+      (includesAny(normalizedQuestion, ["learn", "study", "start", "beginner"]) && includesAny(normalizedQuestion, [" ai ", " genai", "machine learning", "ml"]))
+    ) {
+      return "Start with the Neural Academy path: 1. AI fundamentals, 2. Python for AI builders, 3. data science foundations, 4. machine learning basics, 5. prompt engineering, 6. RAG, 7. agentic AI. Your first practical build should be a Personal AI Study Coach or a tiny document Q&A assistant, because it teaches prompts, retrieval, evaluation, and product thinking without becoming too big.";
+    }
+
+    if (includesAny(normalizedQuestion, ["career", "track", "job", "role", "resume", "interview"])) {
       return "For career direction, start with the AI Career Path Quiz. The strongest tracks on this site are GenAI Builder, Data Scientist, AI Product Engineer, Cloud AI Architect, and Agentic AI Engineer. If you want hands-on momentum, choose GenAI Builder first, then build a tiny RAG assistant.";
     }
 
-    if (normalizedQuestion.includes("rag") || normalizedQuestion.includes("retrieval") || normalizedQuestion.includes("vector")) {
-      return "For RAG, use this path: learn embeddings, create a small document set, retrieve relevant chunks, generate grounded answers, then evaluate whether each answer cites the right context. The AI Lab weekly challenge is a good first build: a tiny RAG assistant in 30 minutes.";
+    if (includesAny(normalizedQuestion, ["rag", "retrieval", "vector", "embedding", "embeddings", "grounded", "chunk", "chunks"])) {
+      return "For RAG, learn it in this order: 1. embeddings, 2. document chunking, 3. vector search, 4. retrieval quality, 5. grounded answer generation, 6. citations, 7. evaluation. Start with five short documents and three test questions. If Veda can retrieve the right chunk and cite it, you understand the core of RAG.";
     }
 
-    if (normalizedQuestion.includes("agent") || normalizedQuestion.includes("agentic")) {
+    if (includesAny(normalizedQuestion, ["agent", "agentic", "tool use", "tools", "memory", "planning", "workflow"])) {
       return "Agentic AI means building systems that can plan, use tools, observe results, retry when something fails, and ask for human approval when needed. A strong starter project is a research agent with three tools: search, source summarization, and answer critique.";
     }
 
-    if (normalizedQuestion.includes("azure") || normalizedQuestion.includes("foundry") || normalizedQuestion.includes("foundation model")) {
+    if (includesAny(normalizedQuestion, ["azure", "foundry", "foundation model", "model catalog", "guardrail", "prompt optimization", "evaluation"])) {
       return "Debosmita's latest newsletter frames Azure AI Foundry as an operating layer for foundation model systems: model selection, agents, evaluations, prompt optimization, guardrails, tracing, governance, and deployment working together instead of one isolated model call.";
     }
 
-    if (normalizedQuestion.includes("project") || normalizedQuestion.includes("portfolio") || normalizedQuestion.includes("build")) {
+    if (includesAny(normalizedQuestion, ["project", "portfolio", "build", "github", "capstone", "idea"])) {
       return "A strong portfolio project from this site is a RAG Research Agent: retrieve sources, draft an answer, check grounding, log failures, and ask for human approval. For beginners, start with a Personal AI Study Coach that recommends one lesson, one flashcard, and one practice task each day.";
     }
 
-    if (normalizedQuestion.includes("7-day") || normalizedQuestion.includes("learning plan") || normalizedQuestion.includes("learn this week")) {
+    if (includesAny(normalizedQuestion, ["7-day", "seven day", "learning plan", "learn this week", "study plan", "roadmap"])) {
       return "Here is a 7-day AI plan: Day 1 learn embeddings, Day 2 learn RAG, Day 3 build a tiny retrieval demo, Day 4 study agents, Day 5 read the Azure AI Foundry newsletter, Day 6 create a project README, Day 7 share your progress on LinkedIn with one lesson learned and one screenshot.";
     }
 
-    if (normalizedQuestion.includes("badge") || normalizedQuestion.includes("linkedin") || normalizedQuestion.includes("share")) {
+    if (includesAny(normalizedQuestion, ["badge", "linkedin", "share", "streak", "leaderboard"])) {
       return "To earn and share a learning badge, complete one focused action: read a micro-lesson, answer a quiz, run a notebook, or finish a weekly challenge. Then share it on LinkedIn with this format: what I learned, what I built, what confused me, and what I will try next.";
     }
 
-    if (normalizedQuestion.includes("newsletter") || normalizedQuestion.includes("read first")) {
+    if (includesAny(normalizedQuestion, ["newsletter", "read first", "article", "writing"])) {
       return "Start with Debosmita's Azure AI Foundry newsletter. It explains why modern AI builders need to understand the operating layer around foundation models: model routing, evaluations, prompt optimization, guardrails, traces, governance, and deployment.";
     }
 
-    if (normalizedQuestion.includes("tool") || normalizedQuestion.includes("genai")) {
+    if (includesAny(normalizedQuestion, ["tool", "tools", "genai", "llm", "llms", "stack"])) {
       return "For GenAI, learn these tools in order: prompt testing, embeddings, vector databases, RAG evaluation, Azure AI Foundry, agent frameworks, tracing, and MLOps monitoring. The goal is not just calling a model, but operating a reliable AI system.";
     }
 
