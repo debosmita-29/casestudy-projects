@@ -2183,49 +2183,332 @@ function ResourcesPage() {
       desc: "A leadership-friendly framework to assess business value, risk, maturity, governance, and adoption readiness.",
     },
   ];
-
+    
   const freeResources = [
-    {
-      title: "AI Fundamentals Starter Pack",
-      desc: "Beginner-friendly lessons on how AI, ML, GenAI, LLMs, prompts, embeddings, and agents work.",
-      tag: "Free",
-    },
-    {
-      title: "Python for AI Builders",
-      desc: "Core Python concepts every AI learner needs: data structures, functions, APIs, files, notebooks, and debugging.",
-      tag: "Free",
-    },
-    {
-      title: "Data Science Foundations",
-      desc: "Statistics, data cleaning, exploratory analysis, visualization, SQL, and model-ready datasets.",
-      tag: "Free",
-    },
-    {
-      title: "Machine Learning Roadmap",
-      desc: "A guided path through regression, classification, evaluation metrics, feature engineering, and model selection.",
-      tag: "Free",
-    },
-    {
-      title: "Prompt Engineering Guide",
-      desc: "Practical prompting patterns for research, coding, summarization, reasoning, tutoring, and workflow automation.",
-      tag: "Free",
-    },
-    {
-      title: "RAG Beginner Guide",
-      desc: "Learn chunking, embeddings, vector databases, retrieval, grounding, citations, and answer evaluation.",
-      tag: "Free",
-    },
-    {
-      title: "Agentic AI Glossary",
-      desc: "Plain-English definitions for agents, tools, memory, planning, orchestration, guardrails, and observability.",
-      tag: "Free",
-    },
-    {
-      title: "AI Career Starter Kit",
-      desc: "Portfolio ideas, GitHub project templates, LinkedIn positioning, resume bullets, and interview prep prompts.",
-      tag: "Free",
-    },
-  ];
+  {
+    title: "AI Fundamentals Starter Pack",
+    desc: "A complete beginner path for understanding what AI is, how modern AI systems work, and how to think like an AI builder.",
+    tag: "Free",
+    level: "Beginner",
+    duration: "2-3 weeks",
+    learn: [
+      "What AI, ML, deep learning, GenAI, and LLMs mean",
+      "How prompts, tokens, context windows, and embeddings work",
+      "The difference between chatbots, copilots, agents, and workflows",
+      "How AI products are designed around users, data, and feedback",
+      "Basic AI safety, hallucination, bias, and evaluation concepts"
+    ],
+    build: [
+      "Personal AI study assistant",
+      "Prompt library for daily productivity",
+      "Simple AI-powered FAQ assistant"
+    ],
+    practice: [
+      "Explain AI to a high school student in 200 words",
+      "Compare a chatbot, RAG app, and AI agent",
+      "Write 10 prompts for research, coding, and learning"
+    ],
+    outcome: "You will understand the AI landscape clearly and know what kind of AI projects you want to build first."
+  },
+  {
+    title: "AI for Data Scientists",
+    desc: "A practical path for data scientists who want to move beyond notebooks and build LLM-powered analytics, RAG, agents, and explainable AI workflows.",
+    tag: "Free",
+    level: "Intermediate",
+    duration: "8-12 weeks",
+    learn: [
+        "How LLMs actually work: tokens, transformers, instruction tuning, context windows, and evaluation",
+        "How to build RAG systems with embeddings, retrieval, vector databases, and grounded responses",
+        "How to combine classical data science workflows with LLM-powered explanations",
+        "How to design agents for research, EDA, data quality, and business reporting",
+        "How to turn data science projects into portfolio-ready AI applications"
+    ],
+    build: [
+        "RAG app over company docs, internal wikis, Confluence pages, or PDF libraries",
+        "Automated EDA agent that summarizes CSVs, creates charts, and flags anomalies",
+        "Customer churn predictor with plain-English LLM explanations for each prediction",
+        "Multi-agent research assistant with search, summarization, fact-checking, and formatting agents",
+        "AI-powered data quality checker for missing values, outliers, schema mismatches, and natural-language issue reports"
+    ],
+    practice: [
+        "Complete the free LLM course and summarize how LLMs generate answers",
+        "Build a document chatbot using embeddings and retrieval",
+        "Train a churn model and generate stakeholder-friendly explanations for predictions",
+        "Design a LangGraph or CrewAI workflow with at least three specialized agents",
+        "Run a data quality audit on a messy dataset and produce an executive-readable report"
+    ],
+    outcome: "You will be able to show employers that you can combine data science, LLMs, RAG, agents, and business communication into real AI-powered analytics products.",
+    links: [
+        {
+        label: "LLM Course",
+        type: "Free GitHub Course",
+        url: "https://github.com/mlabonne/llm-course"
+        },
+        {
+        label: "LangChain: Chat with Your Data",
+        type: "Free Course",
+        url: "https://www.deeplearning.ai/short-courses/langchain-chat-with-your-data/"
+        },
+        {
+        label: "Building Applications with Vector Databases",
+        type: "Free Tutorial",
+        url: "https://www.deeplearning.ai/short-courses/building-applications-vector-databases/"
+        },
+        {
+        label: "Automated EDA Agent Tutorial",
+        type: "YouTube",
+        url: "https://www.youtube.com/watch?v=C75TROiiEa0"
+        },
+        {
+        label: "Intro to Machine Learning",
+        type: "Free Kaggle Course",
+        url: "https://www.kaggle.com/learn/intro-to-machine-learning"
+        },
+        {
+        label: "AI Agents in LangGraph",
+        type: "Free Course",
+        url: "https://www.deeplearning.ai/short-courses/ai-agents-in-langgraph/"
+        },
+        {
+        label: "AI Data Quality Checker Tutorial",
+        type: "YouTube",
+        url: "https://www.youtube.com/watch?v=CnAgB3A5OlU"
+        }
+    ]
+  },
+  {
+    title: "Python for AI Builders",
+    desc: "A hands-on Python track focused on the skills needed for AI, ML, data science, APIs, automation, and project building.",
+    tag: "Free",
+    level: "Beginner",
+    duration: "4-6 weeks",
+    learn: [
+      "Variables, functions, loops, lists, dictionaries, and classes",
+      "Reading and writing files, JSON, CSV, and API responses",
+      "Using notebooks, virtual environments, packages, and project folders",
+      "Working with pandas, NumPy, requests, and basic plotting",
+      "Debugging errors and writing clean reusable code"
+    ],
+    build: [
+      "CSV data cleaner",
+      "AI prompt automation script",
+      "API-powered research assistant",
+      "Mini data dashboard"
+    ],
+    practice: [
+      "Clean a messy CSV and summarize it",
+      "Call an API and save results to a file",
+      "Write a reusable function for text preprocessing",
+      "Create a command-line tool that answers user questions"
+    ],
+    outcome: "You will be able to write Python scripts and notebooks for real AI and data workflows."
+  },
+  {
+    title: "Data Science Foundations",
+    desc: "A practical data science path covering data cleaning, exploration, statistics, visualization, SQL, and insight generation.",
+    tag: "Free",
+    level: "Beginner to Intermediate",
+    duration: "6-8 weeks",
+    learn: [
+      "Data types, missing values, outliers, joins, grouping, and aggregation",
+      "Exploratory data analysis using pandas and visualization libraries",
+      "Core statistics: mean, median, variance, correlation, distributions, sampling",
+      "SQL basics: SELECT, WHERE, GROUP BY, JOIN, CTEs, and window functions",
+      "How to turn analysis into clear business recommendations"
+    ],
+    build: [
+      "Sales performance dashboard",
+      "Customer churn exploration notebook",
+      "Student performance analysis",
+      "SQL analytics report"
+    ],
+    practice: [
+      "Find top 5 drivers of revenue in a dataset",
+      "Clean a dataset with missing values and duplicates",
+      "Write SQL queries for customer segmentation",
+      "Create charts that explain a business trend"
+    ],
+    outcome: "You will be able to analyze real datasets and communicate insights like a data analyst."
+  },
+  {
+    title: "Machine Learning Roadmap",
+    desc: "A structured ML path from first model to model evaluation, feature engineering, deployment thinking, and responsible model use.",
+    tag: "Free",
+    level: "Intermediate",
+    duration: "8-10 weeks",
+    learn: [
+      "Supervised vs unsupervised learning",
+      "Regression, classification, clustering, and recommendation basics",
+      "Train/test split, cross-validation, leakage, overfitting, and underfitting",
+      "Metrics: accuracy, precision, recall, F1, ROC-AUC, RMSE, MAE",
+      "Feature engineering, model interpretation, and deployment readiness"
+    ],
+    build: [
+      "House price prediction model",
+      "Customer churn classifier",
+      "Resume-job match scorer",
+      "Recommendation system prototype"
+    ],
+    practice: [
+      "Train three models and compare metrics",
+      "Explain false positives and false negatives for a classifier",
+      "Create a feature importance report",
+      "Write a model card for an ML project"
+    ],
+    outcome: "You will know how to train, evaluate, explain, and package ML models for portfolio projects."
+  },
+  {
+    title: "Prompt Engineering Guide",
+    desc: "A practical guide to designing prompts that produce reliable outputs for learning, research, coding, analysis, and product workflows.",
+    tag: "Free",
+    level: "Beginner to Intermediate",
+    duration: "2-4 weeks",
+    learn: [
+      "Prompt roles, constraints, examples, context, and output formats",
+      "Zero-shot, few-shot, chain-of-thought-style decomposition, and critique prompts",
+      "How to ask models for structured JSON, tables, summaries, and code",
+      "Prompt patterns for research, debugging, writing, tutoring, and analysis",
+      "How to evaluate, iterate, and version prompts"
+    ],
+    build: [
+      "Prompt library for students",
+      "AI writing assistant",
+      "Code review prompt pack",
+      "Research summarization workflow"
+    ],
+    practice: [
+      "Rewrite a weak prompt into a strong prompt",
+      "Generate a rubric and grade an answer",
+      "Ask for JSON output and validate it",
+      "Create prompts for five different professions"
+    ],
+    outcome: "You will be able to use AI tools more effectively and design reusable prompts for real workflows."
+  },
+  {
+    title: "RAG Beginner Guide",
+    desc: "A zero-to-one path for building retrieval-augmented generation systems over PDFs, websites, notes, policies, and enterprise documents.",
+    tag: "Free",
+    level: "Intermediate",
+    duration: "6-8 weeks",
+    learn: [
+      "Why RAG is used and how it reduces hallucination",
+      "Document loading, chunking, metadata, embeddings, and vector search",
+      "Similarity search, reranking, grounding, citations, and source traceability",
+      "Vector databases such as FAISS, Chroma, Pinecone, Weaviate, and pgvector",
+      "RAG evaluation: retrieval quality, answer faithfulness, latency, and cost"
+    ],
+    build: [
+      "PDF question-answering assistant",
+      "Personal knowledge base chatbot",
+      "Company policy assistant",
+      "Research paper summarizer"
+    ],
+    practice: [
+      "Chunk a PDF into meaningful sections",
+      "Compare retrieval results for different chunk sizes",
+      "Add citations to generated answers",
+      "Create a test set for evaluating RAG answers"
+    ],
+    outcome: "You will be able to build your first grounded AI app over documents and explain how it works."
+  },
+  {
+    title: "Agentic AI Glossary",
+    desc: "A concept map for understanding agents, tools, memory, planning, orchestration, retries, observability, and production constraints.",
+    tag: "Free",
+    level: "Intermediate to Advanced",
+    duration: "4-6 weeks",
+    learn: [
+      "What makes an AI agent different from a chatbot",
+      "Tools, function calling, planning, memory, state, and task decomposition",
+      "Single-agent vs multi-agent workflows",
+      "Human-in-the-loop approvals, guardrails, and recovery patterns",
+      "Observability for agents: traces, tool failures, latency, cost, and quality"
+    ],
+    build: [
+      "Research agent",
+      "Calendar planning agent",
+      "Data analysis agent",
+      "Multi-step workflow assistant"
+    ],
+    practice: [
+      "Design an agent with three tools",
+      "Create a failure recovery plan for bad tool output",
+      "Map the state transitions of an agent workflow",
+      "Define observability metrics for an agent"
+    ],
+    outcome: "You will understand how to design AI agents that can reason, use tools, and complete multi-step tasks."
+  },
+  {
+    title: "AI Career Starter Kit",
+    desc: "A practical career kit for turning learning into portfolio projects, GitHub proof, LinkedIn visibility, interview stories, and job readiness.",
+    tag: "Free",
+    level: "All Levels",
+    duration: "2-4 weeks",
+    learn: [
+      "How to choose AI projects that match your career goals",
+      "How to write strong README files and project case studies",
+      "How to explain AI projects in interviews",
+      "How to position yourself on LinkedIn and GitHub",
+      "How to build a 90-day AI learning and portfolio plan"
+    ],
+    build: [
+      "AI portfolio website",
+      "GitHub project case study",
+      "LinkedIn learning series",
+      "Resume bullet bank for AI projects"
+    ],
+    practice: [
+      "Write a project README with problem, approach, stack, and impact",
+      "Record a 2-minute project explanation",
+      "Create 10 LinkedIn post ideas from your learning journey",
+      "Prepare STAR stories for AI project interviews"
+    ],
+    outcome: "You will have a clear learning plan and a portfolio strategy that shows real proof of skill."
+  }
+];
+
+  // const freeResources = [
+  //   {
+  //     title: "AI Fundamentals Starter Pack",
+  //     desc: "Beginner-friendly lessons on how AI, ML, GenAI, LLMs, prompts, embeddings, and agents work.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "Python for AI Builders",
+  //     desc: "Core Python concepts every AI learner needs: data structures, functions, APIs, files, notebooks, and debugging.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "Data Science Foundations",
+  //     desc: "Statistics, data cleaning, exploratory analysis, visualization, SQL, and model-ready datasets.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "Machine Learning Roadmap",
+  //     desc: "A guided path through regression, classification, evaluation metrics, feature engineering, and model selection.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "Prompt Engineering Guide",
+  //     desc: "Practical prompting patterns for research, coding, summarization, reasoning, tutoring, and workflow automation.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "RAG Beginner Guide",
+  //     desc: "Learn chunking, embeddings, vector databases, retrieval, grounding, citations, and answer evaluation.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "Agentic AI Glossary",
+  //     desc: "Plain-English definitions for agents, tools, memory, planning, orchestration, guardrails, and observability.",
+  //     tag: "Free",
+  //   },
+  //   {
+  //     title: "AI Career Starter Kit",
+  //     desc: "Portfolio ideas, GitHub project templates, LinkedIn positioning, resume bullets, and interview prep prompts.",
+  //     tag: "Free",
+  //   },
+  // ];
 
   const externalResources = [
     {
