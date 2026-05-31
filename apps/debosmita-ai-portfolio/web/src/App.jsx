@@ -2467,48 +2467,117 @@ function ResourcesPage() {
   }
 ];
 
-  // const freeResources = [
-  //   {
-  //     title: "AI Fundamentals Starter Pack",
-  //     desc: "Beginner-friendly lessons on how AI, ML, GenAI, LLMs, prompts, embeddings, and agents work.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "Python for AI Builders",
-  //     desc: "Core Python concepts every AI learner needs: data structures, functions, APIs, files, notebooks, and debugging.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "Data Science Foundations",
-  //     desc: "Statistics, data cleaning, exploratory analysis, visualization, SQL, and model-ready datasets.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "Machine Learning Roadmap",
-  //     desc: "A guided path through regression, classification, evaluation metrics, feature engineering, and model selection.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "Prompt Engineering Guide",
-  //     desc: "Practical prompting patterns for research, coding, summarization, reasoning, tutoring, and workflow automation.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "RAG Beginner Guide",
-  //     desc: "Learn chunking, embeddings, vector databases, retrieval, grounding, citations, and answer evaluation.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "Agentic AI Glossary",
-  //     desc: "Plain-English definitions for agents, tools, memory, planning, orchestration, guardrails, and observability.",
-  //     tag: "Free",
-  //   },
-  //   {
-  //     title: "AI Career Starter Kit",
-  //     desc: "Portfolio ideas, GitHub project templates, LinkedIn positioning, resume bullets, and interview prep prompts.",
-  //     tag: "Free",
-  //   },
-  // ];
+    <section className="mt-12">
+  <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Free Learning Library</h2>
+  <p className="mt-4 max-w-3xl leading-8 text-zinc-400">
+    A zero-to-hero roadmap for learners who want to build strong AI, ML, data science, chatbot, RAG, and agentic AI foundations over the next few months.
+  </p>
+
+  <div className="mt-8 grid gap-6 md:grid-cols-2">
+    {freeResources.map((resource) => {
+      const primaryLink = resource.links?.[0]?.url;
+
+      return (
+        <article
+          key={resource.title}
+          onClick={() => {
+            if (primaryLink) {
+              window.open(primaryLink, "_blank", "noopener,noreferrer");
+            }
+          }}
+          role={primaryLink ? "link" : "article"}
+          tabIndex={primaryLink ? 0 : undefined}
+          onKeyDown={(event) => {
+            if (primaryLink && (event.key === "Enter" || event.key === " ")) {
+              event.preventDefault();
+              window.open(primaryLink, "_blank", "noopener,noreferrer");
+            }
+          }}
+          className={`rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7 transition ${
+            primaryLink
+              ? "cursor-pointer hover:-translate-y-1 hover:border-[#caa177]/60"
+              : "hover:border-zinc-700"
+          }`}
+        >
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-[#caa177]/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#caa177]">
+              {resource.tag}
+            </span>
+            <span className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400">
+              {resource.level}
+            </span>
+            <span className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400">
+              {resource.duration}
+            </span>
+          </div>
+
+          <h3 className="mt-5 text-2xl font-bold text-white">{resource.title}</h3>
+          <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
+
+          <div className="mt-6 grid gap-5 lg:grid-cols-2">
+            <div>
+              <h4 className="font-semibold text-white">What you’ll learn</h4>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-400">
+                {resource.learn.map((item) => (
+                  <li key={item}>• {item}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold text-white">What you’ll build</h4>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-400">
+                {resource.build.map((item) => (
+                  <li key={item}>• {item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-6 rounded-2xl border border-zinc-800 bg-black/40 p-5">
+            <h4 className="font-semibold text-white">Practice exercises</h4>
+            <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-400">
+              {resource.practice.map((item) => (
+                <li key={item}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+
+          {resource.links && (
+            <div
+              className="mt-6 rounded-2xl border border-zinc-800 bg-black/40 p-5"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <h4 className="font-semibold text-white">Free tutorials and references</h4>
+              <div className="mt-4 grid gap-3">
+                {resource.links.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 transition hover:border-[#caa177]/60 hover:bg-[#caa177]/10"
+                  >
+                    <p className="text-sm font-semibold text-white">{link.label}</p>
+                    <p className="mt-1 text-xs uppercase tracking-[0.18em] text-[#caa177]">{link.type}</p>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <p className="mt-5 rounded-2xl border border-[#caa177]/30 bg-[#caa177]/10 p-4 text-sm leading-6 text-[#d8b58d]">
+            Outcome: {resource.outcome}
+          </p>
+
+          <p className="mt-5 font-semibold text-[#caa177]">
+            {primaryLink ? "Open Free Resource →" : "Coming Soon →"}
+          </p>
+        </article>
+      );
+    })}
+  </div>
+</section>
 
   const externalResources = [
     {
