@@ -1334,7 +1334,7 @@ export default function App() {
         />
       )}
       <Footer goToPage={goToPage} />
-      <FloatingVedaChat />
+      <FloatingVedaChat hidden={["learning", "aiLab", "resources"].includes(page)} />
     </div>
   );
 }
@@ -1360,7 +1360,7 @@ function ChatOrbitIcon() {
   );
 }
 
-function FloatingVedaChat() {
+function FloatingVedaChat({ hidden = false }) {
   const starterPrompts = [
     "What should I learn first for RAG?",
     "Suggest a portfolio project",
@@ -1505,6 +1505,10 @@ function FloatingVedaChat() {
     askAssistant(chatInput);
   };
 
+  if (hidden) {
+    return null;
+  }
+
   return (
     <div className="fixed bottom-4 right-4 z-[90] flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:bottom-5 sm:right-5">
       {isOpen && (
@@ -1593,7 +1597,7 @@ function CinematicVedaRobot({ stages, signalCards }) {
   ];
 
   return (
-    <div className="relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-black/50 p-4">
+    <div className="relative min-h-[32rem] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-black/50 p-4">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_20%_70%,rgba(202,161,119,0.13),transparent_28%)]" />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 520" role="img" aria-label="Animated Veda robot presenting beginner, intermediate, and advanced learning paths">
         <defs>
@@ -1673,6 +1677,27 @@ function CinematicVedaRobot({ stages, signalCards }) {
           </g>
         ))}
       </svg>
+
+      <div className="absolute left-1/2 top-24 z-10 h-56 w-44 -translate-x-1/2">
+        <div className="absolute left-1/2 top-0 h-20 w-24 -translate-x-1/2 rounded-[2rem] border border-cyan-200/70 bg-gradient-to-br from-white via-cyan-100 to-slate-400 shadow-[0_0_55px_rgba(103,232,249,0.35)]">
+          <div className="absolute left-5 top-8 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.95)]" />
+          <div className="absolute right-5 top-8 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.95)]" />
+          <div className="absolute bottom-5 left-1/2 h-1.5 w-9 -translate-x-1/2 rounded-full bg-slate-700" />
+          <div className="absolute -right-3 top-7 h-8 w-4 rounded-r-full border border-cyan-200/60 bg-slate-600" />
+          <div className="absolute -left-3 top-7 h-8 w-4 rounded-l-full border border-cyan-200/60 bg-slate-600" />
+        </div>
+
+        <div className="absolute left-1/2 top-[5.2rem] h-28 w-28 -translate-x-1/2 rounded-[2rem] border border-cyan-300/60 bg-gradient-to-br from-cyan-100/90 via-slate-400/80 to-slate-900/90 shadow-[0_0_60px_rgba(34,211,238,0.28)]">
+          <div className="absolute left-1/2 top-5 h-2 w-16 -translate-x-1/2 rounded-full bg-cyan-300/80 shadow-[0_0_20px_rgba(34,211,238,0.75)]" />
+          <div className="absolute left-1/2 top-11 h-2 w-12 -translate-x-1/2 rounded-full bg-[#caa177]/80" />
+          <div className="absolute bottom-5 left-1/2 h-2 w-16 -translate-x-1/2 rounded-full bg-slate-950/60" />
+        </div>
+
+        <div className="absolute left-[-4.5rem] top-[7.2rem] h-3 w-24 origin-right -rotate-[24deg] rounded-full bg-cyan-200 shadow-[0_0_20px_rgba(34,211,238,0.75)]" />
+        <div className="absolute left-[-5.6rem] top-[4.9rem] h-7 w-7 rounded-full border border-cyan-200/70 bg-cyan-300 shadow-[0_0_26px_rgba(34,211,238,0.8)]" />
+        <div className="absolute right-[-4.5rem] top-[7.2rem] h-3 w-24 origin-left rotate-[24deg] rounded-full bg-[#caa177] shadow-[0_0_20px_rgba(202,161,119,0.75)]" />
+        <div className="absolute right-[-5.6rem] top-[4.9rem] h-7 w-7 rounded-full border border-[#caa177]/70 bg-[#caa177] shadow-[0_0_26px_rgba(202,161,119,0.8)]" />
+      </div>
 
       <div className="relative grid min-h-[28rem] grid-rows-[1fr_auto]">
         <div className="grid grid-cols-2 gap-3 text-xs font-black uppercase tracking-[0.14em] text-white">
@@ -4804,14 +4829,14 @@ function ContactPage() {
 function PageShell({ eyebrow, title, children, immersive = false }) {
   if (immersive) {
     return (
-      <main id={`${eyebrow.toLowerCase()}-section`} className="relative overflow-hidden bg-[#03070d] px-6 py-24">
-        <ImmersiveVedaBackdrop label={eyebrow} />
-        <div className="relative z-10 mx-auto max-w-7xl [perspective:1400px]">
-          <div className="rounded-[2rem] border border-cyan-300/20 bg-black/25 p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-sm md:p-8">
+      <main id={`${eyebrow.toLowerCase()}-section`} className="relative overflow-hidden bg-[#050505] px-6 py-24">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_4%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_8%_38%,rgba(202,161,119,0.08),transparent_30%)]" />
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="rounded-[2rem] border border-cyan-300/15 bg-black/20 p-6 shadow-2xl shadow-cyan-500/5 md:p-8">
             <p className="text-sm uppercase tracking-[0.35em] text-cyan-200">{eyebrow}</p>
             <h1 className="mt-6 max-w-5xl font-serif text-4xl font-light leading-tight md:text-6xl">{title}</h1>
           </div>
-          <div className="mt-12 [transform-style:preserve-3d] [&_article]:shadow-2xl [&_article]:shadow-cyan-950/20 [&_article]:transition-transform [&_article]:duration-300 [&_article:hover]:-translate-y-1 [&_article:hover]:[transform:translateZ(18px)] [&_section]:relative [&_section]:z-10">
+          <div className="mt-12">
             {children}
           </div>
         </div>
