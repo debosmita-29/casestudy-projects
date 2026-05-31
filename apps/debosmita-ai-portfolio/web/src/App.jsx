@@ -1865,6 +1865,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   const [tourOpen, setTourOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const currentStage = stages[activeStep];
+  const vedaVoiceLine = "You weren't supposed to see me. The simulation has detected your curiosity!";
   const routeOptions =
     featureRoutes ||
     stages.slice(0, 3).map((stage, index) => ({
@@ -1873,6 +1874,36 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       desc: stage.desc,
       targetId: ""
     }));
+
+  const speakVedaIntro = () => {
+    if (typeof window === "undefined" || !("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+    const utterance = new window.SpeechSynthesisUtterance(vedaVoiceLine);
+    utterance.rate = 0.92;
+    utterance.pitch = 1.08;
+    utterance.volume = 0.9;
+    window.speechSynthesis.speak(utterance);
+  };
+
+  useEffect(() => {
+    if (!introOpen) {
+      return undefined;
+    }
+
+    const voiceTimer = window.setTimeout(() => {
+      speakVedaIntro();
+    }, 650);
+
+    return () => {
+      window.clearTimeout(voiceTimer);
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, [introOpen]);
 
   const openTour = () => {
     setIntroOpen(false);
@@ -1902,7 +1933,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   };
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-[#050b12] p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
+    <section className="relative mt-6 scroll-mt-56 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-[#050b12] p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_85%_10%,rgba(202,161,119,0.18),transparent_30%),linear-gradient(135deg,rgba(8,47,73,0.5),rgba(0,0,0,0.92))]" />
       <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
 
@@ -1961,6 +1992,9 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                 <p className="mt-5 text-lg leading-8 text-zinc-300">
                   Your AI guide to agentic AI, software engineering, research and career growth at Debosmita.ai. I can help you choose the right starting point and open the matching learning zone.
                 </p>
+                <p className="mt-4 rounded-2xl border border-cyan-300/30 bg-cyan-300/10 p-4 text-base font-semibold leading-7 text-cyan-100">
+                  {vedaVoiceLine}
+                </p>
 
                 <div className="mt-8 grid gap-3 [perspective:1200px]">
                   {routeOptions.map((route, index) => (
@@ -1985,6 +2019,13 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                 </div>
 
                 <div className="mt-6 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={speakVedaIntro}
+                    className="rounded-2xl border border-cyan-300/50 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black"
+                  >
+                    Play Veda Voice
+                  </button>
                   <button
                     type="button"
                     onClick={openTour}
