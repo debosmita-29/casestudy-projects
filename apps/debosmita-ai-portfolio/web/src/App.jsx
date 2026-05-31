@@ -501,6 +501,167 @@ const microsoftAiTreeUrl = "https://github.com/microsoft/AI-For-Beginners/tree/m
 
 const newsletterContent = [
   {
+    slug: "azure-foundry-foundation-model-operating-layer",
+    title: "Azure AI Foundry Is Becoming the Operating Layer for Foundation Model Systems",
+    subtitle:
+      "Why the next frontier is not just choosing a model, but operating a governed, observable, multi-model AI system.",
+    date: "May 31, 2026",
+    readTime: "7 min read",
+    category: "Azure AI Foundry",
+    featured: true,
+    excerpt:
+      "Azure AI Foundry is moving from model catalog to model operating layer: agents, evaluations, prompt optimization, guardrails, local AI, and physical AI are becoming one production system.",
+    content: `
+      <p>For a long time, the foundation model conversation sounded like a leaderboard.</p>
+
+      <p>Which model is smartest? Which benchmark moved? Which context window is larger? Which model writes better code?</p>
+
+      <p>Those questions still matter.</p>
+
+      <p>But this week, the more interesting question is different:</p>
+
+      <blockquote>What happens when the platform around the model becomes more important than the model alone?</blockquote>
+
+      <p>That is why I am watching Azure AI Foundry closely.</p>
+
+      <p>Microsoft is positioning Foundry less like a simple place to pick models, and more like an operating layer for enterprise AI systems: models, agents, tools, tracing, evaluation, governance, security, and deployment surfaces coming together inside one managed environment.</p>
+
+      <h2>The Shift: From Model Catalog to Model Operating Layer</h2>
+
+      <p>The old mental model was simple:</p>
+
+      <ul>
+        <li>Choose a foundation model.</li>
+        <li>Call the API.</li>
+        <li>Wrap it in an app.</li>
+        <li>Hope the behavior is reliable enough.</li>
+      </ul>
+
+      <p>That is no longer enough for real enterprise AI.</p>
+
+      <p>Enterprise teams need to answer harder questions:</p>
+
+      <ul>
+        <li>Which model should handle this task?</li>
+        <li>How do we evaluate outputs before production?</li>
+        <li>How do we trace agent behavior?</li>
+        <li>How do we keep workflows on task?</li>
+        <li>How do we optimize prompts based on evidence instead of vibes?</li>
+        <li>How do we run intelligence across cloud, edge, regulated, and physical environments?</li>
+      </ul>
+
+      <p>This is where Foundry becomes interesting.</p>
+
+      <p>Microsoft describes Foundry as a unified platform for enterprise AI operations, model builders, and application development, bringing agents, models, tools, tracing, monitoring, evaluations, role-based access control, networking, and policies into one management model.</p>
+
+      <h2>Why This Is Emerging Now</h2>
+
+      <p>Foundation models are becoming abundant. Foundry gives developers access to a broad model ecosystem that includes Microsoft, OpenAI, Anthropic, Mistral, xAI, Meta, DeepSeek, Hugging Face, and others.</p>
+
+      <p>That abundance creates a new problem.</p>
+
+      <p>The challenge is no longer only access.</p>
+
+      <p>The challenge is orchestration.</p>
+
+      <p>In production systems, one model may not be enough. A low-latency model may handle routing or extraction. A stronger reasoning model may handle planning. A small model may run locally. A vision-language model may interpret images. A guardrail layer may inspect the response. An evaluation system may score behavior after the fact.</p>
+
+      <p>The architecture starts to look less like a chatbot and more like an AI control plane.</p>
+
+      <h2>The New Technical Pattern: Evaluate, Optimize, Govern</h2>
+
+      <p>The most important Foundry trend is not only model variety. It is the tooling around model behavior.</p>
+
+      <p>Recent Foundry documentation highlights additions such as Prompt Optimizer, task-adherence guardrails, and LangChain/LangGraph integration. That matters because the next wave of AI systems will need evidence-driven iteration.</p>
+
+      <p>Instead of asking, “Does this prompt feel better?” teams can start asking:</p>
+
+      <ul>
+        <li>Did the agent stay on task?</li>
+        <li>Did the prompt improvement increase evaluation scores?</li>
+        <li>Which step failed in the trace?</li>
+        <li>Which model was overkill for this task?</li>
+        <li>Which workflow needs human review?</li>
+      </ul>
+
+      <p>That is a major step toward AI engineering as a disciplined software practice.</p>
+
+      <h2>The Unique Angle: Physical AI and Local AI</h2>
+
+      <p>The most unusual part of the Foundry story is how it is extending beyond cloud apps.</p>
+
+      <p>Microsoft and NVIDIA are connecting Foundry with accelerated infrastructure, agent services, observability, NVIDIA Nemotron models, Omniverse, and physical AI workflows. The goal is not just to generate text, but to connect AI to real operational environments: factories, energy systems, robotics workflows, digital twins, inspections, and regulated infrastructure.</p>
+
+      <p>This is where the phrase “foundation model” starts to stretch.</p>
+
+      <p>A foundation model is no longer just a model behind a chat window.</p>
+
+      <p>It becomes part of a larger system that can observe, reason, simulate, act, and operate under governance.</p>
+
+      <h2>What Builders Should Learn From This</h2>
+
+      <p>If you are learning AI right now, do not stop at model prompting.</p>
+
+      <p>Learn the operating system around the model:</p>
+
+      <ul>
+        <li>model selection</li>
+        <li>prompt evaluation</li>
+        <li>RAG grounding</li>
+        <li>agent tracing</li>
+        <li>workflow guardrails</li>
+        <li>model cost and latency tradeoffs</li>
+        <li>human-in-the-loop review</li>
+        <li>deployment and monitoring</li>
+      </ul>
+
+      <p>That is where AI careers are going.</p>
+
+      <p>The people who win in this next phase will not only know how to call a model. They will know how to design, operate, evaluate, and govern systems of models.</p>
+
+      <h2>My Take</h2>
+
+      <p>Azure AI Foundry is becoming a signal of a larger industry shift.</p>
+
+      <p>The future of enterprise AI will not be one foundation model sitting behind one interface.</p>
+
+      <p>It will be a governed model ecosystem: many foundation models, many agent workflows, many deployment surfaces, and one operational layer that helps teams understand what the system is doing.</p>
+
+      <p>That is the emerging technology to watch.</p>
+
+      <p>Not just foundation models.</p>
+
+      <p>Foundation model operations.</p>
+
+      <h2>Builder Exercise</h2>
+
+      <p>This week, pick one AI use case and design it as a Foundry-style system.</p>
+
+      <ul>
+        <li>Which model handles reasoning?</li>
+        <li>Which model handles low-cost extraction?</li>
+        <li>What should be retrieved before generation?</li>
+        <li>Which guardrails are needed?</li>
+        <li>What should be traced?</li>
+        <li>What metric decides whether the system is production-ready?</li>
+      </ul>
+
+      <p>If you can answer those questions, you are no longer just prompting AI.</p>
+
+      <p>You are designing an AI system.</p>
+
+      <h2>Sources I Used</h2>
+
+      <ul>
+        <li><a href="https://learn.microsoft.com/en-ca/azure/foundry/what-is-foundry?view=foundry" target="_blank" rel="noreferrer">Microsoft Learn: What is Microsoft Foundry?</a></li>
+        <li><a href="https://blogs.microsoft.com/blog/2026/03/16/microsoft-at-nvidia-gtc-new-solutions-for-microsoft-foundry-azure-ai-infrastructure-and-physical-ai/" target="_blank" rel="noreferrer">Microsoft Official Blog: Microsoft Foundry, Azure AI infrastructure, and Physical AI</a></li>
+        <li><a href="https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/whats-new-in-foundry-labs---april-2026/4509714" target="_blank" rel="noreferrer">Microsoft Tech Community: What's new in Foundry Labs - April 2026</a></li>
+      </ul>
+
+      <p><strong>— Debosmita Roy</strong><br />AI Systems Architect | Azure AI Foundry | Foundation Model Operations</p>
+    `
+  },
+  {
     slug: "nemoclaw-future-agentic-ai",
     title: "What NemoClaw Teaches Us About the Future of Agentic AI",
     subtitle:
