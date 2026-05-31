@@ -1884,9 +1884,14 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
             >
               Start Veda Guided Tour
             </button>
-            <span className="inline-flex items-center rounded-2xl border border-[#caa177]/40 px-5 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#caa177]">
+            <button
+              type="button"
+              onClick={openTour}
+              className="inline-flex items-center rounded-2xl border border-[#caa177]/40 px-5 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#caa177] transition hover:bg-[#caa177] hover:text-black"
+              aria-label={`Start guided tour for ${modeLabel}`}
+            >
               {modeLabel}
-            </span>
+            </button>
           </div>
         </div>
 
