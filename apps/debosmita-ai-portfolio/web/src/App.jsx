@@ -1799,12 +1799,22 @@ function ImmersiveVedaBackdrop({ label }) {
   );
 }
 
-function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, signalCards }) {
+function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, signalCards, featureRoutes }) {
+  const [introOpen, setIntroOpen] = useState(true);
   const [tourOpen, setTourOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
   const currentStage = stages[activeStep];
+  const routeOptions =
+    featureRoutes ||
+    stages.slice(0, 3).map((stage, index) => ({
+      label: index === 0 ? "Beginner" : index === 1 ? "Intermediate" : "Advanced",
+      title: stage.title,
+      desc: stage.desc,
+      targetId: ""
+    }));
 
   const openTour = () => {
+    setIntroOpen(false);
     setActiveStep(0);
     setTourOpen(true);
   };
@@ -1812,6 +1822,22 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   const closeTour = () => {
     setTourOpen(false);
     setActiveStep(0);
+  };
+
+  const navigateToFeature = (route) => {
+    setIntroOpen(false);
+    setTourOpen(false);
+
+    if (!route.targetId) {
+      return;
+    }
+
+    setTimeout(() => {
+      document.getElementById(route.targetId)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 120);
   };
 
   return (
@@ -1851,6 +1877,81 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
           </article>
         ))}
       </div>
+
+      {introOpen && (
+        <div className="fixed inset-0 z-[96] flex items-center justify-center overflow-y-auto bg-black/85 px-4 py-8 backdrop-blur-md">
+          <div className="relative w-full max-w-6xl overflow-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_24%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_20%_74%,rgba(202,161,119,0.16),transparent_28%),linear-gradient(135deg,rgba(8,47,73,0.72),rgba(0,0,0,0.95))]" />
+            <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(103,232,249,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.55)_1px,transparent_1px)] [background-size:54px_54px] [transform:perspective(900px)_rotateX(58deg)_translateY(-12rem)_scale(1.25)]" />
+
+            <div className="relative grid gap-6 p-5 md:p-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+              <div>
+                <div className="inline-flex rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-cyan-200">
+                  Veda Live Guide
+                </div>
+                <h3 className="mt-5 font-serif text-4xl font-light leading-tight text-white md:text-6xl">
+                  Hi, I'm Veda.
+                </h3>
+                <p className="mt-5 text-lg leading-8 text-zinc-300">
+                  Your AI guide to agentic AI, software engineering, research and career growth at Debosmita.ai. I can help you choose the right starting point and open the matching learning zone.
+                </p>
+
+                <div className="mt-8 grid gap-3 [perspective:1200px]">
+                  {routeOptions.map((route, index) => (
+                    <button
+                      key={route.title}
+                      type="button"
+                      onClick={() => navigateToFeature(route)}
+                      className="group rounded-2xl border border-cyan-300/25 bg-black/55 p-4 text-left shadow-xl shadow-cyan-950/20 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-cyan-300/70 hover:bg-cyan-300/10 hover:[transform:translateZ(22px)]"
+                    >
+                      <div className="flex items-start gap-4">
+                        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300 text-sm font-black text-black">
+                          0{index + 1}
+                        </span>
+                        <span>
+                          <span className="block text-xs font-black uppercase tracking-[0.22em] text-[#caa177]">{route.label}</span>
+                          <span className="mt-1 block text-xl font-bold text-white">{route.title}</span>
+                          <span className="mt-2 block text-sm leading-6 text-zinc-400">{route.desc}</span>
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={openTour}
+                    className="rounded-2xl bg-cyan-300 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-black transition hover:scale-[1.02] hover:bg-cyan-200"
+                  >
+                    Start Guided Tour
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setIntroOpen(false)}
+                    className="rounded-2xl border border-zinc-700 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-zinc-300 transition hover:border-white hover:text-white"
+                  >
+                    Explore Myself
+                  </button>
+                </div>
+              </div>
+
+              <div className="relative">
+                <CinematicVedaRobot stages={stages} signalCards={signalCards} />
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setIntroOpen(false)}
+              className="absolute right-5 top-5 flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 bg-black/60 text-xl text-zinc-300 transition hover:border-white hover:text-white"
+              aria-label="Close Veda introduction"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
 
       {tourOpen && (
         <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/80 px-4 backdrop-blur-md">
@@ -2283,6 +2384,26 @@ function LearningPage({ goToPage }) {
         intro="Welcome to the Neural Academy. Veda helps learners move from AI foundations to real-world GenAI systems, one guided learning path at a time."
         stages={vedaStages}
         signalCards={vedaSignals}
+        featureRoutes={[
+          {
+            label: "Resources for Beginners",
+            title: "Debosmita AI-For-Beginners",
+            desc: "Start with lessons, notebooks, labs, and capstone work designed for first-time AI builders.",
+            targetId: "debosmita-ai-curriculum"
+          },
+          {
+            label: "Intermediates",
+            title: "Learning Tracks",
+            desc: "Move into data science, machine learning, chatbots, RAG apps, and project-based learning.",
+            targetId: "learning-tracks"
+          },
+          {
+            label: "Advanced",
+            title: "Hands-On Practice Lab",
+            desc: "Build agents, RAG pipelines, production-style AI demos, and portfolio-ready capstones.",
+            targetId: "hands-on-practice-lab"
+          }
+        ]}
       />
 
       <section className="mt-12 rounded-[2rem] border border-[#caa177]/30 bg-[#caa177]/10 p-8">
@@ -2369,7 +2490,7 @@ function LearningPage({ goToPage }) {
         </div>
       </section>
 
-      <section className="mt-12 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-gradient-to-br from-[#071116] via-black to-zinc-950 p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
+      <section id="debosmita-ai-curriculum" className="mt-12 scroll-mt-36 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-gradient-to-br from-[#071116] via-black to-zinc-950 p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">Debosmita AI-For-Beginners</p>
@@ -2567,7 +2688,7 @@ function LearningPage({ goToPage }) {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="learning-tracks" className="mt-12 scroll-mt-36">
         <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Learning Tracks</h2>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -2589,7 +2710,7 @@ function LearningPage({ goToPage }) {
         </div>
       </section>
 
-      <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+      <section id="hands-on-practice-lab" className="mt-12 grid scroll-mt-36 gap-8 lg:grid-cols-[1fr_0.9fr]">
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Hands-On Practice Lab</p>
           <h2 className="mt-4 font-serif text-4xl font-light text-white">Build while you learn.</h2>
@@ -3703,9 +3824,29 @@ function AIBuilderLabPage({ goToPage }) {
         intro="Welcome to the Agentic Command Center. Here Veda helps you practice daily, earn Skill Cores, build projects, and turn learning into public proof."
         stages={vedaStages}
         signalCards={vedaSignals}
+        featureRoutes={[
+          {
+            label: "Resources for Beginners",
+            title: "AI Energy",
+            desc: "Begin with daily micro-actions: read one concept, answer one quiz, or run one notebook cell.",
+            targetId: "ai-energy"
+          },
+          {
+            label: "Intermediates",
+            title: "Build Engine",
+            desc: "Generate project ideas by level and turn practice into portfolio artifacts.",
+            targetId: "build-engine"
+          },
+          {
+            label: "Advanced",
+            title: "Skill Cores",
+            desc: "Earn badges, share progress on LinkedIn, and build visible career signal.",
+            targetId: "skill-cores"
+          }
+        ]}
       />
 
-      <section className="mt-12 rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
+      <section id="ai-energy" className="mt-12 scroll-mt-36 rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">Engagement Hub</p>
@@ -3797,7 +3938,7 @@ function AIBuilderLabPage({ goToPage }) {
         </div>
       </section>
 
-      <section className="mt-12 grid gap-6 lg:grid-cols-2">
+      <section id="build-engine" className="mt-12 grid scroll-mt-36 gap-6 lg:grid-cols-2">
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Build Engine</p>
           <h2 className="mt-4 text-3xl font-light text-white">Generate a project idea by level.</h2>
@@ -3837,7 +3978,7 @@ function AIBuilderLabPage({ goToPage }) {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section id="skill-cores" className="mt-12 scroll-mt-36">
         <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Skill Cores, sharing, and growth loops</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {["RAG Beginner", "Prompt Engineer", "Model Training Starter", "Azure AI Explorer"].map((badge) => (
@@ -4418,6 +4559,26 @@ function ResourcesPage() {
         intro="Welcome to the Intelligence Vault. Veda helps you find the right tools, templates, guides, checklists, and project labs for your next AI build."
         stages={vedaStages}
         signalCards={vedaSignals}
+        featureRoutes={[
+          {
+            label: "Resources for Beginners",
+            title: "Toolkits",
+            desc: "Start with curated learning resources for AI fundamentals, RAG, agents, data science, and GenAI.",
+            targetId: "resource-toolkits"
+          },
+          {
+            label: "Intermediates",
+            title: "Launch Kits",
+            desc: "Explore tutorials, templates, and project structures that help learners publish stronger work.",
+            targetId: "resource-launch-kits"
+          },
+          {
+            label: "Advanced",
+            title: "Advanced Labs",
+            desc: "Jump into guided project paths for production chatbots, RAG systems, agents, and MLOps.",
+            targetId: "resource-advanced-labs"
+          }
+        ]}
       />
 
       <section className="mt-12">
@@ -4434,7 +4595,7 @@ function ResourcesPage() {
         </div>
       </section>
 
-    <section className="mt-12">
+    <section id="resource-toolkits" className="mt-12 scroll-mt-36">
       <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Toolkits</h2>
       <p className="mt-4 max-w-3xl leading-8 text-zinc-400">
         A zero-to-hero roadmap for learners who want to build strong AI, ML, data science, chatbot, RAG, and agentic AI foundations over the next few months.
@@ -4561,7 +4722,7 @@ function ResourcesPage() {
         </div>
       </section> */}
 
-      <section className="mt-12">
+      <section id="resource-launch-kits" className="mt-12 scroll-mt-36">
         <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Field Manuals</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {externalResources.map((resource) => (
@@ -4593,7 +4754,7 @@ function ResourcesPage() {
         </div>
       </section>
 
-      <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
+      <section id="resource-advanced-labs" className="mt-12 scroll-mt-36 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Advanced Labs</p>
         <h2 className="mt-4 font-serif text-4xl font-light text-white md:text-5xl">Build real-world AI projects with guidance.</h2>
         <p className="mt-5 max-w-4xl leading-8 text-zinc-300">
