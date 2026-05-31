@@ -1506,32 +1506,32 @@ function FloatingMitaMindChat() {
   };
 
   return (
-    <div className="fixed bottom-5 right-5 z-[90] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 z-[90] flex max-w-[calc(100vw-2rem)] flex-col items-end gap-3 sm:bottom-5 sm:right-5">
       {isOpen && (
-        <section className="w-[min(26rem,calc(100vw-2.5rem))] overflow-hidden rounded-[1.5rem] border border-cyan-300/30 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
-          <div className="flex items-center justify-between gap-4 border-b border-zinc-800 bg-[#070b12] px-5 py-4">
+        <section className="flex h-[min(34rem,calc(100vh-7rem))] w-[min(24rem,calc(100vw-2rem))] flex-col overflow-hidden rounded-[1.5rem] border border-cyan-300/30 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
+          <div className="flex shrink-0 items-center justify-between gap-3 border-b border-zinc-800 bg-[#070b12] px-4 py-3">
             <div className="flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-300 text-black">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-cyan-300 text-black">
                 <ChatOrbitIcon />
               </div>
-              <div>
+              <div className="min-w-0">
                 <p className="text-sm font-black text-white">MitaMind AI</p>
                 <p className="text-xs text-cyan-200">Website knowledge agent</p>
               </div>
             </div>
-            <button type="button" onClick={() => setIsOpen(false)} className="rounded-full border border-zinc-700 px-3 py-1 text-sm text-zinc-300 transition hover:border-white hover:text-white" aria-label="Close MitaMind AI">
-              Close
+            <button type="button" onClick={() => setIsOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-700 text-lg leading-none text-zinc-300 transition hover:border-white hover:text-white" aria-label="Minimize MitaMind AI">
+              ×
             </button>
           </div>
 
-          <div className="flex max-h-[24rem] flex-col gap-3 overflow-y-auto px-4 py-4">
+          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 py-4">
             {chatMessages.map((message, index) => (
               <div
                 key={`${message.role}-${index}`}
-                className={`whitespace-pre-line rounded-2xl px-4 py-3 text-sm leading-6 ${
+                className={`max-w-[88%] whitespace-pre-line break-words rounded-2xl px-4 py-3 text-sm leading-6 ${
                   message.role === "user"
-                    ? "ml-8 bg-cyan-300 text-black"
-                    : "mr-8 border border-zinc-800 bg-black/60 text-zinc-300"
+                    ? "ml-auto bg-cyan-300 text-black"
+                    : "mr-auto border border-zinc-800 bg-black/60 text-zinc-300"
                 }`}
               >
                 {message.text}
@@ -1539,14 +1539,14 @@ function FloatingMitaMindChat() {
             ))}
           </div>
 
-          <div className="border-t border-zinc-800 px-4 py-4">
-            <div className="mb-3 flex flex-wrap gap-2">
+          <div className="shrink-0 border-t border-zinc-800 px-4 py-4">
+            <div className="mb-3 flex max-h-24 flex-wrap gap-2 overflow-y-auto pr-1">
               {starterPrompts.map((prompt) => (
                 <button
                   key={prompt}
                   type="button"
                   onClick={() => askAssistant(prompt)}
-                  className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                  className="rounded-full border border-zinc-700 px-3 py-2 text-left text-xs font-semibold leading-4 text-zinc-300 transition hover:border-cyan-300 hover:text-cyan-200"
                 >
                   {prompt}
                 </button>
@@ -1562,7 +1562,7 @@ function FloatingMitaMindChat() {
                 aria-label="Ask MitaMind AI"
                 className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-black px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
               />
-              <button type="submit" className="rounded-2xl bg-[#caa177] px-4 py-3 text-sm font-black text-black transition hover:scale-[1.02]">
+              <button type="submit" className="shrink-0 rounded-2xl bg-[#caa177] px-4 py-3 text-sm font-black text-black transition hover:scale-[1.02]">
                 Send
               </button>
             </form>
