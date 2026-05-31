@@ -1633,7 +1633,7 @@ function CinematicVedaRobot({ stages, signalCards }) {
   ];
 
   return (
-    <div className="relative min-h-[32rem] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-black/50 p-4">
+    <div className="relative min-h-[27rem] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-black/50 p-4">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_20%_70%,rgba(202,161,119,0.13),transparent_28%)]" />
       <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 520" role="img" aria-label="Animated Veda robot presenting beginner, intermediate, and advanced learning paths">
         <defs>
@@ -1714,7 +1714,7 @@ function CinematicVedaRobot({ stages, signalCards }) {
         ))}
       </svg>
 
-      <div className="absolute left-1/2 top-24 z-10 h-56 w-44 -translate-x-1/2">
+      <div className="absolute left-1/2 top-20 z-10 h-56 w-44 -translate-x-1/2">
         <div className="absolute left-1/2 top-0 h-20 w-24 -translate-x-1/2 rounded-[2rem] border border-cyan-200/70 bg-gradient-to-br from-white via-cyan-100 to-slate-400 shadow-[0_0_55px_rgba(103,232,249,0.35)]">
           <div className="absolute left-5 top-8 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.95)]" />
           <div className="absolute right-5 top-8 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(34,211,238,0.95)]" />
@@ -1735,7 +1735,7 @@ function CinematicVedaRobot({ stages, signalCards }) {
         <div className="absolute right-[-5.6rem] top-[4.9rem] h-7 w-7 rounded-full border border-[#caa177]/70 bg-[#caa177] shadow-[0_0_26px_rgba(202,161,119,0.8)]" />
       </div>
 
-      <div className="relative grid min-h-[28rem] grid-rows-[1fr_auto]">
+      <div className="relative grid min-h-[24rem] grid-rows-[1fr_auto]">
         <div className="grid grid-cols-2 gap-3 text-xs font-black uppercase tracking-[0.14em] text-white">
           <div className="self-start rounded-2xl border border-cyan-300/30 bg-black/70 p-4 shadow-xl shadow-cyan-500/10">
             <p className="text-cyan-200">{pathwayLabels[0][0]}</p>
@@ -1864,6 +1864,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   const [introOpen, setIntroOpen] = useState(true);
   const [tourOpen, setTourOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
+  const audioContextRef = useRef(null);
+  const cosmicAudioRef = useRef(null);
   const currentStage = stages[activeStep];
   const vedaVoiceLine = "You weren't supposed to see me. The simulation has detected your curiosity!";
   const routeOptions =
@@ -1888,13 +1890,74 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
     window.speechSynthesis.speak(utterance);
   };
 
+  const startCosmicAudio = (withVoice = true) => {
+    if (typeof window === "undefined" || !("AudioContext" in window || "webkitAudioContext" in window)) {
+      if (withVoice) {
+        speakVedaIntro();
+      }
+      return;
+    }
+
+    const AudioEngine = window.AudioContext || window.webkitAudioContext;
+    const audioContext = audioContextRef.current || new AudioEngine();
+    audioContextRef.current = audioContext;
+
+    if (audioContext.state === "suspended") {
+      audioContext.resume();
+    }
+
+    if (!cosmicAudioRef.current) {
+      const masterGain = audioContext.createGain();
+      masterGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+      masterGain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 1.2);
+      masterGain.connect(audioContext.destination);
+
+      const drone = audioContext.createOscillator();
+      drone.type = "sine";
+      drone.frequency.setValueAtTime(72, audioContext.currentTime);
+
+      const shimmer = audioContext.createOscillator();
+      shimmer.type = "triangle";
+      shimmer.frequency.setValueAtTime(288, audioContext.currentTime);
+
+      const pulse = audioContext.createOscillator();
+      pulse.type = "sine";
+      pulse.frequency.setValueAtTime(0.18, audioContext.currentTime);
+
+      const pulseGain = audioContext.createGain();
+      pulseGain.gain.setValueAtTime(0.018, audioContext.currentTime);
+
+      const shimmerGain = audioContext.createGain();
+      shimmerGain.gain.setValueAtTime(0.012, audioContext.currentTime);
+
+      const droneGain = audioContext.createGain();
+      droneGain.gain.setValueAtTime(0.028, audioContext.currentTime);
+
+      pulse.connect(pulseGain);
+      pulseGain.connect(droneGain.gain);
+      drone.connect(droneGain);
+      shimmer.connect(shimmerGain);
+      droneGain.connect(masterGain);
+      shimmerGain.connect(masterGain);
+
+      drone.start();
+      shimmer.start();
+      pulse.start();
+      cosmicAudioRef.current = { drone, shimmer, pulse, masterGain };
+    }
+
+    if (withVoice) {
+      window.setTimeout(speakVedaIntro, 850);
+    }
+  };
+
   useEffect(() => {
     if (!introOpen) {
       return undefined;
     }
 
     const voiceTimer = window.setTimeout(() => {
-      speakVedaIntro();
+      startCosmicAudio(true);
     }, 650);
 
     return () => {
@@ -1905,7 +1968,17 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
     };
   }, [introOpen]);
 
+  useEffect(() => () => {
+    if (cosmicAudioRef.current && audioContextRef.current) {
+      cosmicAudioRef.current.masterGain.gain.exponentialRampToValueAtTime(0.0001, audioContextRef.current.currentTime + 0.4);
+    }
+    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }, []);
+
   const openTour = () => {
+    startCosmicAudio(false);
     setIntroOpen(false);
     setActiveStep(0);
     setTourOpen(true);
@@ -1917,6 +1990,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   };
 
   const navigateToFeature = (route) => {
+    startCosmicAudio(false);
     setIntroOpen(false);
     setTourOpen(false);
 
@@ -1976,8 +2050,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       </div>
 
       {introOpen && (
-        <div className="veda-modal-backdrop fixed inset-0 z-[96] flex items-start justify-center overflow-y-auto bg-black/85 px-5 py-6 backdrop-blur-md lg:items-center lg:px-8">
-          <div className="veda-modal-panel relative my-auto max-h-[calc(100vh-3rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
+        <div className="veda-modal-backdrop fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/85 px-5 py-8 backdrop-blur-md lg:items-center lg:px-8">
+          <div className="veda-modal-panel relative my-auto max-h-[calc(100vh-4rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_24%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_20%_74%,rgba(202,161,119,0.16),transparent_28%),linear-gradient(135deg,rgba(8,47,73,0.72),rgba(0,0,0,0.95))]" />
             <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(103,232,249,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.55)_1px,transparent_1px)] [background-size:54px_54px] [transform:perspective(900px)_rotateX(58deg)_translateY(-12rem)_scale(1.25)]" />
 
@@ -1996,13 +2070,13 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                   {vedaVoiceLine}
                 </p>
 
-                <div className="mt-8 grid gap-3 [perspective:1200px]">
+                <div className="mt-6 grid gap-3 [perspective:1200px]">
                   {routeOptions.map((route, index) => (
                     <button
                       key={route.title}
                       type="button"
                       onClick={() => navigateToFeature(route)}
-                      className="group rounded-2xl border border-cyan-300/25 bg-black/55 p-4 text-left shadow-xl shadow-cyan-950/20 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-cyan-300/70 hover:bg-cyan-300/10 hover:[transform:translateZ(22px)]"
+                      className="group rounded-2xl border border-cyan-300/25 bg-black/55 p-3 text-left shadow-xl shadow-cyan-950/20 backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-cyan-300/70 hover:bg-cyan-300/10 hover:[transform:translateZ(22px)]"
                     >
                       <div className="flex items-start gap-4">
                         <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300 text-sm font-black text-black">
@@ -2018,13 +2092,13 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                   ))}
                 </div>
 
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="sticky bottom-0 z-20 -mx-5 mt-5 flex flex-wrap gap-3 border-t border-cyan-300/10 bg-[#050b12]/95 px-5 py-4 backdrop-blur md:-mx-7 md:px-7">
                   <button
                     type="button"
-                    onClick={speakVedaIntro}
+                    onClick={() => startCosmicAudio(true)}
                     className="rounded-2xl border border-cyan-300/50 px-5 py-3 text-sm font-black uppercase tracking-[0.16em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black"
                   >
-                    Play Veda Voice
+                    Play Cosmic Audio
                   </button>
                   <button
                     type="button"
@@ -2035,7 +2109,10 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
                   </button>
                   <button
                     type="button"
-                    onClick={() => setIntroOpen(false)}
+                    onClick={() => {
+                      startCosmicAudio(false);
+                      setIntroOpen(false);
+                    }}
                     className="rounded-2xl border border-zinc-700 px-5 py-3 text-sm font-bold uppercase tracking-[0.16em] text-zinc-300 transition hover:border-white hover:text-white"
                   >
                     Explore Myself
