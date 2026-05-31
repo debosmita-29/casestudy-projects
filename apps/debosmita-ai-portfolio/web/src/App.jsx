@@ -2888,11 +2888,106 @@ function AIBuilderLabPage({ goToPage }) {
     quiz: false,
     notebook: false
   });
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      text:
+        "Hi, I am Ask Debosmita AI. I can help you choose an AI learning path, find a portfolio project, understand RAG or agents, use the newsletter companion, or pick a badge to share."
+    }
+  ]);
 
   const streakCount = Object.values(completedToday).filter(Boolean).length;
   const activeTrack = careerTracks[selectedTrack];
   const activeProject = projectIdeas[selectedLevel];
   const activeFlashcard = flashcards[flashcardIndex];
+
+  const assistantAnswers = [
+    {
+      triggers: ["rag", "retrieval", "vector", "embedding", "assistant"],
+      text:
+        "For RAG, start with three pieces: a small document set, embeddings or keyword retrieval, and an evaluation checklist. Your fastest path here is the Weekly AI Challenge: build a tiny RAG assistant in 30 minutes, then earn the RAG Beginner badge."
+    },
+    {
+      triggers: ["career", "path", "quiz", "role", "track", "job"],
+      text:
+        `A good starting track is ${activeTrack.title}. ${activeTrack.desc} Next step: ${activeTrack.next} You can switch tracks in the AI Career Path Quiz and compare GenAI Builder, Data Scientist, AI Product Engineer, Cloud AI Architect, and Agentic AI Engineer.`
+    },
+    {
+      triggers: ["project", "portfolio", "github", "build", "idea"],
+      text:
+        `Try the ${activeProject.idea}. It is a ${activeProject.career} portfolio project using ${activeProject.stack}. Build goal: ${activeProject.build}`
+    },
+    {
+      triggers: ["newsletter", "article", "writing", "companion", "foundry", "azure"],
+      text:
+        "Use the Newsletter Companion loop: read the weekly issue, answer one quiz question, post one discussion prompt, then build a small artifact. For Azure AI Foundry, a strong exercise is sketching model routing, evaluation, guardrails, and observability as one operating layer."
+    },
+    {
+      triggers: ["agent", "agentic", "tools", "memory", "planning"],
+      text:
+        "For agentic AI, think in loops: goal, plan, tool use, observation, critique, retry, and human approval. A beginner project is a research agent with three tools, a trace log, and a failure recovery plan."
+    },
+    {
+      triggers: ["badge", "linkedin", "share", "streak", "leaderboard"],
+      text:
+        "The growth loop is simple: complete a micro-lesson, quiz, or notebook practice, earn a badge, then share it on LinkedIn. The strongest public post format is: what I learned, what I built, what failed, and what I will improve next."
+    },
+    {
+      triggers: ["tool", "toolkit", "directory", "mlops", "notebook", "cloud"],
+      text:
+        "Use the AI Toolkit Directory by category. For GenAI, start with prompt testing and Azure AI Foundry. For RAG, add vector databases. For MLOps, add model cards, evaluation, monitoring, and drift checks."
+    },
+    {
+      triggers: ["flashcard", "term", "concept", "learn", "beginner"],
+      text:
+        `Today's flashcard is ${activeFlashcard[0]}: ${activeFlashcard[1]} A useful habit is to explain the term in one sentence, then build one tiny example using it.`
+    }
+  ];
+
+  const starterPrompts = [
+    "What should I learn first for RAG?",
+    "Suggest a portfolio project for me",
+    "Which AI career path fits me?",
+    "How do I share a badge on LinkedIn?"
+  ];
+
+  const getAssistantReply = (question) => {
+    const normalizedQuestion = question.toLowerCase();
+    const scoredAnswers = assistantAnswers
+      .map((answer) => ({
+        ...answer,
+        score: answer.triggers.filter((trigger) => normalizedQuestion.includes(trigger)).length
+      }))
+      .sort((a, b) => b.score - a.score);
+
+    if (scoredAnswers[0]?.score > 0) {
+      return scoredAnswers[0].text;
+    }
+
+    return "I can help with AI learning paths, RAG, agents, Azure AI Foundry, project ideas, badges, newsletters, and build-in-public prompts. Try asking: \"What should I build this week?\" or \"Which AI career path fits me?\"";
+  };
+
+  const askAssistant = (question) => {
+    const trimmedQuestion = question.trim();
+
+    if (!trimmedQuestion) {
+      return;
+    }
+
+    const reply = getAssistantReply(trimmedQuestion);
+    setChatMessages((messages) => [
+      ...messages,
+      { role: "user", text: trimmedQuestion },
+      { role: "assistant", text: reply }
+    ]);
+    setChatInput("");
+  };
+
+  const handleAssistantSubmit = (event) => {
+    event.preventDefault();
+    askAssistant(chatInput);
+  };
 
   const shareBadge = (badge) => {
     const text = encodeURIComponent(`I earned the ${badge} learning badge in Debosmita AI Lab. Building in public as I learn AI, RAG, GenAI, and agentic systems.`);
@@ -3086,13 +3181,54 @@ function AIBuilderLabPage({ goToPage }) {
 
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
           <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Ask Debosmita AI</p>
-          <h2 className="mt-4 text-3xl font-light text-white">Coming soon: chat over my lessons, projects, and newsletters.</h2>
+          <h2 className="mt-4 text-3xl font-light text-white">Chat with the AI learning guide.</h2>
           <p className="mt-5 leading-8 text-zinc-400">
-            This chatbot can be trained on AI-For-Beginners, newsletters, project case studies, and learning resources. For now, visitors can submit questions by email.
+            Ask about AI career paths, RAG projects, Azure AI Foundry, badges, newsletters, flashcards, and what to build next.
           </p>
-          <a href="mailto:debosmitaroy.ai@gmail.com?subject=Ask%20Debosmita%20AI" className="mt-6 inline-flex rounded-2xl bg-[#caa177] px-6 py-3 font-semibold text-black">
-            Ask a question →
-          </a>
+
+          <div className="mt-6 rounded-[1.5rem] border border-zinc-800 bg-black/40 p-4">
+            <div className="flex max-h-80 flex-col gap-3 overflow-y-auto pr-1">
+              {chatMessages.map((message, index) => (
+                <div
+                  key={`${message.role}-${index}`}
+                  className={`rounded-2xl px-4 py-3 text-sm leading-6 ${
+                    message.role === "user"
+                      ? "ml-8 bg-cyan-300 text-black"
+                      : "mr-8 border border-zinc-800 bg-zinc-950 text-zinc-300"
+                  }`}
+                >
+                  {message.text}
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 flex flex-wrap gap-2">
+              {starterPrompts.map((prompt) => (
+                <button
+                  key={prompt}
+                  type="button"
+                  onClick={() => askAssistant(prompt)}
+                  className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleAssistantSubmit} className="mt-4 flex gap-3">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                placeholder="Ask about RAG, agents, projects..."
+                aria-label="Ask Debosmita AI"
+                className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
+              />
+              <button type="submit" className="rounded-2xl bg-[#caa177] px-5 py-3 text-sm font-bold text-black transition hover:scale-[1.02]">
+                Send
+              </button>
+            </form>
+          </div>
         </div>
       </section>
 
