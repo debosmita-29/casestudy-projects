@@ -1152,60 +1152,110 @@ function ProjectsPage({ openCaseStudy }) {
 }
 
 function LearningPage({ goToPage }) {
+  const calendlyLink = "https://calendly.com/debosmitaroy-ai/30min?month=2026-06";
+
   const tracks = [
     {
       title: "AI Foundations",
-      items: ["How LLMs work", "Prompting", "Embeddings", "RAG", "Evaluation"]
+      level: "Beginner",
+      desc: "Learn how modern AI systems work before jumping into tools.",
+      topics: ["LLMs", "Prompting", "Embeddings", "RAG", "AI evaluation"]
     },
     {
       title: "Data Science Foundations",
-      items: ["Python", "SQL", "Statistics", "EDA", "Dashboards"]
+      level: "Beginner",
+      desc: "Build the analytical base needed for practical AI and ML work.",
+      topics: ["Python", "SQL", "Statistics", "EDA", "Dashboards"]
     },
     {
       title: "Machine Learning",
-      items: ["Supervised ML", "Feature engineering", "Model training", "Validation", "Deployment"]
+      level: "Intermediate",
+      desc: "Train, validate, explain, and deploy models with real workflows.",
+      topics: ["Feature engineering", "Model training", "Validation", "Metrics", "Deployment"]
+    },
+    {
+      title: "Chatbots & RAG Apps",
+      level: "Project Track",
+      desc: "Build useful AI assistants over documents, websites, and business data.",
+      topics: ["Vector search", "Chunking", "Retrieval", "Grounding", "Chat UI"]
     },
     {
       title: "Agentic AI Engineering",
-      items: ["Tool use", "Memory", "Planning", "Multi-agent workflows", "Observability"]
+      level: "Advanced",
+      desc: "Design agents that use tools, memory, planning, and multi-step workflows.",
+      topics: ["Tool use", "Memory", "Planning", "LangGraph", "Agent observability"]
     },
     {
-      title: "Production AI Projects",
-      items: ["Chatbots", "RAG apps", "AI agents", "MLOps pipelines", "LLM-powered products"]
-    },
-    {
-      title: "Research & White Papers",
-      items: ["Guides", "Architecture notes", "Case studies", "Quizzes", "Hands-on labs"]
+      title: "Production AI Systems",
+      level: "Professional",
+      desc: "Move from notebooks to production-scale AI products and platforms.",
+      topics: ["APIs", "MLOps", "Monitoring", "Cost controls", "Security"]
     }
   ];
 
-  return (
-    <PageShell eyebrow="Learning Platform" title="Learn AI, ML, data science, and agentic systems by building real projects.">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {tracks.map((track) => (
-          <article key={track.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-            <h2 className="text-2xl font-bold text-white">{track.title}</h2>
-            <ul className="mt-5 space-y-3 text-zinc-400">
-              {track.items.map((item) => (
-                <li key={item}>• {item}</li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </div>
+  const growth = [
+    "Free introductory courses to build trust and word-of-mouth",
+    "Project showcase where learners publish what they build",
+    "Weekly live sessions, AMAs, and AI build-alongs",
+    "Free cheat sheets, tutorials, guides, and newsletters",
+    "University, bootcamp, and corporate L&D partnerships",
+    "Certificates, skill badges, LinkedIn sharing, and learner outcome stories"
+  ];
 
-      <div className="mt-10 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
-        <h2 className="text-3xl font-bold text-white">Hands-on Practice Lab</h2>
-        <p className="mt-4 leading-8 text-zinc-300">
-          Students will learn by building chatbots, RAG systems, agents, data pipelines, dashboards, and production-style AI apps with guided exercises, quizzes, templates, and project reviews.
+  const monetization = [
+    {
+      title: "Subscriptions",
+      desc: "Free fundamentals, then paid advanced content, mentorship, certificates, and hands-on labs."
+    },
+    {
+      title: "One-Time Courses",
+      desc: "Sell individual courses, learning paths, and bootcamp-style project bundles."
+    },
+    {
+      title: "B2B / Enterprise",
+      desc: "Offer company-wide licenses, team dashboards, and custom AI training programs."
+    },
+    {
+      title: "Credentials",
+      desc: "Verified certificates, proctored assessments, badges, and portfolio reviews."
+    },
+    {
+      title: "Marketplace",
+      desc: "Allow external instructors to publish specialized courses with revenue sharing."
+    },
+    {
+      title: "Sponsorships",
+      desc: "Partner with AI tooling, cloud, and MLOps companies for sponsored learning paths."
+    }
+  ];
+
+  const labs = [
+    "Build a chatbot over your own documents",
+    "Create a RAG pipeline with embeddings and vector search",
+    "Design an AI agent that uses tools and memory",
+    "Deploy a FastAPI AI backend",
+    "Evaluate hallucination, latency, cost, and answer quality",
+    "Create a capstone project for LinkedIn and GitHub"
+  ];
+
+  return (
+    <PageShell
+      eyebrow="Learning Platform"
+      title="Learn AI, ML, data science, and agentic systems by building real projects."
+    >
+      <section className="rounded-[2rem] border border-[#caa177]/30 bg-[#caa177]/10 p-8">
+        <p className="max-w-4xl text-lg leading-8 text-zinc-300">
+          This learning platform is designed for budding AI professionals, data science learners,
+          fresh graduates, and motivated high school students who want to move from fundamentals
+          to hands-on AI product building.
         </p>
 
-        <div className="mt-7 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap gap-4">
           <a
-            href="https://calendly.com/debosmitaroy-ai/30min?month=2026-06"
+            href={calendlyLink}
             target="_blank"
             rel="noreferrer"
-            className="rounded-2xl bg-[#caa177] px-6 py-3 font-semibold text-black transition hover:bg-[#d8b58d]"
+            className="rounded-2xl bg-[#caa177] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-[#d8b58d]"
           >
             Book a Learning Call →
           </a>
@@ -1213,15 +1263,184 @@ function LearningPage({ goToPage }) {
           <button
             type="button"
             onClick={() => goToPage("resources")}
-            className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold text-white transition hover:border-[#caa177] hover:text-[#caa177]"
+            className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#caa177] hover:text-[#caa177]"
           >
             Explore Resources →
           </button>
         </div>
-      </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Learning Tracks</h2>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {tracks.map((track) => (
+            <article key={track.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7 transition hover:-translate-y-1 hover:border-[#caa177]/60">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">{track.level}</p>
+              <h3 className="mt-4 text-2xl font-bold text-white">{track.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{track.desc}</p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {track.topics.map((topic) => (
+                  <span key={topic} className="rounded-full border border-zinc-700 px-3 py-1 text-xs text-zinc-400">
+                    {topic}
+                  </span>
+                ))}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-8 lg:grid-cols-[1fr_0.9fr]">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Hands-On Practice Lab</p>
+          <h2 className="mt-4 font-serif text-4xl font-light text-white">Build while you learn.</h2>
+          <p className="mt-5 leading-8 text-zinc-400">
+            Learners should not only watch tutorials. They should build chatbots, agents,
+            RAG apps, pipelines, dashboards, and production-style AI demos with guided labs.
+          </p>
+
+          <div className="mt-7 grid gap-3">
+            {labs.map((lab) => (
+              <div key={lab} className="rounded-2xl border border-zinc-800 bg-black/40 px-5 py-4 text-zinc-300">
+                {lab}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">What To Provide</p>
+
+          <div className="mt-6 space-y-5 text-zinc-300">
+            <p>Guided tutorials, white papers, quizzes, exercises, notebooks, and project templates.</p>
+            <p>Beginner-friendly explainers for AI, ML, data science, LLMs, agents, and MLOps.</p>
+            <p>Capstone projects learners can publish on GitHub and showcase on LinkedIn.</p>
+            <p>A backend-protected LLM sandbox with rate limits, auth, logging, and budget controls.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Growth Strategy</h2>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {growth.map((item) => (
+            <div key={item} className="rounded-2xl border border-zinc-800 bg-zinc-950 p-5 text-zinc-300">
+              {item}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Monetization Models</h2>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {monetization.map((model) => (
+            <article key={model.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+              <h3 className="text-2xl font-bold text-white">{model.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{model.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-black p-8">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Quick-Win Priorities</p>
+        <h2 className="mt-4 font-serif text-4xl font-light text-white">Launch lean, then expand.</h2>
+
+        <div className="mt-7 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border border-zinc-800 p-5">
+            <p className="text-3xl font-bold text-[#caa177]">01</p>
+            <p className="mt-3 text-zinc-300">Publish free AI fundamentals and chatbot starter content.</p>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 p-5">
+            <p className="text-3xl font-bold text-[#caa177]">02</p>
+            <p className="mt-3 text-zinc-300">Offer paid mentorship calls, cohort sessions, and project reviews.</p>
+          </div>
+          <div className="rounded-2xl border border-zinc-800 p-5">
+            <p className="text-3xl font-bold text-[#caa177]">03</p>
+            <p className="mt-3 text-zinc-300">Add certificates, learner showcases, and corporate training packages.</p>
+          </div>
+        </div>
+      </section>
     </PageShell>
   );
 }
+
+// function LearningPage({ goToPage }) {
+//   const tracks = [
+//     {
+//       title: "AI Foundations",
+//       items: ["How LLMs work", "Prompting", "Embeddings", "RAG", "Evaluation"]
+//     },
+//     {
+//       title: "Data Science Foundations",
+//       items: ["Python", "SQL", "Statistics", "EDA", "Dashboards"]
+//     },
+//     {
+//       title: "Machine Learning",
+//       items: ["Supervised ML", "Feature engineering", "Model training", "Validation", "Deployment"]
+//     },
+//     {
+//       title: "Agentic AI Engineering",
+//       items: ["Tool use", "Memory", "Planning", "Multi-agent workflows", "Observability"]
+//     },
+//     {
+//       title: "Production AI Projects",
+//       items: ["Chatbots", "RAG apps", "AI agents", "MLOps pipelines", "LLM-powered products"]
+//     },
+//     {
+//       title: "Research & White Papers",
+//       items: ["Guides", "Architecture notes", "Case studies", "Quizzes", "Hands-on labs"]
+//     }
+//   ];
+
+//   return (
+//     <PageShell eyebrow="Learning Platform" title="Learn AI, ML, data science, and agentic systems by building real projects.">
+//       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+//         {tracks.map((track) => (
+//           <article key={track.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+//             <h2 className="text-2xl font-bold text-white">{track.title}</h2>
+//             <ul className="mt-5 space-y-3 text-zinc-400">
+//               {track.items.map((item) => (
+//                 <li key={item}>• {item}</li>
+//               ))}
+//             </ul>
+//           </article>
+//         ))}
+//       </div>
+
+//       <div className="mt-10 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
+//         <h2 className="text-3xl font-bold text-white">Hands-on Practice Lab</h2>
+//         <p className="mt-4 leading-8 text-zinc-300">
+//           Students will learn by building chatbots, RAG systems, agents, data pipelines, dashboards, and production-style AI apps with guided exercises, quizzes, templates, and project reviews.
+//         </p>
+
+//         <div className="mt-7 flex flex-wrap gap-3">
+//           <a
+//             href="https://calendly.com/debosmitaroy-ai/30min?month=2026-06"
+//             target="_blank"
+//             rel="noreferrer"
+//             className="rounded-2xl bg-[#caa177] px-6 py-3 font-semibold text-black transition hover:bg-[#d8b58d]"
+//           >
+//             Book a Learning Call →
+//           </a>
+
+//           <button
+//             type="button"
+//             onClick={() => goToPage("resources")}
+//             className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold text-white transition hover:border-[#caa177] hover:text-[#caa177]"
+//           >
+//             Explore Resources →
+//           </button>
+//         </div>
+//       </div>
+//     </PageShell>
+//   );
+// }
 
 // function ProjectsPage({ openCaseStudy }) {
 //   return (
