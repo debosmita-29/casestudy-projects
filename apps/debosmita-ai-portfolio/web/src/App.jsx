@@ -1334,7 +1334,7 @@ export default function App() {
         />
       )}
       <Footer goToPage={goToPage} />
-      <FloatingMitaMindChat />
+      <FloatingVedaChat />
     </div>
   );
 }
@@ -1360,7 +1360,7 @@ function ChatOrbitIcon() {
   );
 }
 
-function FloatingMitaMindChat() {
+function FloatingVedaChat() {
   const starterPrompts = [
     "What should I learn first for RAG?",
     "Suggest a portfolio project",
@@ -1415,7 +1415,7 @@ function FloatingMitaMindChat() {
     {
       role: "assistant",
       text:
-        "Hi, I am MitaMind AI, Debosmita's learning and portfolio guide. Ask me about her AI projects, newsletters, AI-For-Beginners lessons, RAG, agents, Azure AI Foundry, badges, or what to build next."
+        "Hi, I'm Veda. Your AI guide to agentic AI, software engineering, research and career growth at Debosmita.ai."
     }
   ]);
 
@@ -1515,11 +1515,11 @@ function FloatingMitaMindChat() {
                 <ChatOrbitIcon />
               </div>
               <div className="min-w-0">
-                <p className="text-sm font-black text-white">MitaMind AI</p>
+                <p className="text-sm font-black text-white">Veda</p>
                 <p className="text-xs text-cyan-200">Website knowledge agent</p>
               </div>
             </div>
-            <button type="button" onClick={() => setIsOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-700 text-lg leading-none text-zinc-300 transition hover:border-white hover:text-white" aria-label="Minimize MitaMind AI">
+            <button type="button" onClick={() => setIsOpen(false)} className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-zinc-700 text-lg leading-none text-zinc-300 transition hover:border-white hover:text-white" aria-label="Minimize Veda">
               ×
             </button>
           </div>
@@ -1558,8 +1558,8 @@ function FloatingMitaMindChat() {
                 type="text"
                 value={chatInput}
                 onChange={(event) => setChatInput(event.target.value)}
-                placeholder="Ask MitaMind AI..."
-                aria-label="Ask MitaMind AI"
+                placeholder="Ask Veda..."
+                aria-label="Ask Veda"
                 className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-black px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
               />
               <button type="submit" className="shrink-0 rounded-2xl bg-[#caa177] px-4 py-3 text-sm font-black text-black transition hover:scale-[1.02]">
@@ -1574,12 +1574,12 @@ function FloatingMitaMindChat() {
         type="button"
         onClick={() => setIsOpen((current) => !current)}
         className="group flex items-center gap-3 rounded-full border border-cyan-300/50 bg-cyan-300 px-4 py-3 font-black text-black shadow-2xl shadow-cyan-500/30 transition hover:scale-[1.03] hover:bg-cyan-200"
-        aria-label="Open MitaMind AI chatbot"
+        aria-label="Open Veda chatbot"
       >
         <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-cyan-200">
           <ChatOrbitIcon />
         </span>
-        <span className="hidden pr-1 text-sm uppercase tracking-[0.14em] sm:inline">Ask MitaMind AI</span>
+        <span className="hidden pr-1 text-sm uppercase tracking-[0.14em] sm:inline">Ask Veda</span>
       </button>
     </div>
   );
@@ -3129,7 +3129,7 @@ function AIBuilderLabPage({ goToPage }) {
     {
       role: "assistant",
       text:
-        "Hi, I am MitaMind AI. I can help you choose an AI learning path, find a portfolio project, understand RAG or agents, use the newsletter companion, or pick a badge to share."
+        "Hi, I'm Veda. Your AI guide to agentic AI, software engineering, research and career growth at Debosmita.ai."
     }
   ]);
 
@@ -3439,7 +3439,7 @@ function AIBuilderLabPage({ goToPage }) {
         </div>
 
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">MitaMind AI</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Veda</p>
           <h2 className="mt-4 text-3xl font-light text-white">Chat with the AI learning guide.</h2>
           <p className="mt-5 leading-8 text-zinc-400">
             Ask about AI career paths, RAG projects, Azure AI Foundry, badges, newsletters, flashcards, and what to build next.
@@ -3479,8 +3479,8 @@ function AIBuilderLabPage({ goToPage }) {
                 type="text"
                 value={chatInput}
                 onChange={(event) => setChatInput(event.target.value)}
-                placeholder="Ask MitaMind about RAG, agents, projects..."
-                aria-label="Ask MitaMind AI"
+                placeholder="Ask Veda about RAG, agents, projects..."
+                aria-label="Ask Veda"
                 className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
               />
               <button type="submit" className="rounded-2xl bg-[#caa177] px-5 py-3 text-sm font-bold text-black transition hover:scale-[1.02]">
