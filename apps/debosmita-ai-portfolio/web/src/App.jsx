@@ -1585,6 +1585,142 @@ function FloatingVedaChat() {
   );
 }
 
+function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, signalCards }) {
+  const [tourOpen, setTourOpen] = useState(false);
+  const [activeStep, setActiveStep] = useState(0);
+  const currentStage = stages[activeStep];
+
+  const openTour = () => {
+    setActiveStep(0);
+    setTourOpen(true);
+  };
+
+  const closeTour = () => {
+    setTourOpen(false);
+    setActiveStep(0);
+  };
+
+  return (
+    <section className="relative overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-[#050b12] p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_85%_10%,rgba(202,161,119,0.18),transparent_30%),linear-gradient(135deg,rgba(8,47,73,0.5),rgba(0,0,0,0.92))]" />
+      <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
+
+      <div className="relative grid gap-8 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">{eyebrow}</p>
+          <h2 className="mt-4 font-serif text-4xl font-light leading-tight text-white md:text-6xl">{title}</h2>
+          <p className="mt-5 max-w-4xl text-lg leading-8 text-zinc-300">{intro}</p>
+
+          <div className="mt-8 flex flex-wrap gap-4">
+            <button
+              type="button"
+              onClick={openTour}
+              className="rounded-2xl bg-cyan-300 px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-cyan-200"
+            >
+              Start Veda Guided Tour
+            </button>
+            <span className="inline-flex items-center rounded-2xl border border-[#caa177]/40 px-5 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#caa177]">
+              {modeLabel}
+            </span>
+          </div>
+        </div>
+
+        <div className="relative min-h-[25rem] rounded-[2rem] border border-cyan-300/20 bg-black/40 p-6">
+          <div className="absolute left-1/2 top-10 h-52 w-52 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-cyan-300/10 shadow-[0_0_80px_rgba(34,211,238,0.25)]" />
+          <div className="absolute left-1/2 top-20 h-32 w-32 -translate-x-1/2 rounded-full border border-[#caa177]/40 bg-black shadow-[0_0_50px_rgba(202,161,119,0.18)]" />
+          <div className="absolute left-1/2 top-[7.2rem] grid h-20 w-20 -translate-x-1/2 place-items-center rounded-3xl border border-cyan-300/50 bg-cyan-300 text-black">
+            <ChatOrbitIcon />
+          </div>
+
+          <div className="absolute left-7 right-7 top-64 grid grid-cols-3 gap-3">
+            {stages.slice(0, 3).map((stage, index) => (
+              <div key={stage.title} className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4 text-center">
+                <p className="text-2xl font-black text-cyan-200">0{index + 1}</p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-zinc-300">{stage.title}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="absolute left-8 right-8 top-48 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
+          <div className="absolute left-[18%] top-40 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
+          <div className="absolute right-[20%] top-56 h-3 w-3 rounded-full bg-[#caa177] shadow-[0_0_20px_rgba(202,161,119,0.9)]" />
+        </div>
+      </div>
+
+      <div className="relative mt-8 grid gap-4 md:grid-cols-3">
+        {signalCards.map((card) => (
+          <article key={card.title} className="rounded-2xl border border-zinc-800 bg-black/40 p-5">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-200">{card.label}</p>
+            <h3 className="mt-3 text-xl font-bold text-white">{card.title}</h3>
+            <p className="mt-3 text-sm leading-6 text-zinc-400">{card.desc}</p>
+          </article>
+        ))}
+      </div>
+
+      {tourOpen && (
+        <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/80 px-4 backdrop-blur-md">
+          <div className="w-full max-w-2xl overflow-hidden rounded-[2rem] border border-cyan-300/40 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
+            <div className="flex items-center justify-between border-b border-zinc-800 bg-[#070b12] px-6 py-5">
+              <div>
+                <p className="text-xs font-black uppercase tracking-[0.25em] text-cyan-200">Veda Guided Journey</p>
+                <h3 className="mt-2 text-2xl font-light text-white">{theme}</h3>
+              </div>
+              <button type="button" onClick={closeTour} className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-700 text-xl text-zinc-300 transition hover:border-white hover:text-white" aria-label="Close Veda guided tour">
+                ×
+              </button>
+            </div>
+
+            <div className="p-6">
+              <div className="rounded-[1.5rem] border border-zinc-800 bg-black/50 p-6">
+                <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#caa177]">
+                  Step {activeStep + 1} of {stages.length}
+                </p>
+                <h4 className="mt-4 text-3xl font-light text-white">{currentStage.title}</h4>
+                <p className="mt-4 leading-8 text-zinc-300">{currentStage.desc}</p>
+              </div>
+
+              <div className="mt-5 flex gap-2">
+                {stages.map((stage, index) => (
+                  <button
+                    key={stage.title}
+                    type="button"
+                    onClick={() => setActiveStep(index)}
+                    className={`h-2 flex-1 rounded-full transition ${activeStep === index ? "bg-cyan-300" : "bg-zinc-800"}`}
+                    aria-label={`Open guided tour step ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap justify-between gap-3">
+                <button
+                  type="button"
+                  onClick={() => setActiveStep((step) => Math.max(step - 1, 0))}
+                  className="rounded-2xl border border-zinc-700 px-5 py-3 font-semibold text-zinc-300 transition hover:border-white hover:text-white"
+                >
+                  Back
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (activeStep === stages.length - 1) {
+                      closeTour();
+                      return;
+                    }
+                    setActiveStep((step) => step + 1);
+                  }}
+                  className="rounded-2xl bg-cyan-300 px-6 py-3 font-black text-black transition hover:scale-[1.02] hover:bg-cyan-200"
+                >
+                  {activeStep === stages.length - 1 ? "Finish Tour" : "Next Signal"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
+  );
+}
+
 function HomePage({ goToPage }) {
   const calendlyLink = "https://calendly.com/debosmitaroy-ai/30min?month=2026-06";
 
@@ -1882,12 +2018,63 @@ function LearningPage({ goToPage }) {
     "Create a capstone project for LinkedIn and GitHub"
   ];
 
+  const vedaStages = [
+    {
+      title: "Beginner AI Explorer",
+      desc: "Veda starts with AI basics, Python, prompts, data literacy, and the mental models learners need before touching advanced tools."
+    },
+    {
+      title: "GenAI Builder",
+      desc: "The path moves into notebooks, embeddings, RAG, chatbot design, prompt evaluation, and small products learners can explain on GitHub."
+    },
+    {
+      title: "RAG Engineer",
+      desc: "Learners practice retrieval quality, grounding, citations, vector databases, and answer evaluation over real documents."
+    },
+    {
+      title: "Agentic AI Engineer",
+      desc: "Advanced builders learn tool use, memory, planning, orchestration, observability, retries, and human approval workflows."
+    },
+    {
+      title: "Cloud AI Architect",
+      desc: "The final stage connects Azure AI Foundry, MLOps, governance, monitoring, cost controls, and production-ready AI systems."
+    }
+  ];
+
+  const vedaSignals = [
+    {
+      label: "Neural Path 01",
+      title: "Foundations",
+      desc: "AI basics, Python, ML concepts, data thinking, prompts, and responsible AI."
+    },
+    {
+      label: "Neural Path 02",
+      title: "Builder Mode",
+      desc: "Notebooks, labs, project templates, RAG prototypes, and portfolio deliverables."
+    },
+    {
+      label: "Neural Path 03",
+      title: "Advanced Systems",
+      desc: "Agents, Azure AI Foundry, evaluation, MLOps, observability, and deployment readiness."
+    }
+  ];
+
   return (
     <PageShell
       eyebrow="Learning Platform"
       title="Learn AI, ML, data science, and agentic systems by building real projects."
     >
-      <section className="rounded-[2rem] border border-[#caa177]/30 bg-[#caa177]/10 p-8">
+      <VedaNeuralGuide
+        eyebrow="Veda Neural Academy"
+        title="Enter the AI learning universe."
+        theme="Learn in the Neural Academy"
+        modeLabel="Learn → Practice → Build"
+        intro="Welcome to the Neural Academy. Veda helps learners move from AI foundations to real-world GenAI systems, one guided learning path at a time."
+        stages={vedaStages}
+        signalCards={vedaSignals}
+      />
+
+      <section className="mt-12 rounded-[2rem] border border-[#caa177]/30 bg-[#caa177]/10 p-8">
         <p className="max-w-4xl text-lg leading-8 text-zinc-300">
           This learning platform is designed for budding AI professionals, data science learners,
           fresh graduates, and motivated high school students who want to move from fundamentals
@@ -3116,6 +3303,47 @@ function AIBuilderLabPage({ goToPage }) {
     ["Notebooks", "Jupyter, Colab, Kaggle, VS Code notebooks"]
   ];
 
+  const vedaStages = [
+    {
+      title: "AI Energy",
+      desc: "Veda turns daily streaks into AI Energy: read one concept, answer one quiz, or run one notebook cell to keep momentum alive."
+    },
+    {
+      title: "Mission of the Week",
+      desc: "Each weekly challenge becomes a focused build mission, such as creating a tiny RAG assistant and sharing proof of work."
+    },
+    {
+      title: "Build Engine",
+      desc: "The portfolio generator recommends projects by level, stack, and career goal so learners always know what to build next."
+    },
+    {
+      title: "Skill Cores",
+      desc: "Badges become Skill Cores that learners can share on LinkedIn to show progress in RAG, prompting, model training, and Azure AI."
+    },
+    {
+      title: "Builder Signal",
+      desc: "Learners publish progress, join the leaderboard, submit projects, and turn private study into visible career momentum."
+    }
+  ];
+
+  const vedaSignals = [
+    {
+      label: "Command Deck",
+      title: "AI Energy",
+      desc: "Daily streaks become a visible power meter for learning consistency."
+    },
+    {
+      label: "Mission Bay",
+      title: "Build Engine",
+      desc: "Weekly challenges and project prompts turn ideas into portfolio artifacts."
+    },
+    {
+      label: "Signal Wall",
+      title: "Skill Cores",
+      desc: "Badges, leaderboards, and build-in-public prompts make progress shareable."
+    }
+  ];
+
   const [selectedTrack, setSelectedTrack] = useState("builder");
   const [selectedLevel, setSelectedLevel] = useState("beginner");
   const [flashcardIndex, setFlashcardIndex] = useState(0);
@@ -3256,7 +3484,17 @@ function AIBuilderLabPage({ goToPage }) {
 
   return (
     <PageShell eyebrow="AI Builder Lab" title="Daily AI practice, challenges, badges, project ideas, and community growth loops.">
-      <section className="rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
+      <VedaNeuralGuide
+        eyebrow="Agentic Command Center"
+        title="Train like an AI builder."
+        theme="Practice in the Agentic Command Center"
+        modeLabel="Energy → Mission → Signal"
+        intro="Welcome to the Agentic Command Center. Here Veda helps you practice daily, earn Skill Cores, build projects, and turn learning into public proof."
+        stages={vedaStages}
+        signalCards={vedaSignals}
+      />
+
+      <section className="mt-12 rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">Engagement Hub</p>
@@ -3276,7 +3514,7 @@ function AIBuilderLabPage({ goToPage }) {
             </div>
           </div>
           <div className="rounded-[2rem] border border-zinc-800 bg-black/50 p-6">
-            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Today’s Streak</p>
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">AI Energy</p>
             <p className="mt-4 text-5xl font-black text-white">{streakCount}/3</p>
             <div className="mt-6 grid gap-3">
               {[
@@ -3301,7 +3539,7 @@ function AIBuilderLabPage({ goToPage }) {
 
       <section className="mt-12 grid gap-6 lg:grid-cols-2">
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Weekly AI Challenge</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Mission of the Week</p>
           <h2 className="mt-4 text-3xl font-light text-white">Build a tiny RAG assistant in 30 minutes.</h2>
           <p className="mt-4 leading-7 text-zinc-400">
             Use five short documents, write three questions, retrieve the best context, and explain whether each answer is grounded.
@@ -3350,7 +3588,7 @@ function AIBuilderLabPage({ goToPage }) {
 
       <section className="mt-12 grid gap-6 lg:grid-cols-2">
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Portfolio Project Generator</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Build Engine</p>
           <h2 className="mt-4 text-3xl font-light text-white">Generate a project idea by level.</h2>
           <div className="mt-6 flex flex-wrap gap-3">
             {Object.keys(projectIdeas).map((level) => (
@@ -3373,7 +3611,7 @@ function AIBuilderLabPage({ goToPage }) {
         </div>
 
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Daily AI Flashcard</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Memory Chip</p>
           <h2 className="mt-4 text-3xl font-light text-white">{activeFlashcard[0]}</h2>
           <p className="mt-5 min-h-24 rounded-2xl border border-zinc-800 bg-black/40 p-5 text-lg leading-8 text-zinc-300">
             {activeFlashcard[1]}
@@ -3389,7 +3627,7 @@ function AIBuilderLabPage({ goToPage }) {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Badges, sharing, and growth loops</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Skill Cores, sharing, and growth loops</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {["RAG Beginner", "Prompt Engineer", "Model Training Starter", "Azure AI Explorer"].map((badge) => (
             <article key={badge} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-6">
@@ -3411,7 +3649,7 @@ function AIBuilderLabPage({ goToPage }) {
           <p className="mt-5 rounded-2xl border border-zinc-800 bg-black/40 p-4 text-sm text-cyan-200">https://www.debosmita.ai/#aiLab?ref=builder</p>
         </div>
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Weekly Leaderboard</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Builder Signal</p>
           <div className="mt-5 space-y-3 text-zinc-300">
             {["1. RAG Sprint", "2. Notebook Runner", "3. Build-in-Public"].map((item) => (
               <div key={item} className="rounded-2xl border border-zinc-800 bg-black/40 p-4">{item}</div>
@@ -3918,18 +4156,65 @@ function ResourcesPage() {
     },
   ];
 
+  const vedaStages = [
+    {
+      title: "Toolkits",
+      desc: "Veda opens the vault by grouping practical AI resources into toolkits for GenAI, RAG, agents, MLOps, data science, and cloud AI."
+    },
+    {
+      title: "Launch Kits",
+      desc: "Templates become launch kits: README structures, project plans, portfolio prompts, evaluation sheets, and career roadmaps."
+    },
+    {
+      title: "Field Manuals",
+      desc: "Guides and tutorials become field manuals that explain how to build, evaluate, deploy, and communicate AI systems."
+    },
+    {
+      title: "System Scans",
+      desc: "Checklists become system scans for production readiness, observability, governance, cost, reliability, and human review."
+    },
+    {
+      title: "Advanced Labs",
+      desc: "Paid and guided project tracks become advanced labs for learners who want mentorship, review, and portfolio-ready outcomes."
+    }
+  ];
+
+  const vedaSignals = [
+    {
+      label: "Vault Layer 01",
+      title: "Toolkits",
+      desc: "Curated learning resources for AI fundamentals, RAG, agents, data science, and GenAI."
+    },
+    {
+      label: "Vault Layer 02",
+      title: "Launch Kits",
+      desc: "Templates and project structures that help learners publish stronger work."
+    },
+    {
+      label: "Vault Layer 03",
+      title: "Advanced Labs",
+      desc: "Guided project paths for production chatbots, RAG systems, agents, and MLOps."
+    }
+  ];
+
   return (
     <PageShell eyebrow="Resources" title="Free AI, ML, data science, and agentic systems resources for builders.">
-      <p className="max-w-4xl text-lg leading-8 text-zinc-300">
-        These resources are designed to help students, fresh graduates, working professionals, and curious builders move from AI curiosity to hands-on AI execution.
-      </p>
+      <VedaNeuralGuide
+        eyebrow="Intelligence Vault"
+        title="Open the vault of AI tools and templates."
+        theme="Build with the Intelligence Vault"
+        modeLabel="Toolkits → Launch Kits → Labs"
+        intro="Welcome to the Intelligence Vault. Veda helps you find the right tools, templates, guides, checklists, and project labs for your next AI build."
+        stages={vedaStages}
+        signalCards={vedaSignals}
+      />
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Featured Resources</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">System Scans</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2">
           {currentResources.map((resource) => (
             <article key={resource.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Resource</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">System Scan</p>
               <h3 className="mt-4 text-2xl font-bold text-white">{resource.title}</h3>
               <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
               <p className="mt-6 font-semibold text-[#caa177]">Coming Soon →</p>
@@ -3939,7 +4224,7 @@ function ResourcesPage() {
       </section>
 
     <section className="mt-12">
-      <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Free Learning Library</h2>
+      <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Toolkits</h2>
       <p className="mt-4 max-w-3xl leading-8 text-zinc-400">
         A zero-to-hero roadmap for learners who want to build strong AI, ML, data science, chatbot, RAG, and agentic AI foundations over the next few months.
       </p>
@@ -4066,7 +4351,7 @@ function ResourcesPage() {
       </section> */}
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Helpful Free External Resources</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Field Manuals</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {externalResources.map((resource) => (
             <a
@@ -4085,11 +4370,11 @@ function ResourcesPage() {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Tutorials & Guides Coming Soon</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Launch Kits Coming Soon</h2>
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {comingSoon.map((resource) => (
             <article key={resource.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-              <p className="text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">Coming Soon</p>
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">Launch Kit</p>
               <h3 className="mt-4 text-2xl font-bold text-white">{resource.title}</h3>
               <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
             </article>
@@ -4098,7 +4383,7 @@ function ResourcesPage() {
       </section>
 
       <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Project-Based Learning</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Advanced Labs</p>
         <h2 className="mt-4 font-serif text-4xl font-light text-white md:text-5xl">Build real-world AI projects with guidance.</h2>
         <p className="mt-5 max-w-4xl leading-8 text-zinc-300">
           These paid project tracks are for learners who want structured mentorship, project reviews, templates, code walkthroughs, and portfolio-ready deliverables.
