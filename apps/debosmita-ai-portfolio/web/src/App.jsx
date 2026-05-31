@@ -1555,6 +1555,85 @@ function LearningPage({ goToPage }) {
         </div>
       </section>
 
+      <section className="mt-12 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-gradient-to-br from-[#071116] via-black to-zinc-950 p-6 shadow-2xl shadow-cyan-500/10 md:p-8">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">Debosmita AI-For-Beginners</p>
+            <h2 className="mt-4 font-serif text-4xl font-light leading-tight text-white md:text-5xl">
+              My original beginner AI curriculum with lessons, notebooks, labs, and capstone work.
+            </h2>
+            <p className="mt-5 max-w-4xl leading-8 text-zinc-300">
+              A practical learning path for students, career switchers, and builders who want to learn AI by doing: read the lesson, run the notebook, complete the lab, then turn the work into a portfolio artifact.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="https://github.com/debosmita-29/AI-For-Beginners"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl bg-cyan-300 px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-cyan-200"
+              >
+                Open curriculum →
+              </a>
+
+              <a
+                href="https://github.com/debosmita-29/AI-For-Beginners/tree/main/notebooks"
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl border border-cyan-300/50 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black"
+              >
+                View notebooks →
+              </a>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                title: "7 modules",
+                desc: "Setup, AI foundations, Python data, ML, neural networks, GenAI/RAG, and responsible AI."
+              },
+              {
+                title: "7 notebooks",
+                desc: "Runnable starter notebooks with beginner-safe examples and no required API keys."
+              },
+              {
+                title: "Hands-on labs",
+                desc: "Each lesson includes a lab prompt, deliverable, and practical reflection task."
+              },
+              {
+                title: "Portfolio capstone",
+                desc: "Learners finish with a responsible AI project plan they can publish and explain."
+              }
+            ].map((item) => (
+              <article key={item.title} className="rounded-2xl border border-zinc-800 bg-black/50 p-5">
+                <h3 className="text-xl font-bold text-white">{item.title}</h3>
+                <p className="mt-3 leading-7 text-zinc-400">{item.desc}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-4">
+          {[
+            ["Lessons", "https://github.com/debosmita-29/AI-For-Beginners/tree/main/lessons"],
+            ["Labs", "https://github.com/debosmita-29/AI-For-Beginners/tree/main/labs"],
+            ["Resources", "https://github.com/debosmita-29/AI-For-Beginners/tree/main/resources"],
+            ["Project Template", "https://github.com/debosmita-29/AI-For-Beginners/blob/main/resources/project-template.md"]
+          ].map(([label, href]) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-5 text-center font-semibold text-zinc-300 transition hover:-translate-y-1 hover:border-cyan-300 hover:text-cyan-200"
+            >
+              {label} →
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section className="mt-12 rounded-[2rem] border border-zinc-800 bg-zinc-950 p-6 md:p-8">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div>
