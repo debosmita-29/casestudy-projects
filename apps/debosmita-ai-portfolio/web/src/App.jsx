@@ -1334,6 +1334,7 @@ export default function App() {
         />
       )}
       <Footer goToPage={goToPage} />
+      <FloatingMitaMindChat />
     </div>
   );
 }
@@ -1346,6 +1347,213 @@ function GiftIcon() {
         fill="currentColor"
       />
     </svg>
+  );
+}
+
+function ChatOrbitIcon() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M5.25 9.75C5.25 6.85 8.27 4.5 12 4.5s6.75 2.35 6.75 5.25S15.73 15 12 15c-.61 0-1.2-.06-1.75-.18L6.5 17.25l.73-3.17a5.2 5.2 0 0 1-1.98-4.33Z" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M9.25 9.75h.01M12 9.75h.01M14.75 9.75h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M3.75 12.25a8.2 8.2 0 0 0 8.5 7.5M20.25 12.25a8.2 8.2 0 0 1-8.5 7.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.65" />
+    </svg>
+  );
+}
+
+function FloatingMitaMindChat() {
+  const starterPrompts = [
+    "What should I learn first for RAG?",
+    "Suggest a portfolio project",
+    "Explain Azure AI Foundry",
+    "Which AI career path fits me?"
+  ];
+
+  const siteKnowledge = [
+    ...projects.map((project) => ({
+      title: project.title,
+      type: "Project",
+      keywords: [project.title, project.subtitle, project.desc, project.detail, ...(project.tags || [])].join(" "),
+      summary: `${project.title}: ${project.subtitle}. ${project.desc} Key areas: ${(project.tags || []).join(", ")}.`
+    })),
+    ...newsletterContent.map((article) => ({
+      title: article.title,
+      type: "Newsletter",
+      keywords: [article.title, article.subtitle, article.category, article.excerpt, article.content].join(" "),
+      summary: `${article.title}: ${article.excerpt}`
+    })),
+    ...microsoftAiForBeginnersCurriculum.map((module) => ({
+      title: module.title,
+      type: "Learning Module",
+      keywords: [module.title, module.summary, module.sourcePath, ...module.children.flatMap((child) => [child.title, child.focus, child.lesson, child.notebook, child.lab, child.assignment].filter(Boolean))].join(" "),
+      summary: `${module.title}: ${module.summary}`
+    })),
+    {
+      title: "AI Builder Lab",
+      type: "Learning Portal",
+      keywords: "AI Lab streaks weekly challenge RAG career quiz portfolio project generator newsletter companion flashcards badges LinkedIn learner wall toolkit directory",
+      summary: "The AI Builder Lab includes streaks, weekly challenges, career path guidance, project ideas, newsletter exercises, flashcards, badges, LinkedIn sharing, and a toolkit directory."
+    },
+    {
+      title: "Career Tracks",
+      type: "Learning Portal",
+      keywords: "GenAI Builder Data Scientist AI Product Engineer Cloud AI Architect Agentic AI Engineer career track quiz",
+      summary: "Career tracks include GenAI Builder, Data Scientist, AI Product Engineer, Cloud AI Architect, and Agentic AI Engineer."
+    }
+  ];
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [chatInput, setChatInput] = useState("");
+  const [chatMessages, setChatMessages] = useState([
+    {
+      role: "assistant",
+      text:
+        "Hi, I am MitaMind AI, Debosmita's learning and portfolio guide. Ask me about her AI projects, newsletters, AI-For-Beginners lessons, RAG, agents, Azure AI Foundry, badges, or what to build next."
+    }
+  ]);
+
+  const scoreKnowledge = (question) => {
+    const terms = question
+      .toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, " ")
+      .split(/\s+/)
+      .filter((term) => term.length > 2);
+
+    return siteKnowledge
+      .map((item) => {
+        const searchable = `${item.title} ${item.type} ${item.keywords}`.toLowerCase();
+        const score = terms.reduce((total, term) => total + (searchable.includes(term) ? 1 : 0), 0);
+        return { ...item, score };
+      })
+      .filter((item) => item.score > 0)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
+  };
+
+  const getAssistantReply = (question) => {
+    const normalizedQuestion = question.toLowerCase();
+    const matches = scoreKnowledge(question);
+
+    if (normalizedQuestion.includes("career") || normalizedQuestion.includes("track") || normalizedQuestion.includes("job")) {
+      return "For career direction, start with the AI Career Path Quiz. The strongest tracks on this site are GenAI Builder, Data Scientist, AI Product Engineer, Cloud AI Architect, and Agentic AI Engineer. If you want hands-on momentum, choose GenAI Builder first, then build a tiny RAG assistant.";
+    }
+
+    if (normalizedQuestion.includes("rag") || normalizedQuestion.includes("retrieval") || normalizedQuestion.includes("vector")) {
+      return "For RAG, use this path: learn embeddings, create a small document set, retrieve relevant chunks, generate grounded answers, then evaluate whether each answer cites the right context. The AI Lab weekly challenge is a good first build: a tiny RAG assistant in 30 minutes.";
+    }
+
+    if (normalizedQuestion.includes("azure") || normalizedQuestion.includes("foundry") || normalizedQuestion.includes("foundation model")) {
+      return "Debosmita's latest newsletter frames Azure AI Foundry as an operating layer for foundation model systems: model selection, agents, evaluations, prompt optimization, guardrails, tracing, governance, and deployment working together instead of one isolated model call.";
+    }
+
+    if (normalizedQuestion.includes("project") || normalizedQuestion.includes("portfolio") || normalizedQuestion.includes("build")) {
+      return "A strong portfolio project from this site is a RAG Research Agent: retrieve sources, draft an answer, check grounding, log failures, and ask for human approval. For beginners, start with a Personal AI Study Coach that recommends one lesson, one flashcard, and one practice task each day.";
+    }
+
+    if (matches.length > 0) {
+      return `I found this from Debosmita's website data:\n\n${matches.map((match) => `${match.type}: ${match.summary}`).join("\n\n")}\n\nYou can ask me to turn any of these into a learning path, project plan, or LinkedIn build-in-public post.`;
+    }
+
+    return "I can answer from Debosmita's website content: AI projects, newsletters, learning modules, AI Lab features, RAG, agents, Azure AI Foundry, career tracks, and portfolio ideas. Try asking: \"What should I build this week?\"";
+  };
+
+  const askAssistant = (question) => {
+    const trimmedQuestion = question.trim();
+
+    if (!trimmedQuestion) {
+      return;
+    }
+
+    setChatMessages((messages) => [
+      ...messages,
+      { role: "user", text: trimmedQuestion },
+      { role: "assistant", text: getAssistantReply(trimmedQuestion) }
+    ]);
+    setChatInput("");
+    setIsOpen(true);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    askAssistant(chatInput);
+  };
+
+  return (
+    <div className="fixed bottom-5 right-5 z-[90] flex max-w-[calc(100vw-2.5rem)] flex-col items-end gap-3">
+      {isOpen && (
+        <section className="w-[min(26rem,calc(100vw-2.5rem))] overflow-hidden rounded-[1.5rem] border border-cyan-300/30 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
+          <div className="flex items-center justify-between gap-4 border-b border-zinc-800 bg-[#070b12] px-5 py-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-cyan-300 text-black">
+                <ChatOrbitIcon />
+              </div>
+              <div>
+                <p className="text-sm font-black text-white">MitaMind AI</p>
+                <p className="text-xs text-cyan-200">Website knowledge agent</p>
+              </div>
+            </div>
+            <button type="button" onClick={() => setIsOpen(false)} className="rounded-full border border-zinc-700 px-3 py-1 text-sm text-zinc-300 transition hover:border-white hover:text-white" aria-label="Close MitaMind AI">
+              Close
+            </button>
+          </div>
+
+          <div className="flex max-h-[24rem] flex-col gap-3 overflow-y-auto px-4 py-4">
+            {chatMessages.map((message, index) => (
+              <div
+                key={`${message.role}-${index}`}
+                className={`whitespace-pre-line rounded-2xl px-4 py-3 text-sm leading-6 ${
+                  message.role === "user"
+                    ? "ml-8 bg-cyan-300 text-black"
+                    : "mr-8 border border-zinc-800 bg-black/60 text-zinc-300"
+                }`}
+              >
+                {message.text}
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t border-zinc-800 px-4 py-4">
+            <div className="mb-3 flex flex-wrap gap-2">
+              {starterPrompts.map((prompt) => (
+                <button
+                  key={prompt}
+                  type="button"
+                  onClick={() => askAssistant(prompt)}
+                  className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-300 transition hover:border-cyan-300 hover:text-cyan-200"
+                >
+                  {prompt}
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleSubmit} className="flex gap-2">
+              <input
+                type="text"
+                value={chatInput}
+                onChange={(event) => setChatInput(event.target.value)}
+                placeholder="Ask MitaMind AI..."
+                aria-label="Ask MitaMind AI"
+                className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-black px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
+              />
+              <button type="submit" className="rounded-2xl bg-[#caa177] px-4 py-3 text-sm font-black text-black transition hover:scale-[1.02]">
+                Send
+              </button>
+            </form>
+          </div>
+        </section>
+      )}
+
+      <button
+        type="button"
+        onClick={() => setIsOpen((current) => !current)}
+        className="group flex items-center gap-3 rounded-full border border-cyan-300/50 bg-cyan-300 px-4 py-3 font-black text-black shadow-2xl shadow-cyan-500/30 transition hover:scale-[1.03] hover:bg-cyan-200"
+        aria-label="Open MitaMind AI chatbot"
+      >
+        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-cyan-200">
+          <ChatOrbitIcon />
+        </span>
+        <span className="hidden pr-1 text-sm uppercase tracking-[0.14em] sm:inline">Ask MitaMind AI</span>
+      </button>
+    </div>
   );
 }
 
@@ -2893,7 +3101,7 @@ function AIBuilderLabPage({ goToPage }) {
     {
       role: "assistant",
       text:
-        "Hi, I am Ask Debosmita AI. I can help you choose an AI learning path, find a portfolio project, understand RAG or agents, use the newsletter companion, or pick a badge to share."
+        "Hi, I am MitaMind AI. I can help you choose an AI learning path, find a portfolio project, understand RAG or agents, use the newsletter companion, or pick a badge to share."
     }
   ]);
 
@@ -3180,7 +3388,7 @@ function AIBuilderLabPage({ goToPage }) {
         </div>
 
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
-          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Ask Debosmita AI</p>
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">MitaMind AI</p>
           <h2 className="mt-4 text-3xl font-light text-white">Chat with the AI learning guide.</h2>
           <p className="mt-5 leading-8 text-zinc-400">
             Ask about AI career paths, RAG projects, Azure AI Foundry, badges, newsletters, flashcards, and what to build next.
@@ -3220,8 +3428,8 @@ function AIBuilderLabPage({ goToPage }) {
                 type="text"
                 value={chatInput}
                 onChange={(event) => setChatInput(event.target.value)}
-                placeholder="Ask about RAG, agents, projects..."
-                aria-label="Ask Debosmita AI"
+                placeholder="Ask MitaMind about RAG, agents, projects..."
+                aria-label="Ask MitaMind AI"
                 className="min-w-0 flex-1 rounded-2xl border border-zinc-700 bg-zinc-950 px-4 py-3 text-sm text-white outline-none transition placeholder:text-zinc-500 focus:border-cyan-300"
               />
               <button type="submit" className="rounded-2xl bg-[#caa177] px-5 py-3 text-sm font-bold text-black transition hover:scale-[1.02]">
