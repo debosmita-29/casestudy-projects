@@ -903,11 +903,19 @@ export default function App() {
   const [activeProjectSlug, setActiveProjectSlug] = useState(null);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
+  const pushRoute = (hash, state = {}) => {
+    const nextHash = hash.startsWith("#") ? hash : `#${hash}`;
+    if (window.location.hash !== nextHash) {
+      window.history.pushState(state, "", nextHash);
+    }
+  };
+
   const openCaseStudy = (slug) => {
     setActiveProjectSlug(slug);
+    setSelectedArticle(null);
     setPage("caseStudy");
     setMenuOpen(false);
-    window.history.replaceState({ page: "caseStudy", slug }, "", `#project-${slug}`);
+    pushRoute(`#project-${slug}`, { page: "caseStudy", slug });
     setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   };
 
@@ -917,11 +925,7 @@ export default function App() {
     setPage("article");
     setMenuOpen(false);
 
-    window.history.pushState(
-      { page: "article", slug: article.slug },
-      "",
-      `#writing-${article.slug}`
-    );
+    pushRoute(`#writing-${article.slug}`, { page: "article", slug: article.slug });
 
     setTimeout(() => {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -960,36 +964,55 @@ export default function App() {
 
   useEffect(() => {
     const openFromHash = () => {
-      const hash = window.location.hash;
+      const hash = window.location.hash || "#home";
 
-    if (hash.startsWith("#project-")) {
-      const slug = hash.replace("#project-", "");
-      const matchedProject = projects.find((project) => project.slug === slug);
+      if (hash.startsWith("#project-")) {
+        const slug = hash.replace("#project-", "");
+        const matchedProject = projects.find((project) => project.slug === slug);
 
-      if (matchedProject) {
-        setActiveProjectSlug(matchedProject.slug);
-        setSelectedArticle(null);
-        setPage("caseStudy");
-        setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+        if (matchedProject) {
+          setActiveProjectSlug(matchedProject.slug);
+          setSelectedArticle(null);
+          setMenuOpen(false);
+          setPage("caseStudy");
+          setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+        }
+
+        return;
       }
 
-      return;
-    }
+      if (hash.startsWith("#writing-")) {
+        const slug = hash.replace("#writing-", "");
+        const matchedArticle = newsletterContent.find(
+          (article) => article.slug === slug
+        );
 
-    if (hash.startsWith("#writing-")) {
-      const slug = hash.replace("#writing-", "");
-      const matchedArticle = newsletterContent.find(
-        (article) => article.slug === slug
-      );
+        if (matchedArticle) {
+          setSelectedArticle(matchedArticle);
+          setActiveProjectSlug(null);
+          setMenuOpen(false);
+          setPage("article");
+          setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+        }
 
-      if (matchedArticle) {
-        setSelectedArticle(matchedArticle);
+        return;
+      }
+
+      const nextPage = hash.replace("#", "");
+      if (nextPage === "home" || Object.prototype.hasOwnProperty.call(pages, nextPage) || nextPage === "contact" || nextPage === "privacy" || nextPage === "terms") {
+        setSelectedArticle(null);
         setActiveProjectSlug(null);
-        setPage("article");
+        setMenuOpen(false);
+        setPage(nextPage);
         setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-    }
-  }
-};
+        return;
+      }
+
+      setSelectedArticle(null);
+      setActiveProjectSlug(null);
+      setMenuOpen(false);
+      setPage("home");
+    };
     // const openFromHash = () => {
     //   const hash = window.location.hash.replace("#project-", "");
     //   const matchedProject = projects.find((project) => project.slug === hash);
@@ -1010,26 +1033,20 @@ export default function App() {
   }, []);
 
   const goToPage = (nextPage) => {
-  setActiveProjectSlug(null);
-  setSelectedArticle(null);
+    setActiveProjectSlug(null);
+    setSelectedArticle(null);
 
-  if (window.location.hash) {
-    window.history.replaceState(null, "", window.location.pathname);
-  }
-
-  setPage(nextPage);
-  setMenuOpen(false);
-  setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
-};
+    pushRoute(`#${nextPage}`, { page: nextPage });
+    setPage(nextPage);
+    setMenuOpen(false);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
+  };
 
   const openFreeGift = () => {
     setActiveProjectSlug(null);
     setSelectedArticle(null);
 
-    if (window.location.hash) {
-      window.history.replaceState(null, "", window.location.pathname);
-    }
-
+    pushRoute("#learning", { page: "learning", section: "free-masterclass" });
     setPage("learning");
     setMenuOpen(false);
     setTimeout(() => {
