@@ -1703,6 +1703,102 @@ function CinematicVedaRobot({ stages, signalCards }) {
   );
 }
 
+function ImmersiveVedaBackdrop({ label }) {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_6%,rgba(34,211,238,0.18),transparent_26%),radial-gradient(circle_at_18%_34%,rgba(202,161,119,0.12),transparent_28%),linear-gradient(180deg,rgba(8,47,73,0.2),rgba(0,0,0,0)_34%)]" />
+      <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(103,232,249,0.45)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.45)_1px,transparent_1px)] [background-size:64px_64px] [transform:perspective(900px)_rotateX(64deg)_translateY(-18rem)_scale(1.35)]" />
+      <div className="absolute left-1/2 top-24 h-[42rem] w-[42rem] -translate-x-1/2 rounded-full border border-cyan-300/10 shadow-[0_0_120px_rgba(34,211,238,0.12)]" />
+      <div className="absolute right-[-8rem] top-32 hidden h-[44rem] w-[32rem] opacity-80 lg:block">
+        <svg className="h-full w-full" viewBox="0 0 420 580" fill="none" role="img" aria-label={`Veda immersive robot presenter for ${label}`}>
+          <defs>
+            <filter id="immersiveVedaGlow">
+              <feGaussianBlur stdDeviation="5" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+            <linearGradient id="immersiveVedaMetal" x1="0" x2="1">
+              <stop offset="0%" stopColor="#e5faff" stopOpacity="0.9" />
+              <stop offset="55%" stopColor="#67e8f9" stopOpacity="0.45" />
+              <stop offset="100%" stopColor="#caa177" stopOpacity="0.65" />
+            </linearGradient>
+          </defs>
+
+          <g opacity="0.5">
+            {[72, 124, 180, 248, 310, 360].map((y, index) => (
+              <g key={y}>
+                <circle cx={index % 2 ? 96 : 54} cy={y} r="4" fill="#67e8f9" filter="url(#immersiveVedaGlow)">
+                  <animate attributeName="opacity" values="0.15;0.95;0.15" dur={`${2.2 + index * 0.25}s`} repeatCount="indefinite" />
+                </circle>
+                <line x1={index % 2 ? 96 : 54} y1={y} x2="232" y2="252" stroke="#67e8f9" strokeWidth="1.5" strokeDasharray="7 12">
+                  <animate attributeName="stroke-dashoffset" values="60;0" dur="3s" repeatCount="indefinite" />
+                </line>
+              </g>
+            ))}
+          </g>
+
+          <g filter="url(#immersiveVedaGlow)" opacity="0.92">
+            <line x1="222" y1="276" x2="42" y2="172" stroke="#67e8f9" strokeWidth="10" strokeLinecap="round" strokeDasharray="220">
+              <animate attributeName="stroke-dashoffset" values="220;0;0;220" dur="7s" repeatCount="indefinite" />
+            </line>
+            <line x1="222" y1="280" x2="38" y2="328" stroke="#caa177" strokeWidth="10" strokeLinecap="round" strokeDasharray="220">
+              <animate attributeName="stroke-dashoffset" values="220;220;0;0;220" dur="7.4s" repeatCount="indefinite" />
+            </line>
+            <line x1="228" y1="280" x2="360" y2="236" stroke="#67e8f9" strokeWidth="10" strokeLinecap="round" strokeDasharray="180">
+              <animate attributeName="stroke-dashoffset" values="180;90;0;0;180" dur="7.8s" repeatCount="indefinite" />
+            </line>
+          </g>
+
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0 -10;0 12;0 -10" dur="5.2s" repeatCount="indefinite" />
+            <ellipse cx="224" cy="462" rx="92" ry="20" fill="#67e8f9" opacity="0.14">
+              <animate attributeName="rx" values="74;106;74" dur="5.2s" repeatCount="indefinite" />
+            </ellipse>
+            <path d="M154 274c0-46 31-78 72-78s72 32 72 78v74c0 46-31 78-72 78s-72-32-72-78v-74Z" fill="url(#immersiveVedaMetal)" opacity="0.72" stroke="#67e8f9" strokeWidth="3" />
+            <rect x="168" y="132" width="116" height="90" rx="34" fill="#071116" opacity="0.92" stroke="#e5faff" strokeWidth="3" />
+            <circle cx="202" cy="172" r="9" fill="#67e8f9">
+              <animate attributeName="r" values="7;11;7" dur="1.8s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="250" cy="172" r="9" fill="#67e8f9">
+              <animate attributeName="r" values="11;7;11" dur="1.8s" repeatCount="indefinite" />
+            </circle>
+            <path d="M198 196 Q226 210 254 196" stroke="#caa177" strokeWidth="5" strokeLinecap="round" />
+            <line x1="226" y1="132" x2="226" y2="96" stroke="#67e8f9" strokeWidth="5" strokeLinecap="round" />
+            <circle cx="226" cy="88" r="10" fill="#caa177">
+              <animate attributeName="opacity" values="0.35;1;0.35" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+            <path d="M186 306h80M188 334h76M202 364h48" stroke="#071116" strokeWidth="6" strokeLinecap="round" opacity="0.75" />
+          </g>
+
+          {[
+            [42, 172, "BEGINNER"],
+            [38, 328, "INTERMEDIATE"],
+            [360, 236, "ADVANCED"]
+          ].map(([cx, cy, text], index) => (
+            <g key={text} filter="url(#immersiveVedaGlow)">
+              <circle cx={cx} cy={cy} r="20" fill={index === 1 ? "#caa177" : "#67e8f9"} opacity="0.9">
+                <animate attributeName="r" values="16;24;16" dur={`${2.2 + index * 0.25}s`} repeatCount="indefinite" />
+              </circle>
+              <text x={cx} y={cy + 46} textAnchor="middle" fill="#e5faff" fontSize="12" fontWeight="800" letterSpacing="2">{text}</text>
+            </g>
+          ))}
+        </svg>
+      </div>
+
+      <div className="absolute left-6 top-[18rem] hidden w-52 rotate-[-5deg] rounded-2xl border border-cyan-300/20 bg-black/30 p-4 shadow-2xl shadow-cyan-500/10 backdrop-blur md:block">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-cyan-200">Veda Scan</p>
+        <p className="mt-2 text-sm leading-6 text-zinc-300">Beginner, intermediate, and advanced signals are active across this page.</p>
+      </div>
+      <div className="absolute bottom-32 right-12 hidden w-60 rotate-[4deg] rounded-2xl border border-[#caa177]/25 bg-black/30 p-4 shadow-2xl shadow-[#caa177]/10 backdrop-blur xl:block">
+        <p className="text-xs font-black uppercase tracking-[0.2em] text-[#caa177]">Neural Presentation</p>
+        <p className="mt-2 text-sm leading-6 text-zinc-300">Curriculum, guides, labs, and project tracks are projected into a cinematic learning layer.</p>
+      </div>
+    </div>
+  );
+}
+
 function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, signalCards }) {
   const [tourOpen, setTourOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -2177,6 +2273,7 @@ function LearningPage({ goToPage }) {
     <PageShell
       eyebrow="Learning Platform"
       title="Learn AI, ML, data science, and agentic systems by building real projects."
+      immersive
     >
       <VedaNeuralGuide
         eyebrow="Veda Neural Academy"
@@ -3597,7 +3694,7 @@ function AIBuilderLabPage({ goToPage }) {
   };
 
   return (
-    <PageShell eyebrow="AI Builder Lab" title="Daily AI practice, challenges, badges, project ideas, and community growth loops.">
+    <PageShell eyebrow="AI Builder Lab" title="Daily AI practice, challenges, badges, project ideas, and community growth loops." immersive>
       <VedaNeuralGuide
         eyebrow="Agentic Command Center"
         title="Train like an AI builder."
@@ -4312,7 +4409,7 @@ function ResourcesPage() {
   ];
 
   return (
-    <PageShell eyebrow="Resources" title="Free AI, ML, data science, and agentic systems resources for builders.">
+    <PageShell eyebrow="Resources" title="Free AI, ML, data science, and agentic systems resources for builders." immersive>
       <VedaNeuralGuide
         eyebrow="Intelligence Vault"
         title="Open the vault of AI tools and templates."
@@ -4543,7 +4640,24 @@ function ContactPage() {
   );
 }
 
-function PageShell({ eyebrow, title, children }) {
+function PageShell({ eyebrow, title, children, immersive = false }) {
+  if (immersive) {
+    return (
+      <main id={`${eyebrow.toLowerCase()}-section`} className="relative overflow-hidden bg-[#03070d] px-6 py-24">
+        <ImmersiveVedaBackdrop label={eyebrow} />
+        <div className="relative z-10 mx-auto max-w-7xl [perspective:1400px]">
+          <div className="rounded-[2rem] border border-cyan-300/20 bg-black/25 p-6 shadow-2xl shadow-cyan-500/10 backdrop-blur-sm md:p-8">
+            <p className="text-sm uppercase tracking-[0.35em] text-cyan-200">{eyebrow}</p>
+            <h1 className="mt-6 max-w-5xl font-serif text-4xl font-light leading-tight md:text-6xl">{title}</h1>
+          </div>
+          <div className="mt-12 [transform-style:preserve-3d] [&_article]:shadow-2xl [&_article]:shadow-cyan-950/20 [&_article]:transition-transform [&_article]:duration-300 [&_article:hover]:-translate-y-1 [&_article:hover]:[transform:translateZ(18px)] [&_section]:relative [&_section]:z-10">
+            {children}
+          </div>
+        </div>
+      </main>
+    );
+  }
+
   return (
     <main id={`${eyebrow.toLowerCase()}-section`} className="mx-auto max-w-7xl px-6 py-24">
       <p className="text-sm uppercase tracking-[0.35em] text-[#caa177]">{eyebrow}</p>
