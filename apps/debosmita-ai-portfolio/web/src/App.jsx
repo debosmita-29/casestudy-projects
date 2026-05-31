@@ -163,6 +163,7 @@ const pages = {
   about: "About",
   projects: "Projects",
   learning: "Learning",
+  aiLab: "AI Lab",
   writing: "Writing",
   speaking: "Speaking",
   resources: "Resources"
@@ -1311,6 +1312,7 @@ export default function App() {
       {page === "about" && <AboutPage />}
       {page === "projects" && <ProjectsPage openCaseStudy={openCaseStudy} />}
       {page === "learning" && <LearningPage goToPage={goToPage} />}
+      {page === "aiLab" && <AIBuilderLabPage goToPage={goToPage} />}
       {page === "caseStudy" && (
         <CaseStudyPage
           project={projects.find((project) => project.slug === activeProjectSlug) || projects[0]}
@@ -2806,6 +2808,306 @@ function SpeakingPage() {
           ))}
         </div>
       </div>
+    </PageShell>
+  );
+}
+
+function AIBuilderLabPage({ goToPage }) {
+  const careerTracks = {
+    builder: {
+      title: "GenAI Builder",
+      desc: "Build chatbots, copilots, RAG assistants, and workflow tools.",
+      next: "Start with the AI-For-Beginners curriculum, then build a tiny document assistant."
+    },
+    data: {
+      title: "Data Scientist",
+      desc: "Analyze data, train models, evaluate outputs, and explain business impact.",
+      next: "Start with Python, data cleaning, machine learning metrics, and portfolio notebooks."
+    },
+    product: {
+      title: "AI Product Engineer",
+      desc: "Turn AI ideas into usable products with UI, APIs, evaluations, and feedback loops.",
+      next: "Build a full-stack AI feature with logging, user feedback, and clear success metrics."
+    },
+    cloud: {
+      title: "Cloud AI Architect",
+      desc: "Design secure, scalable AI systems across cloud models, data, monitoring, and governance.",
+      next: "Map a Foundry-style architecture with model routing, RAG, guardrails, and observability."
+    },
+    agent: {
+      title: "Agentic AI Engineer",
+      desc: "Design agents that use tools, memory, planning, retries, and human approval.",
+      next: "Build a research agent with three tools and a failure recovery plan."
+    }
+  };
+
+  const projectIdeas = {
+    beginner: {
+      career: "GenAI Builder",
+      idea: "Personal AI Study Coach",
+      stack: "React, prompts, static lesson data",
+      build: "A simple assistant that recommends one lesson, one flashcard, and one practice task each day."
+    },
+    intermediate: {
+      career: "Data Scientist",
+      idea: "AI Data Quality Checker",
+      stack: "Python, pandas, charts, LLM explanations",
+      build: "Upload a CSV, find missing values and outliers, then generate a stakeholder-friendly report."
+    },
+    advanced: {
+      career: "Agentic AI Engineer",
+      idea: "RAG Research Agent",
+      stack: "Vector search, LangGraph-style workflow, evaluation rubric",
+      build: "An agent that retrieves sources, drafts an answer, checks grounding, and asks for human approval."
+    }
+  };
+
+  const flashcards = [
+    ["Embeddings", "Numeric representations that let systems compare semantic similarity."],
+    ["RAG", "Retrieval augmented generation: retrieve context before generating an answer."],
+    ["Fine-tuning", "Training a model further on specific examples to adapt behavior."],
+    ["AI Agent", "A system that can reason over goals, use tools, and take multi-step actions."],
+    ["Vector DB", "A database optimized for storing and searching embeddings."],
+    ["Evaluation", "A repeatable way to measure whether an AI system is useful, safe, and grounded."]
+  ];
+
+  const toolkit = [
+    ["GenAI", "OpenAI, Azure AI Foundry, Claude, Gemini, prompt testing"],
+    ["Agents", "LangGraph, CrewAI, tool calling, planning, traces"],
+    ["Vector Databases", "FAISS, Chroma, Pinecone, Weaviate, pgvector"],
+    ["Azure AI", "Azure AI Foundry, model catalog, evaluations, prompt optimization"],
+    ["MLOps", "MLflow, model cards, monitoring, drift checks"],
+    ["Notebooks", "Jupyter, Colab, Kaggle, VS Code notebooks"]
+  ];
+
+  const [selectedTrack, setSelectedTrack] = useState("builder");
+  const [selectedLevel, setSelectedLevel] = useState("beginner");
+  const [flashcardIndex, setFlashcardIndex] = useState(0);
+  const [completedToday, setCompletedToday] = useState({
+    microLesson: false,
+    quiz: false,
+    notebook: false
+  });
+
+  const streakCount = Object.values(completedToday).filter(Boolean).length;
+  const activeTrack = careerTracks[selectedTrack];
+  const activeProject = projectIdeas[selectedLevel];
+  const activeFlashcard = flashcards[flashcardIndex];
+
+  const shareBadge = (badge) => {
+    const text = encodeURIComponent(`I earned the ${badge} learning badge in Debosmita AI Lab. Building in public as I learn AI, RAG, GenAI, and agentic systems.`);
+    const url = encodeURIComponent("https://www.debosmita.ai/#aiLab");
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}&summary=${text}`, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <PageShell eyebrow="AI Builder Lab" title="Daily AI practice, challenges, badges, project ideas, and community growth loops.">
+      <section className="rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-200">Engagement Hub</p>
+            <h2 className="mt-4 font-serif text-4xl font-light leading-tight text-white md:text-5xl">
+              A playful learning layer for turning visitors into repeat AI builders.
+            </h2>
+            <p className="mt-5 max-w-4xl leading-8 text-zinc-300">
+              This page packages streaks, challenges, quizzes, flashcards, badges, templates, and build-in-public prompts into one growth engine for the learning portal.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <button type="button" onClick={() => goToPage("learning")} className="rounded-2xl bg-cyan-300 px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-cyan-200">
+                Start learning →
+              </button>
+              <button type="button" onClick={() => goToPage("writing")} className="rounded-2xl border border-cyan-300/50 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-cyan-200 transition hover:bg-cyan-300 hover:text-black">
+                Use newsletter companion →
+              </button>
+            </div>
+          </div>
+          <div className="rounded-[2rem] border border-zinc-800 bg-black/50 p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Today’s Streak</p>
+            <p className="mt-4 text-5xl font-black text-white">{streakCount}/3</p>
+            <div className="mt-6 grid gap-3">
+              {[
+                ["microLesson", "Read 1 AI concept in 3 minutes"],
+                ["quiz", "Answer one quiz question"],
+                ["notebook", "Run or review one notebook cell"]
+              ].map(([key, label]) => (
+                <label key={key} className="flex items-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-950 p-4 text-left text-zinc-300">
+                  <input
+                    type="checkbox"
+                    checked={completedToday[key]}
+                    onChange={() => setCompletedToday((current) => ({ ...current, [key]: !current[key] }))}
+                    className="h-5 w-5 accent-cyan-300"
+                  />
+                  {label}
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Weekly AI Challenge</p>
+          <h2 className="mt-4 text-3xl font-light text-white">Build a tiny RAG assistant in 30 minutes.</h2>
+          <p className="mt-4 leading-7 text-zinc-400">
+            Use five short documents, write three questions, retrieve the best context, and explain whether each answer is grounded.
+          </p>
+          <div className="mt-6 rounded-2xl border border-zinc-800 bg-black/40 p-5 text-zinc-300">
+            Submit a GitHub link, screenshot, or LinkedIn post. Public submissions can appear on the Learner Wall.
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Newsletter Companion</p>
+          <h2 className="mt-4 text-3xl font-light text-white">Quiz, discuss, then build the idea.</h2>
+          <div className="mt-6 grid gap-3 text-zinc-300">
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">Quiz: What makes Azure AI Foundry an operating layer?</div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">Discussion: Where should humans stay in the loop?</div>
+            <div className="rounded-2xl border border-zinc-800 bg-black/40 p-4">Build: Sketch a model routing + evaluation flow.</div>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">AI Career Path Quiz</p>
+          <h2 className="mt-4 text-3xl font-light text-white">Find your builder track.</h2>
+          <div className="mt-6 grid gap-3">
+            {Object.entries(careerTracks).map(([key, track]) => (
+              <button
+                key={key}
+                type="button"
+                onClick={() => setSelectedTrack(key)}
+                className={`rounded-2xl border p-4 text-left transition ${selectedTrack === key ? "border-cyan-300 bg-cyan-300/10 text-white" : "border-zinc-800 bg-black/40 text-zinc-400 hover:border-zinc-600 hover:text-white"}`}
+              >
+                {track.title}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-cyan-300/20 bg-cyan-300/5 p-7">
+          <p className="text-sm font-semibold uppercase tracking-[0.25em] text-cyan-200">Recommended Track</p>
+          <h3 className="mt-4 text-4xl font-light text-white">{activeTrack.title}</h3>
+          <p className="mt-4 leading-8 text-zinc-300">{activeTrack.desc}</p>
+          <p className="mt-5 rounded-2xl border border-cyan-300/20 bg-black/40 p-5 leading-7 text-cyan-100">{activeTrack.next}</p>
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 lg:grid-cols-2">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Portfolio Project Generator</p>
+          <h2 className="mt-4 text-3xl font-light text-white">Generate a project idea by level.</h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {Object.keys(projectIdeas).map((level) => (
+              <button
+                key={level}
+                type="button"
+                onClick={() => setSelectedLevel(level)}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold capitalize transition ${selectedLevel === level ? "border-[#caa177] bg-[#caa177] text-black" : "border-zinc-700 text-zinc-300 hover:border-[#caa177] hover:text-[#caa177]"}`}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+          <div className="mt-6 rounded-2xl border border-zinc-800 bg-black/40 p-5">
+            <p className="text-sm uppercase tracking-[0.2em] text-[#caa177]">{activeProject.career}</p>
+            <h3 className="mt-3 text-2xl font-bold text-white">{activeProject.idea}</h3>
+            <p className="mt-3 text-zinc-400">{activeProject.build}</p>
+            <p className="mt-4 text-sm font-semibold text-cyan-200">Stack: {activeProject.stack}</p>
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Daily AI Flashcard</p>
+          <h2 className="mt-4 text-3xl font-light text-white">{activeFlashcard[0]}</h2>
+          <p className="mt-5 min-h-24 rounded-2xl border border-zinc-800 bg-black/40 p-5 text-lg leading-8 text-zinc-300">
+            {activeFlashcard[1]}
+          </p>
+          <button
+            type="button"
+            onClick={() => setFlashcardIndex((index) => (index + 1) % flashcards.length)}
+            className="mt-6 rounded-2xl bg-white px-6 py-3 font-semibold text-black transition hover:scale-[1.02]"
+          >
+            Next card →
+          </button>
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Badges, sharing, and growth loops</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {["RAG Beginner", "Prompt Engineer", "Model Training Starter", "Azure AI Explorer"].map((badge) => (
+            <article key={badge} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-6">
+              <p className="text-3xl">◆</p>
+              <h3 className="mt-4 text-xl font-bold text-white">{badge}</h3>
+              <button type="button" onClick={() => shareBadge(badge)} className="mt-6 rounded-2xl border border-[#caa177]/50 px-4 py-2 text-sm font-semibold text-[#caa177] transition hover:bg-[#caa177] hover:text-black">
+                Share on LinkedIn →
+              </button>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 lg:grid-cols-3">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Referral Link</p>
+          <h3 className="mt-4 text-2xl font-bold text-white">Invite 3 friends.</h3>
+          <p className="mt-4 leading-7 text-zinc-400">Unlock the advanced project guide when referral tracking is connected.</p>
+          <p className="mt-5 rounded-2xl border border-zinc-800 bg-black/40 p-4 text-sm text-cyan-200">https://www.debosmita.ai/#aiLab?ref=builder</p>
+        </div>
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Weekly Leaderboard</p>
+          <div className="mt-5 space-y-3 text-zinc-300">
+            {["1. RAG Sprint", "2. Notebook Runner", "3. Build-in-Public"].map((item) => (
+              <div key={item} className="rounded-2xl border border-zinc-800 bg-black/40 p-4">{item}</div>
+            ))}
+          </div>
+        </div>
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Free Templates</p>
+          <h3 className="mt-4 text-2xl font-bold text-white">Downloadable lead magnets.</h3>
+          <p className="mt-4 leading-7 text-zinc-400">Project README, RAG evaluation sheet, AI career roadmap, and prompt library gated by email signup.</p>
+        </div>
+      </section>
+
+      <section className="mt-12 grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">AI Toolkit Directory</p>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {toolkit.map(([category, tools]) => (
+              <div key={category} className="rounded-2xl border border-zinc-800 bg-black/40 p-5">
+                <h3 className="font-bold text-white">{category}</h3>
+                <p className="mt-2 text-sm leading-6 text-zinc-400">{tools}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Ask Debosmita AI</p>
+          <h2 className="mt-4 text-3xl font-light text-white">Coming soon: chat over my lessons, projects, and newsletters.</h2>
+          <p className="mt-5 leading-8 text-zinc-400">
+            This chatbot can be trained on AI-For-Beginners, newsletters, project case studies, and learning resources. For now, visitors can submit questions by email.
+          </p>
+          <a href="mailto:debosmitaroy.ai@gmail.com?subject=Ask%20Debosmita%20AI" className="mt-6 inline-flex rounded-2xl bg-[#caa177] px-6 py-3 font-semibold text-black">
+            Ask a question →
+          </a>
+        </div>
+      </section>
+
+      <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Public Learner Wall</p>
+        <h2 className="mt-4 font-serif text-4xl font-light text-white md:text-5xl">Showcase learners who build in public.</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {["Completed a tiny RAG assistant", "Published an AI flashcard thread", "Shared a capstone project"].map((item) => (
+            <div key={item} className="rounded-2xl border border-zinc-800 bg-black/40 p-5 text-zinc-300">{item}</div>
+          ))}
+        </div>
+        <p className="mt-6 leading-7 text-zinc-300">
+          Build-in-public prompt: “Today I learned one AI concept, built one small artifact, and documented one lesson. Here is what changed in my thinking...”
+        </p>
+      </section>
     </PageShell>
   );
 }
