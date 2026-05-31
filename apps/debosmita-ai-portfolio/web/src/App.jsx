@@ -270,6 +270,7 @@ const pages = {
   home: "Home",
   about: "About",
   projects: "Projects",
+  learning: "Learning",
   writing: "Writing",
   speaking: "Speaking",
   resources: "Resources"
@@ -867,6 +868,7 @@ export default function App() {
       {page === "home" && <HomePage goToPage={goToPage} />}
       {page === "about" && <AboutPage />}
       {page === "projects" && <ProjectsPage openCaseStudy={openCaseStudy} />}
+      {page === "learning" && <LearningPage goToPage={goToPage} />}
       {page === "caseStudy" && (
         <CaseStudyPage
           project={projects.find((project) => project.slug === activeProjectSlug) || projects[0]}
@@ -893,57 +895,116 @@ export default function App() {
 }
 
 function HomePage({ goToPage }) {
-  return (
-    <main>
-      <section className="relative mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl gap-12 overflow-hidden px-6 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-        <div className="absolute left-1/2 top-20 h-96 w-96 rounded-full bg-[#caa177]/10 blur-3xl" />
+  const calendlyLink = "https://calendly.com/debosmitaroy-ai/30min?month=2026-06";
 
-        <div className="relative z-10">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">AI Architect & Engineering Leader</p>
-          <h1 className="mt-8 max-w-3xl font-serif text-5xl font-light leading-[0.95] tracking-tight text-white md:text-7xl lg:text-8xl">
+  return (
+    <section className="relative min-h-[88vh] overflow-hidden px-6 pt-28 md:px-12 lg:px-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">
+            AI Architect & Engineering Leader
+          </p>
+
+          <h1 className="mt-6 max-w-4xl text-5xl font-black leading-tight text-white md:text-7xl">
             Building Intelligent Systems that Scale
           </h1>
 
-          <div className="mt-8 flex items-center gap-3">
-            <div className="h-px w-16 bg-[#caa177]" />
-            <div className="h-1.5 w-1.5 rounded-full bg-[#caa177]" />
-          </div>
-
-          <p className="mt-8 max-w-xl text-lg leading-8 text-zinc-300">
-            I architect and build AI-powered platforms and multi-agent systems that solve real-world problems and drive measurable impact.
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-zinc-300">
+            I architect and build AI & ML powered platforms, learning systems and multi-agent products that help people and businesses move from AI curiosity to real implementation.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <button onClick={() => goToPage("projects")} className="rounded-2xl bg-[#caa177] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-[#d8b58d]">
+            <button
+              type="button"
+              onClick={() => goToPage("projects")}
+              className="rounded-2xl bg-[#caa177] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-[#d8b58d]"
+            >
               View My Work →
             </button>
-            <button onClick={() => goToPage("contact")} className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#caa177] hover:text-[#caa177]">
-              Let’s Connect →
+
+            <a
+              href={calendlyLink}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-[#caa177]/60 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-[#caa177] transition hover:bg-[#caa177] hover:text-black"
+            >
+              Book a Call →
+            </a>
+
+            <button
+              type="button"
+              onClick={() => goToPage("learning")}
+              className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#caa177] hover:text-[#caa177]"
+            >
+              Learn AI →
             </button>
           </div>
-
-          <div className="mt-14 flex items-center gap-4 text-zinc-500">
-            <div className="h-px w-16 bg-zinc-700" />
-            <span className="text-xs uppercase tracking-[0.35em]">Scroll</span>
-            <div className="animate-bounce text-lg text-[#caa177]">↓</div>
-          </div>
         </div>
 
-        <div className="relative z-10 flex justify-center lg:justify-end">
-          <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 via-[#111111] to-black shadow-2xl">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(202,161,119,0.24),transparent_42%)]" />
-            <img
-              src="/assets/debosmita-hero.png"
-              alt="Debosmita Roy"
-              className="relative z-10 h-[620px] w-full object-cover object-[center_top] scale-[1.02]"
-            />
-          </div>
+        <div className="relative">
+          <img
+            src="/assets/debosmita-hero.png"
+            alt="Debosmita Roy"
+            className="mx-auto aspect-[4/5] w-full max-w-md rounded-[2rem] object-cover"
+          />
         </div>
-      </section>
-      <CalloutGrid goToPage={goToPage} />
-    </main>
+      </div>
+    </section>
   );
 }
+
+// function HomePage({ goToPage }) {
+//   return (
+//     <main>
+//       <section className="relative mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl gap-12 overflow-hidden px-6 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+//         <div className="absolute left-1/2 top-20 h-96 w-96 rounded-full bg-[#caa177]/10 blur-3xl" />
+
+//         <div className="relative z-10">
+//           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">AI Architect & Engineering Leader</p>
+//           <h1 className="mt-8 max-w-3xl font-serif text-5xl font-light leading-[0.95] tracking-tight text-white md:text-7xl lg:text-8xl">
+//             Building Intelligent Systems that Scale
+//           </h1>
+
+//           <div className="mt-8 flex items-center gap-3">
+//             <div className="h-px w-16 bg-[#caa177]" />
+//             <div className="h-1.5 w-1.5 rounded-full bg-[#caa177]" />
+//           </div>
+
+//           <p className="mt-8 max-w-xl text-lg leading-8 text-zinc-300">
+//             I architect and build AI & ML powered platforms and multi-agent systems that solve real-world problems and drive measurable impact.
+//           </p>
+
+//           <div className="mt-10 flex flex-wrap gap-4">
+//             <button onClick={() => goToPage("projects")} className="rounded-2xl bg-[#caa177] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-[#d8b58d]">
+//               View My Work →
+//             </button>
+//             <button onClick={() => goToPage("contact")} className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#caa177] hover:text-[#caa177]">
+//               Let’s Connect →
+//             </button>
+//           </div>
+
+//           <div className="mt-14 flex items-center gap-4 text-zinc-500">
+//             <div className="h-px w-16 bg-zinc-700" />
+//             <span className="text-xs uppercase tracking-[0.35em]">Scroll</span>
+//             <div className="animate-bounce text-lg text-[#caa177]">↓</div>
+//           </div>
+//         </div>
+
+//         <div className="relative z-10 flex justify-center lg:justify-end">
+//           <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 via-[#111111] to-black shadow-2xl">
+//             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(202,161,119,0.24),transparent_42%)]" />
+//             <img
+//               src="/assets/debosmita-hero.png"
+//               alt="Debosmita Roy"
+//               className="relative z-10 h-[620px] w-full object-cover object-[center_top] scale-[1.02]"
+//             />
+//           </div>
+//         </div>
+//       </section>
+//       <CalloutGrid goToPage={goToPage} />
+//     </main>
+//   );
+// }
 
 function CalloutGrid({ goToPage }) {
   const callouts = [
@@ -1071,6 +1132,78 @@ function ProjectsPage({ openCaseStudy }) {
             </div>
           </article>
         ))}
+      </div>
+    </PageShell>
+  );
+}
+
+function LearningPage({ goToPage }) {
+  const tracks = [
+    {
+      title: "AI Foundations",
+      items: ["How LLMs work", "Prompting", "Embeddings", "RAG", "Evaluation"]
+    },
+    {
+      title: "Data Science Foundations",
+      items: ["Python", "SQL", "Statistics", "EDA", "Dashboards"]
+    },
+    {
+      title: "Machine Learning",
+      items: ["Supervised ML", "Feature engineering", "Model training", "Validation", "Deployment"]
+    },
+    {
+      title: "Agentic AI Engineering",
+      items: ["Tool use", "Memory", "Planning", "Multi-agent workflows", "Observability"]
+    },
+    {
+      title: "Production AI Projects",
+      items: ["Chatbots", "RAG apps", "AI agents", "MLOps pipelines", "LLM-powered products"]
+    },
+    {
+      title: "Research & White Papers",
+      items: ["Guides", "Architecture notes", "Case studies", "Quizzes", "Hands-on labs"]
+    }
+  ];
+
+  return (
+    <PageShell eyebrow="Learning Platform" title="Learn AI, ML, data science, and agentic systems by building real projects.">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {tracks.map((track) => (
+          <article key={track.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+            <h2 className="text-2xl font-bold text-white">{track.title}</h2>
+            <ul className="mt-5 space-y-3 text-zinc-400">
+              {track.items.map((item) => (
+                <li key={item}>• {item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <div className="mt-10 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
+        <h2 className="text-3xl font-bold text-white">Hands-on Practice Lab</h2>
+        <p className="mt-4 leading-8 text-zinc-300">
+          Students will learn by building chatbots, RAG systems, agents, data pipelines, dashboards, and production-style AI apps with guided exercises, quizzes, templates, and project reviews.
+        </p>
+
+        <div className="mt-7 flex flex-wrap gap-3">
+          <a
+            href="https://calendly.com/debosmitaroy-ai/30min?month=2026-06"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl bg-[#caa177] px-6 py-3 font-semibold text-black transition hover:bg-[#d8b58d]"
+          >
+            Book a Learning Call →
+          </a>
+
+          <button
+            type="button"
+            onClick={() => goToPage("resources")}
+            className="rounded-2xl border border-zinc-700 px-6 py-3 font-semibold text-white transition hover:border-[#caa177] hover:text-[#caa177]"
+          >
+            Explore Resources →
+          </button>
+        </div>
       </div>
     </PageShell>
   );
