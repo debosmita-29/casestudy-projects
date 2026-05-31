@@ -158,114 +158,6 @@ const projects = [
   }
 ];
 
-// const projects = [
-//   {
-//     slug: "cogniintel",
-//     title: "CogniIntel",
-//     subtitle: "Enterprise RAG + Multi-Agent Knowledge System",
-//     desc: "Autonomous enterprise knowledge extraction using multi-agent RAG systems.",
-//     detail: "CogniIntel is a multi-agent RAG system designed to unify fragmented enterprise knowledge.",
-//     included: [
-//       "Document ingestion over policy and support datasets",
-//       "TF-IDF retrieval baseline",
-//       "Agent planner, retriever, critic, and answer composer",
-//       "Evaluation harness for grounded answers"
-//     ],
-//     impact: [
-//       "Faster knowledge lookup",
-//       "Reduced manual document triage",
-//       "Better traceability from answer to source"
-//     ],
-//     tags: ["RAG", "FAISS-like retrieval", "Agent orchestration"],
-//     image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1600&q=80",
-//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/cogniintel"
-//   },
-//   {
-//     slug: "quantumroute-ai",
-//     title: "QuantumRoute AI",
-//     subtitle: "Optimization Engine for Complex Scheduling",
-//     desc: "Quantum-inspired optimization for enterprise scheduling and resource allocation.",
-//     detail: "QuantumRoute AI solves combinatorial scheduling problems using quantum-inspired search.",
-//     included: [
-//       "Resource, task, and constraint dataset",
-//       "Simulated annealing optimizer",
-//       "Constraint-aware scoring engine",
-//       "Allocation report generator"
-//     ],
-//     impact: [
-//       "Better allocation visibility",
-//       "Faster planning cycles",
-//       "Scenario-based scheduling decisions"
-//     ],
-//     tags: ["Optimization", "Scheduling", "Heuristics"],
-//     image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=1600&q=80",
-//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/quantumroute-ai"
-//   },
-//   {
-//     slug: "agentops-sentinel",
-//     title: "AgentOps Sentinel",
-//     subtitle: "Observability for Agentic AI Systems",
-//     desc: "Observability platform for monitoring multi-agent AI systems in production.",
-//     detail: "AgentOps Sentinel provides observability for agentic AI systems.",
-//     included: [
-//       "Agent telemetry parser",
-//       "Hallucination and tool failure risk scoring",
-//       "Token efficiency analytics",
-//       "Executive summary report"
-//     ],
-//     impact: [
-//       "Improved AI reliability visibility",
-//       "Faster debugging of agent failures",
-//       "Better governance for production agents"
-//     ],
-//     tags: ["Observability", "Risk scoring", "Telemetry"],
-//     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=80",
-//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/agentops-sentinel"
-//   },
-//   {
-//     slug: "insightforge",
-//     title: "InsightForge",
-//     subtitle: "Autonomous BI + NL-to-SQL Analytics",
-//     desc: "Autonomous BI system converting natural language into SQL and insights.",
-//     detail: "InsightForge is an autonomous analytics engine.",
-//     included: [
-//       "SQLite analytics layer over sample sales data",
-//       "NL-to-SQL pattern engine",
-//       "Insight summarizer",
-//       "KPI report output"
-//     ],
-//     impact: [
-//       "Faster access to business insights",
-//       "Reduced dashboard dependency",
-//       "Natural language analytics workflow"
-//     ],
-//     tags: ["Analytics", "SQL", "BI automation"],
-//     image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1600&q=80",
-//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/insightforge"
-//   },
-//   {
-//     slug: "neurorecruit",
-//     title: "NeuroRecruit",
-//     subtitle: "AI Talent Intelligence + Skill Matching",
-//     desc: "AI-powered talent intelligence and job-candidate matching engine.",
-//     detail: "NeuroRecruit matches candidates to roles using skill graph embeddings.",
-//     included: [
-//       "Candidate and job datasets",
-//       "Skill normalization",
-//       "Cosine similarity ranking",
-//       "Explainable match reasons"
-//     ],
-//     impact: [
-//       "Improved role-to-skill matching",
-//       "More explainable recruiting decisions",
-//       "Reduced manual screening effort"
-//     ],
-//     tags: ["Embeddings", "Skill graph", "Ranking"],
-//     image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80",
-//     githubLink: "https://github.com/debosmita-29/casestudy-projects/tree/main/casestudy-projects/debosmita-ai-portfolio-turborepo-startup-saas/apps/neurorecruit"
-//   }
-// ];
-
 const pages = {
   home: "Home",
   about: "About",
@@ -275,6 +167,337 @@ const pages = {
   speaking: "Speaking",
   resources: "Resources"
 };
+
+const microsoftAiForBeginnersCurriculum = [
+  {
+    slug: "setup",
+    title: "Course Setup",
+    summary: "Prepare the development environment and understand how to run notebooks and labs.",
+    sourcePath: "lessons/0-course-setup",
+    children: [
+      {
+        number: "00",
+        title: "Course Setup",
+        focus: "Development environment, local setup, and notebook workflow.",
+        lesson: "lessons/0-course-setup/setup.md",
+        notebook: "lessons/0-course-setup/how-to-run.md"
+      }
+    ]
+  },
+  {
+    slug: "intro",
+    title: "Introduction to AI",
+    summary: "Start with AI history, core terminology, and the evolution from symbolic AI to modern systems.",
+    sourcePath: "lessons/1-Intro",
+    children: [
+      {
+        number: "01",
+        title: "Introduction and History of AI",
+        focus: "AI milestones, major approaches, and why modern AI systems matter.",
+        lesson: "lessons/1-Intro/README.md",
+        assignment: "lessons/1-Intro/assignment.md"
+      }
+    ]
+  },
+  {
+    slug: "symbolic",
+    title: "Symbolic AI",
+    summary: "Learn knowledge representation, expert systems, ontologies, and concept graphs.",
+    sourcePath: "lessons/2-Symbolic",
+    children: [
+      {
+        number: "02",
+        title: "Knowledge Representation and Expert Systems",
+        focus: "Rules, ontologies, semantic knowledge, and concept graphs.",
+        lesson: "lessons/2-Symbolic/README.md",
+        notebooks: [
+          "lessons/2-Symbolic/Animals.ipynb",
+          "lessons/2-Symbolic/FamilyOntology.ipynb",
+          "lessons/2-Symbolic/MSConceptGraph.ipynb"
+        ],
+        assignment: "lessons/2-Symbolic/assignment.md"
+      }
+    ]
+  },
+  {
+    slug: "neural-networks",
+    title: "Introduction to Neural Networks",
+    summary: "Move from perceptrons to multi-layer neural networks and deep learning frameworks.",
+    sourcePath: "lessons/3-NeuralNetworks",
+    children: [
+      {
+        number: "03",
+        title: "Perceptron",
+        focus: "The simplest neural unit and the intuition behind trainable decision boundaries.",
+        lesson: "lessons/3-NeuralNetworks/03-Perceptron/README.md",
+        notebook: "lessons/3-NeuralNetworks/03-Perceptron/Perceptron.ipynb",
+        lab: "lessons/3-NeuralNetworks/03-Perceptron/lab/README.md"
+      },
+      {
+        number: "04",
+        title: "Multi-Layered Perceptron and Creating Your Own Framework",
+        focus: "Backpropagation concepts and how deep learning frameworks are assembled.",
+        lesson: "lessons/3-NeuralNetworks/04-OwnFramework/README.md",
+        notebook: "lessons/3-NeuralNetworks/04-OwnFramework/OwnFramework.ipynb",
+        lab: "lessons/3-NeuralNetworks/04-OwnFramework/lab/README.md"
+      },
+      {
+        number: "05",
+        title: "Intro to Frameworks and Overfitting",
+        focus: "PyTorch, Keras, TensorFlow, training loops, and overfitting control.",
+        lesson: "lessons/3-NeuralNetworks/05-Frameworks/README.md",
+        notebooks: [
+          "lessons/3-NeuralNetworks/05-Frameworks/IntroPyTorch.ipynb",
+          "lessons/3-NeuralNetworks/05-Frameworks/IntroKeras.ipynb",
+          "lessons/3-NeuralNetworks/05-Frameworks/IntroKerasTF.ipynb"
+        ],
+        lab: "lessons/3-NeuralNetworks/05-Frameworks/lab/README.md"
+      }
+    ]
+  },
+  {
+    slug: "computer-vision",
+    title: "Computer Vision",
+    summary: "Explore image processing, CNNs, transfer learning, autoencoders, GANs, detection, and segmentation.",
+    sourcePath: "lessons/4-ComputerVision",
+    children: [
+      {
+        number: "06",
+        title: "Intro to Computer Vision and OpenCV",
+        focus: "Classic image processing and computer vision foundations.",
+        lesson: "lessons/4-ComputerVision/06-IntroCV/README.md",
+        notebook: "lessons/4-ComputerVision/06-IntroCV/OpenCV.ipynb",
+        lab: "lessons/4-ComputerVision/06-IntroCV/lab/README.md"
+      },
+      {
+        number: "07",
+        title: "Convolutional Neural Networks",
+        focus: "CNN layers, image classification, and common CNN architectures.",
+        lesson: "lessons/4-ComputerVision/07-ConvNets/README.md",
+        notebooks: [
+          "lessons/4-ComputerVision/07-ConvNets/ConvNetsPyTorch.ipynb",
+          "lessons/4-ComputerVision/07-ConvNets/ConvNetsTF.ipynb"
+        ],
+        lab: "lessons/4-ComputerVision/07-ConvNets/lab/README.md"
+      },
+      {
+        number: "08",
+        title: "Pre-trained Networks and Transfer Learning",
+        focus: "Reuse existing models, improve training, and adapt networks to new datasets.",
+        lesson: "lessons/4-ComputerVision/08-TransferLearning/README.md",
+        notebooks: [
+          "lessons/4-ComputerVision/08-TransferLearning/TransferLearningPyTorch.ipynb",
+          "lessons/4-ComputerVision/08-TransferLearning/TransferLearningTF.ipynb"
+        ],
+        lab: "lessons/4-ComputerVision/08-TransferLearning/lab/README.md"
+      },
+      {
+        number: "09",
+        title: "Autoencoders and VAEs",
+        focus: "Representation learning, compression, denoising, and generative latent spaces.",
+        lesson: "lessons/4-ComputerVision/09-Autoencoders/README.md",
+        notebooks: [
+          "lessons/4-ComputerVision/09-Autoencoders/AutoEncodersPyTorch.ipynb",
+          "lessons/4-ComputerVision/09-Autoencoders/AutoencodersTF.ipynb"
+        ]
+      },
+      {
+        number: "10",
+        title: "GANs and Artistic Style Transfer",
+        focus: "Generative adversarial networks and neural style transfer workflows.",
+        lesson: "lessons/4-ComputerVision/10-GANs/README.md",
+        notebooks: [
+          "lessons/4-ComputerVision/10-GANs/GANPyTorch.ipynb",
+          "lessons/4-ComputerVision/10-GANs/GANTF.ipynb",
+          "lessons/4-ComputerVision/10-GANs/StyleTransfer.ipynb"
+        ]
+      },
+      {
+        number: "11",
+        title: "Object Detection",
+        focus: "Detect and localize objects in images.",
+        lesson: "lessons/4-ComputerVision/11-ObjectDetection/README.md",
+        notebook: "lessons/4-ComputerVision/11-ObjectDetection/ObjectDetection.ipynb",
+        lab: "lessons/4-ComputerVision/11-ObjectDetection/lab/README.md"
+      },
+      {
+        number: "12",
+        title: "Semantic Segmentation and U-Net",
+        focus: "Pixel-level classification, segmentation masks, and U-Net style models.",
+        lesson: "lessons/4-ComputerVision/12-Segmentation/README.md",
+        notebooks: [
+          "lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationPytorch.ipynb",
+          "lessons/4-ComputerVision/12-Segmentation/SemanticSegmentationTF.ipynb"
+        ],
+        lab: "lessons/4-ComputerVision/12-Segmentation/lab/README.md"
+      }
+    ]
+  },
+  {
+    slug: "nlp",
+    title: "Natural Language Processing",
+    summary: "Work through text representation, embeddings, language modeling, RNNs, transformers, NER, and LLMs.",
+    sourcePath: "lessons/5-NLP",
+    children: [
+      {
+        number: "13",
+        title: "Text Representation: BoW and TF-IDF",
+        focus: "Represent text numerically with classic NLP approaches.",
+        lesson: "lessons/5-NLP/13-TextRep/README.md",
+        notebooks: [
+          "lessons/5-NLP/13-TextRep/TextRepresentationPyTorch.ipynb",
+          "lessons/5-NLP/13-TextRep/TextRepresentationTF.ipynb"
+        ],
+        assignment: "lessons/5-NLP/13-TextRep/assignment.md"
+      },
+      {
+        number: "14",
+        title: "Semantic Word Embeddings: Word2Vec and GloVe",
+        focus: "Dense word vectors and semantic similarity.",
+        lesson: "lessons/5-NLP/14-Embeddings/README.md",
+        notebooks: [
+          "lessons/5-NLP/14-Embeddings/EmbeddingsPyTorch.ipynb",
+          "lessons/5-NLP/14-Embeddings/EmbeddingsTF.ipynb"
+        ],
+        assignment: "lessons/5-NLP/14-Embeddings/assignment.md"
+      },
+      {
+        number: "15",
+        title: "Language Modeling and Training Embeddings",
+        focus: "Train language models and custom embeddings.",
+        lesson: "lessons/5-NLP/15-LanguageModeling/README.md",
+        notebooks: [
+          "lessons/5-NLP/15-LanguageModeling/CBoW-PyTorch.ipynb",
+          "lessons/5-NLP/15-LanguageModeling/CBoW-TF.ipynb"
+        ],
+        lab: "lessons/5-NLP/15-LanguageModeling/lab/README.md"
+      },
+      {
+        number: "16",
+        title: "Recurrent Neural Networks",
+        focus: "Sequence modeling with recurrent architectures.",
+        lesson: "lessons/5-NLP/16-RNN/README.md",
+        notebooks: [
+          "lessons/5-NLP/16-RNN/RNNPyTorch.ipynb",
+          "lessons/5-NLP/16-RNN/RNNTF.ipynb"
+        ],
+        assignment: "lessons/5-NLP/16-RNN/assignment.md"
+      },
+      {
+        number: "17",
+        title: "Generative Recurrent Networks",
+        focus: "Generate text and sequences with recurrent models.",
+        lesson: "lessons/5-NLP/17-GenerativeNetworks/README.md",
+        notebooks: [
+          "lessons/5-NLP/17-GenerativeNetworks/GenerativePyTorch.ipynb",
+          "lessons/5-NLP/17-GenerativeNetworks/GenerativeTF.ipynb"
+        ],
+        lab: "lessons/5-NLP/17-GenerativeNetworks/lab/README.md"
+      },
+      {
+        number: "18",
+        title: "Transformers and BERT",
+        focus: "Attention, transformer architecture, and BERT-style models.",
+        lesson: "lessons/5-NLP/18-Transformers/README.md",
+        notebooks: [
+          "lessons/5-NLP/18-Transformers/TransformersPyTorch.ipynb",
+          "lessons/5-NLP/18-Transformers/TransformersTF.ipynb"
+        ],
+        assignment: "lessons/5-NLP/18-Transformers/assignment.md"
+      },
+      {
+        number: "19",
+        title: "Named Entity Recognition",
+        focus: "Extract entities and structured meaning from text.",
+        lesson: "lessons/5-NLP/19-NER/README.md",
+        notebook: "lessons/5-NLP/19-NER/NER-TF.ipynb",
+        lab: "lessons/5-NLP/19-NER/lab/README.md"
+      },
+      {
+        number: "20",
+        title: "Large Language Models, Prompt Programming, and Few-Shot Tasks",
+        focus: "Prompting, generative LLM behavior, and few-shot learning.",
+        lesson: "lessons/5-NLP/20-LangModels/README.md",
+        notebook: "lessons/5-NLP/20-LangModels/GPT-PyTorch.ipynb"
+      }
+    ]
+  },
+  {
+    slug: "other-ai",
+    title: "Other AI Techniques",
+    summary: "Round out the curriculum with genetic algorithms, reinforcement learning, and multi-agent systems.",
+    sourcePath: "lessons/6-Other",
+    children: [
+      {
+        number: "21",
+        title: "Genetic Algorithms",
+        focus: "Search and optimization inspired by evolution.",
+        lesson: "lessons/6-Other/21-GeneticAlgorithms/README.md",
+        notebooks: [
+          "lessons/6-Other/21-GeneticAlgorithms/Genetic.ipynb",
+          "lessons/6-Other/21-GeneticAlgorithms/Diophantine.ipynb"
+        ]
+      },
+      {
+        number: "22",
+        title: "Deep Reinforcement Learning",
+        focus: "Agents, reward signals, policies, and RL training loops.",
+        lesson: "lessons/6-Other/22-DeepRL/README.md",
+        notebooks: [
+          "lessons/6-Other/22-DeepRL/CartPole-RL-PyTorch.ipynb",
+          "lessons/6-Other/22-DeepRL/CartPole-RL-TF.ipynb"
+        ],
+        lab: "lessons/6-Other/22-DeepRL/lab/README.md"
+      },
+      {
+        number: "23",
+        title: "Multi-Agent Systems",
+        focus: "Agent coordination, interaction, and distributed intelligence.",
+        lesson: "lessons/6-Other/23-MultiagentSystems/README.md",
+        assignment: "lessons/6-Other/23-MultiagentSystems/assignment.md"
+      }
+    ]
+  },
+  {
+    slug: "ethics",
+    title: "Responsible AI",
+    summary: "Add safety, accountability, governance, and ethical decision-making to the learning path.",
+    sourcePath: "lessons/7-Ethics",
+    children: [
+      {
+        number: "24",
+        title: "AI Ethics and Responsible AI",
+        focus: "Responsible AI principles and business-facing governance.",
+        lesson: "lessons/7-Ethics/README.md",
+        microsoftLearn: "https://docs.microsoft.com/learn/paths/responsible-ai-business-principles/?WT.mc_id=academic-77998-cacaste"
+      }
+    ]
+  },
+  {
+    slug: "extras",
+    title: "Extras and Sketchnotes",
+    summary: "Explore multimodal AI and visual sketchnotes that make the curriculum easier to review.",
+    sourcePath: "lessons/X-Extras",
+    children: [
+      {
+        number: "25",
+        title: "Multi-Modal Networks, CLIP, and VQGAN",
+        focus: "Connect images and language with multimodal representation learning.",
+        lesson: "lessons/X-Extras/X1-MultiModal/README.md",
+        notebook: "lessons/X-Extras/X1-MultiModal/Clip.ipynb"
+      },
+      {
+        number: "SK",
+        title: "AI Curriculum Sketchnotes",
+        focus: "Visual summaries for reviewing core AI ideas.",
+        lesson: "lessons/sketchnotes/README.md"
+      }
+    ]
+  }
+];
+
+const microsoftAiBaseUrl = "https://github.com/microsoft/AI-For-Beginners/blob/main/";
+const microsoftAiTreeUrl = "https://github.com/microsoft/AI-For-Beginners/tree/main/";
 
 const newsletterContent = [
   {
@@ -799,6 +1022,24 @@ export default function App() {
   setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
 };
 
+  const openFreeGift = () => {
+    setActiveProjectSlug(null);
+    setSelectedArticle(null);
+
+    if (window.location.hash) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+
+    setPage("learning");
+    setMenuOpen(false);
+    setTimeout(() => {
+      document.getElementById("free-masterclass")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 80);
+  };
+
   // const goToPage = (nextPage) => {
   //   setActiveProjectSlug(null);
   //   if (window.location.hash) {
@@ -840,6 +1081,29 @@ export default function App() {
       </aside>
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#050505]/90 backdrop-blur-xl">
+        <div className="border-b border-[#caa177]/20 bg-gradient-to-r from-[#caa177] via-[#ddb892] to-cyan-200 px-4 py-2 text-black">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 text-center sm:flex-row sm:text-left">
+            <div className="flex flex-col items-center gap-2 text-sm font-semibold sm:flex-row">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black text-white shadow-lg shadow-black/20" aria-hidden="true">
+                <GiftIcon />
+              </span>
+              <span>
+                <strong>Free Gift</strong>
+                <span className="mx-2 text-black/50">-</span>
+                Design Your AI Career with GenAI Masterclass ($199 Value)
+              </span>
+            </div>
+
+            <button
+              type="button"
+              onClick={openFreeGift}
+              className="rounded-full bg-black px-5 py-2 text-xs font-black uppercase tracking-[0.18em] text-white transition hover:scale-[1.02] hover:bg-zinc-900"
+            >
+              Get early access
+            </button>
+          </div>
+        </div>
+
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
           <div className="flex items-center gap-4">
             <button onClick={() => setMenuOpen(true)} className="flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-full border border-[#caa177]/50 bg-transparent transition hover:bg-[#caa177]/10" aria-label="Open menu">
@@ -891,6 +1155,17 @@ export default function App() {
       )}
       <Footer goToPage={goToPage} />
     </div>
+  );
+}
+
+function GiftIcon() {
+  return (
+    <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path
+        d="M13.5 4.5h-2.19A2.3 2.3 0 0 0 12 3.1a2.04 2.04 0 0 0-2.1-2.1c-.56.01-1.04.23-1.43.65A4.2 4.2 0 0 0 8 2.52a4.2 4.2 0 0 0-.47-.87A1.95 1.95 0 0 0 6.1 1a2.04 2.04 0 0 0-2.1 2.1c.01.55.24 1.02.69 1.4H2.5A1 1 0 0 0 1.5 5.5v2A1 1 0 0 0 2.5 8.5v4a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-4a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1ZM9.31 2.28c.16-.18.36-.28.63-.28.6 0 1.07.47 1.06 1.07-.01.26-.11.46-.28.62-.59.53-1.58.71-2.19.78.08-.66.28-1.62.78-2.19ZM5.31 2.3C5.5 2.11 5.76 2 6.07 2c.26 0 .47.1.62.28.53.59.71 1.57.78 2.18-.61-.06-1.59-.25-2.18-.77A.82.82 0 0 1 5 3.06c0-.29.11-.55.31-.76ZM2.5 5.5h5v2h-5v-2Zm1 3h4v4h-4v-4Zm9 4h-4v-4h4v4Zm1-5h-5v-2h5v2Z"
+        fill="currentColor"
+      />
+    </svg>
   );
 }
 
@@ -966,59 +1241,6 @@ function HomePage({ goToPage }) {
     </main>
   );
 }
-
-// function HomePage({ goToPage }) {
-//   return (
-//     <main>
-//       <section className="relative mx-auto grid min-h-[calc(100vh-88px)] max-w-7xl gap-12 overflow-hidden px-6 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-//         <div className="absolute left-1/2 top-20 h-96 w-96 rounded-full bg-[#caa177]/10 blur-3xl" />
-
-//         <div className="relative z-10">
-//           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">AI Architect & Engineering Leader</p>
-//           <h1 className="mt-8 max-w-3xl font-serif text-5xl font-light leading-[0.95] tracking-tight text-white md:text-7xl lg:text-8xl">
-//             Building Intelligent Systems that Scale
-//           </h1>
-
-//           <div className="mt-8 flex items-center gap-3">
-//             <div className="h-px w-16 bg-[#caa177]" />
-//             <div className="h-1.5 w-1.5 rounded-full bg-[#caa177]" />
-//           </div>
-
-//           <p className="mt-8 max-w-xl text-lg leading-8 text-zinc-300">
-//             I architect and build AI & ML powered platforms and multi-agent systems that solve real-world problems and drive measurable impact.
-//           </p>
-
-//           <div className="mt-10 flex flex-wrap gap-4">
-//             <button onClick={() => goToPage("projects")} className="rounded-2xl bg-[#caa177] px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-[#d8b58d]">
-//               View My Work →
-//             </button>
-//             <button onClick={() => goToPage("contact")} className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-[#caa177] hover:text-[#caa177]">
-//               Let’s Connect →
-//             </button>
-//           </div>
-
-//           <div className="mt-14 flex items-center gap-4 text-zinc-500">
-//             <div className="h-px w-16 bg-zinc-700" />
-//             <span className="text-xs uppercase tracking-[0.35em]">Scroll</span>
-//             <div className="animate-bounce text-lg text-[#caa177]">↓</div>
-//           </div>
-//         </div>
-
-//         <div className="relative z-10 flex justify-center lg:justify-end">
-//           <div className="relative w-full max-w-xl overflow-hidden rounded-[2rem] border border-white/10 bg-gradient-to-br from-zinc-900 via-[#111111] to-black shadow-2xl">
-//             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(202,161,119,0.24),transparent_42%)]" />
-//             <img
-//               src="/assets/debosmita-hero.png"
-//               alt="Debosmita Roy"
-//               className="relative z-10 h-[620px] w-full object-cover object-[center_top] scale-[1.02]"
-//             />
-//           </div>
-//         </div>
-//       </section>
-//       <CalloutGrid goToPage={goToPage} />
-//     </main>
-//   );
-// }
 
 function CalloutGrid({ goToPage }) {
   const callouts = [
@@ -1153,6 +1375,12 @@ function ProjectsPage({ openCaseStudy }) {
 
 function LearningPage({ goToPage }) {
   const calendlyLink = "https://calendly.com/debosmitaroy-ai/30min?month=2026-06";
+  const [selectedMicrosoftModuleSlug, setSelectedMicrosoftModuleSlug] = useState(
+    microsoftAiForBeginnersCurriculum[0].slug
+  );
+  const selectedMicrosoftModule =
+    microsoftAiForBeginnersCurriculum.find((module) => module.slug === selectedMicrosoftModuleSlug) ||
+    microsoftAiForBeginnersCurriculum[0];
 
   const tracks = [
     {
@@ -1267,6 +1495,182 @@ function LearningPage({ goToPage }) {
           >
             Explore Resources →
           </button>
+        </div>
+      </section>
+
+      <section id="free-masterclass" className="mt-12 scroll-mt-36 overflow-hidden rounded-[2rem] border border-cyan-300/30 bg-[#070b12] p-8 shadow-2xl shadow-cyan-500/10">
+        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+          <div>
+            <div className="inline-flex items-center gap-3 rounded-full border border-cyan-300/30 bg-cyan-300/10 px-4 py-2 text-sm font-bold uppercase tracking-[0.18em] text-cyan-200">
+              <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-cyan-300 text-black">
+                <GiftIcon />
+              </span>
+              Free Gift
+            </div>
+
+            <h2 className="mt-6 font-serif text-4xl font-light leading-tight text-white md:text-5xl">
+              Design Your AI Career with GenAI Masterclass
+            </h2>
+
+            <p className="mt-5 text-lg font-semibold text-[#caa177]">
+              $199 Value • Early Access
+            </p>
+
+            <p className="mt-5 leading-8 text-zinc-300">
+              A practical starter session for learners and professionals who want to use AI with clarity: choose the right learning path, build portfolio-ready projects, and turn GenAI, RAG, agents, cloud, and data science into career momentum.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href={calendlyLink}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-2xl bg-cyan-300 px-7 py-4 text-sm font-black uppercase tracking-[0.18em] text-black transition hover:scale-[1.02] hover:bg-cyan-200"
+              >
+                Get early access →
+              </a>
+
+              <button
+                type="button"
+                onClick={() => goToPage("resources")}
+                className="rounded-2xl border border-zinc-600 px-7 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:border-cyan-300 hover:text-cyan-200"
+              >
+                View free resources →
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              "Map your GenAI, data science, and cloud learning path",
+              "Identify portfolio projects employers can understand",
+              "Learn how RAG and agentic systems fit real products",
+              "Build a weekly execution plan for model training and full-stack AI apps"
+            ].map((item) => (
+              <div key={item} className="rounded-2xl border border-zinc-800 bg-black/40 p-5 text-zinc-300">
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-12 rounded-[2rem] border border-zinc-800 bg-zinc-950 p-6 md:p-8">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Microsoft AI For Beginners Map</p>
+            <h2 className="mt-4 font-serif text-4xl font-light text-white md:text-5xl">A full beginner AI curriculum inside this learning portal.</h2>
+            <p className="mt-5 max-w-4xl leading-8 text-zinc-400">
+              This section mirrors the public Microsoft AI For Beginners curriculum structure: setup, core lesson pages, child lessons, notebooks, labs, assignments, responsible AI, multimodal extras, and sketchnote review material. Lesson content opens from the official Microsoft GitHub source.
+            </p>
+          </div>
+
+          <a
+            href="https://microsoft.github.io/AI-For-Beginners/"
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-2xl border border-[#caa177]/50 px-6 py-3 text-center text-sm font-bold uppercase tracking-[0.18em] text-[#caa177] transition hover:bg-[#caa177] hover:text-black"
+          >
+            Open original curriculum →
+          </a>
+        </div>
+
+        <div className="mt-8 grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {[
+            "12-week curriculum",
+            "24 core lessons",
+            "PyTorch, TensorFlow, and Keras notebooks",
+            "Labs, assignments, responsible AI, and extras"
+          ].map((feature) => (
+            <div key={feature} className="rounded-2xl border border-zinc-800 bg-black/40 p-4 text-sm font-semibold text-zinc-300">
+              {feature}
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex gap-3 overflow-x-auto pb-2">
+          {microsoftAiForBeginnersCurriculum.map((module) => (
+            <button
+              key={module.slug}
+              type="button"
+              onClick={() => setSelectedMicrosoftModuleSlug(module.slug)}
+              className={`min-w-[190px] rounded-2xl border p-4 text-left transition ${
+                selectedMicrosoftModuleSlug === module.slug
+                  ? "border-[#caa177] bg-[#caa177]/10 text-white"
+                  : "border-zinc-800 bg-black/30 text-zinc-400 hover:border-zinc-600 hover:text-white"
+              }`}
+            >
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#caa177]">
+                {module.children.length} {module.children.length === 1 ? "page" : "pages"}
+              </p>
+              <p className="mt-2 font-semibold">{module.title}</p>
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-8 rounded-[2rem] border border-zinc-800 bg-black/40 p-6">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+            <div>
+              <h3 className="text-3xl font-light text-white">{selectedMicrosoftModule.title}</h3>
+              <p className="mt-3 max-w-3xl leading-7 text-zinc-400">{selectedMicrosoftModule.summary}</p>
+            </div>
+
+            <a
+              href={`${microsoftAiTreeUrl}${selectedMicrosoftModule.sourcePath}`}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-zinc-700 px-5 py-3 text-center text-sm font-semibold text-zinc-300 transition hover:border-[#caa177] hover:text-[#caa177]"
+            >
+              Module source →
+            </a>
+          </div>
+
+          <div className="mt-7 grid gap-5 lg:grid-cols-2">
+            {selectedMicrosoftModule.children.map((lesson) => {
+              const resources = [
+                lesson.lesson && { label: "Lesson", path: lesson.lesson },
+                lesson.notebook && { label: "Notebook", path: lesson.notebook },
+                ...(lesson.notebooks || []).map((path, index) => ({ label: `Notebook ${index + 1}`, path })),
+                lesson.lab && { label: "Lab", path: lesson.lab },
+                lesson.assignment && { label: "Assignment", path: lesson.assignment },
+                lesson.microsoftLearn && { label: "Microsoft Learn", href: lesson.microsoftLearn }
+              ].filter(Boolean);
+
+              return (
+                <article key={`${lesson.number}-${lesson.title}`} className="rounded-[1.5rem] border border-zinc-800 bg-zinc-950 p-6">
+                  <div className="flex items-start gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#caa177] text-sm font-black text-black">
+                      {lesson.number}
+                    </span>
+                    <div>
+                      <h4 className="text-xl font-bold text-white">{lesson.title}</h4>
+                      <p className="mt-3 leading-7 text-zinc-400">{lesson.focus}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    {resources.map((resource) => {
+                      const href =
+                        resource.href ||
+                        `${resource.path.endsWith(".md") || resource.path.endsWith(".ipynb") ? microsoftAiBaseUrl : microsoftAiTreeUrl}${resource.path}`;
+
+                      return (
+                        <a
+                          key={`${lesson.number}-${resource.label}-${href}`}
+                          href={href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-zinc-700 px-3 py-1.5 text-xs font-semibold text-zinc-300 transition hover:border-[#caa177] hover:text-[#caa177]"
+                        >
+                          {resource.label}
+                        </a>
+                      );
+                    })}
+                  </div>
+                </article>
+              );
+            })}
+          </div>
         </div>
       </section>
 
