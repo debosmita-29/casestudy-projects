@@ -1311,7 +1311,7 @@ function LearningPage({ goToPage }) {
         </div>
 
         <div className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">What To Provide</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">What I Provide</p>
 
           <div className="mt-6 space-y-5 text-zinc-300">
             <p>Guided tutorials, white papers, quizzes, exercises, notebooks, and project templates.</p>
@@ -1323,7 +1323,7 @@ function LearningPage({ goToPage }) {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Growth Strategy</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Join a Learning Community Built for Real AI Careers</h2>
 
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {growth.map((item) => (
@@ -1335,7 +1335,7 @@ function LearningPage({ goToPage }) {
       </section>
 
       <section className="mt-12">
-        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Monetization Models</h2>
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Programs for Every Stage</h2>
 
         <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {monetization.map((model) => (
@@ -1348,8 +1348,8 @@ function LearningPage({ goToPage }) {
       </section>
 
       <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-black p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Quick-Win Priorities</p>
-        <h2 className="mt-4 font-serif text-4xl font-light text-white">Launch lean, then expand.</h2>
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Begin Your AI Journey</p>
+        <h2 className="mt-4 font-serif text-4xl font-light text-white">Start Building in Your First Week.</h2>
 
         <div className="mt-7 grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-zinc-800 p-5">
