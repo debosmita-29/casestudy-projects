@@ -1585,6 +1585,124 @@ function FloatingVedaChat() {
   );
 }
 
+function CinematicVedaRobot({ stages, signalCards }) {
+  const pathwayLabels = [
+    ["Resources for Beginners", stages[0]?.title || "Beginner"],
+    ["Intermediates", stages[1]?.title || "Builder"],
+    ["Advanced", stages[stages.length - 1]?.title || "Advanced"]
+  ];
+
+  return (
+    <div className="relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-cyan-300/20 bg-black/50 p-4">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(34,211,238,0.18),transparent_34%),radial-gradient(circle_at_20%_70%,rgba(202,161,119,0.13),transparent_28%)]" />
+      <svg className="absolute inset-0 h-full w-full" viewBox="0 0 520 520" role="img" aria-label="Animated Veda robot presenting beginner, intermediate, and advanced learning paths">
+        <defs>
+          <filter id="vedaGlow">
+            <feGaussianBlur stdDeviation="4" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+          <linearGradient id="vedaCyan" x1="0" x2="1">
+            <stop offset="0%" stopColor="#67e8f9" />
+            <stop offset="100%" stopColor="#caa177" />
+          </linearGradient>
+        </defs>
+
+        <g opacity="0.55">
+          {[90, 150, 220, 305, 385, 445].map((x, index) => (
+            <g key={x}>
+              <circle cx={x} cy={index % 2 === 0 ? 90 : 128} r="4" fill="#67e8f9" filter="url(#vedaGlow)">
+                <animate attributeName="opacity" values="0.25;1;0.25" dur={`${2.2 + index * 0.18}s`} repeatCount="indefinite" />
+              </circle>
+              <line x1={x} y1={index % 2 === 0 ? 90 : 128} x2={260} y2={250} stroke="#67e8f9" strokeWidth="1" strokeDasharray="5 8">
+                <animate attributeName="stroke-dashoffset" values="40;0" dur="2.8s" repeatCount="indefinite" />
+              </line>
+            </g>
+          ))}
+        </g>
+
+        <g filter="url(#vedaGlow)">
+          <line x1="260" y1="250" x2="82" y2="170" stroke="url(#vedaCyan)" strokeWidth="8" strokeLinecap="round" strokeDasharray="180" strokeDashoffset="180">
+            <animate attributeName="stroke-dashoffset" values="180;0;0;180" dur="5.8s" repeatCount="indefinite" />
+          </line>
+          <line x1="260" y1="250" x2="74" y2="310" stroke="url(#vedaCyan)" strokeWidth="8" strokeLinecap="round" strokeDasharray="190" strokeDashoffset="190">
+            <animate attributeName="stroke-dashoffset" values="190;190;0;0;190" dur="6.2s" repeatCount="indefinite" />
+          </line>
+          <line x1="260" y1="250" x2="438" y2="238" stroke="url(#vedaCyan)" strokeWidth="8" strokeLinecap="round" strokeDasharray="180" strokeDashoffset="180">
+            <animate attributeName="stroke-dashoffset" values="180;120;0;0;180" dur="6.6s" repeatCount="indefinite" />
+          </line>
+        </g>
+
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 -8;0 8;0 -8" dur="4.5s" repeatCount="indefinite" />
+          <ellipse cx="260" cy="362" rx="78" ry="18" fill="#67e8f9" opacity="0.12">
+            <animate attributeName="rx" values="60;88;60" dur="4.5s" repeatCount="indefinite" />
+          </ellipse>
+          <rect x="204" y="208" width="112" height="118" rx="34" fill="#071116" stroke="#67e8f9" strokeWidth="3" />
+          <rect x="218" y="160" width="84" height="70" rx="26" fill="#0b1220" stroke="#caa177" strokeWidth="3" />
+          <circle cx="242" cy="194" r="7" fill="#67e8f9">
+            <animate attributeName="r" values="5;8;5" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="278" cy="194" r="7" fill="#67e8f9">
+            <animate attributeName="r" values="8;5;8" dur="1.8s" repeatCount="indefinite" />
+          </circle>
+          <path d="M236 214 Q260 226 284 214" stroke="#caa177" strokeWidth="4" strokeLinecap="round" fill="none" />
+          <path d="M230 250h60M230 275h60M242 300h36" stroke="#67e8f9" strokeWidth="3" strokeLinecap="round" opacity="0.7">
+            <animate attributeName="opacity" values="0.35;1;0.35" dur="2s" repeatCount="indefinite" />
+          </path>
+          <line x1="260" y1="160" x2="260" y2="134" stroke="#67e8f9" strokeWidth="4" strokeLinecap="round" />
+          <circle cx="260" cy="128" r="8" fill="#caa177">
+            <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />
+          </circle>
+        </g>
+
+        {[
+          [74, 170, "#67e8f9"],
+          [66, 310, "#caa177"],
+          [446, 238, "#67e8f9"]
+        ].map(([cx, cy, fill], index) => (
+          <g key={`${cx}-${cy}`} filter="url(#vedaGlow)">
+            <circle cx={cx} cy={cy} r="18" fill={fill} opacity="0.92">
+              <animate attributeName="r" values="14;20;14" dur={`${2 + index * 0.35}s`} repeatCount="indefinite" />
+            </circle>
+            <circle cx={cx} cy={cy} r="32" fill="none" stroke={fill} strokeWidth="1.5" opacity="0.55">
+              <animate attributeName="r" values="22;38;22" dur={`${2.4 + index * 0.3}s`} repeatCount="indefinite" />
+            </circle>
+          </g>
+        ))}
+      </svg>
+
+      <div className="relative grid min-h-[28rem] grid-rows-[1fr_auto]">
+        <div className="grid grid-cols-2 gap-3 text-xs font-black uppercase tracking-[0.14em] text-white">
+          <div className="self-start rounded-2xl border border-cyan-300/30 bg-black/70 p-4 shadow-xl shadow-cyan-500/10">
+            <p className="text-cyan-200">{pathwayLabels[0][0]}</p>
+            <p className="mt-2 text-zinc-300">{pathwayLabels[0][1]}</p>
+          </div>
+          <div className="self-start justify-self-end rounded-2xl border border-cyan-300/30 bg-black/70 p-4 text-right shadow-xl shadow-cyan-500/10">
+            <p className="text-cyan-200">{pathwayLabels[2][0]}</p>
+            <p className="mt-2 text-zinc-300">{pathwayLabels[2][1]}</p>
+          </div>
+          <div className="col-span-2 mt-24 max-w-[15rem] rounded-2xl border border-[#caa177]/40 bg-black/70 p-4 shadow-xl shadow-[#caa177]/10">
+            <p className="text-[#caa177]">{pathwayLabels[1][0]}</p>
+            <p className="mt-2 text-zinc-300">{pathwayLabels[1][1]}</p>
+          </div>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-3">
+          {signalCards.map((card) => (
+            <article key={card.title} className="rounded-2xl border border-zinc-800 bg-zinc-950/85 p-4 backdrop-blur">
+              <p className="text-[0.65rem] font-bold uppercase tracking-[0.18em] text-cyan-200">{card.label}</p>
+              <h3 className="mt-2 text-sm font-bold text-white">{card.title}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, signalCards }) {
   const [tourOpen, setTourOpen] = useState(false);
   const [activeStep, setActiveStep] = useState(0);
@@ -1625,26 +1743,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
           </div>
         </div>
 
-        <div className="relative min-h-[25rem] rounded-[2rem] border border-cyan-300/20 bg-black/40 p-6">
-          <div className="absolute left-1/2 top-10 h-52 w-52 -translate-x-1/2 rounded-full border border-cyan-300/30 bg-cyan-300/10 shadow-[0_0_80px_rgba(34,211,238,0.25)]" />
-          <div className="absolute left-1/2 top-20 h-32 w-32 -translate-x-1/2 rounded-full border border-[#caa177]/40 bg-black shadow-[0_0_50px_rgba(202,161,119,0.18)]" />
-          <div className="absolute left-1/2 top-[7.2rem] grid h-20 w-20 -translate-x-1/2 place-items-center rounded-3xl border border-cyan-300/50 bg-cyan-300 text-black">
-            <ChatOrbitIcon />
-          </div>
-
-          <div className="absolute left-7 right-7 top-64 grid grid-cols-3 gap-3">
-            {stages.slice(0, 3).map((stage, index) => (
-              <div key={stage.title} className="rounded-2xl border border-zinc-800 bg-zinc-950/80 p-4 text-center">
-                <p className="text-2xl font-black text-cyan-200">0{index + 1}</p>
-                <p className="mt-2 text-xs font-bold uppercase tracking-[0.16em] text-zinc-300">{stage.title}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="absolute left-8 right-8 top-48 h-px bg-gradient-to-r from-transparent via-cyan-300/70 to-transparent" />
-          <div className="absolute left-[18%] top-40 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_20px_rgba(34,211,238,0.9)]" />
-          <div className="absolute right-[20%] top-56 h-3 w-3 rounded-full bg-[#caa177] shadow-[0_0_20px_rgba(202,161,119,0.9)]" />
-        </div>
+        <CinematicVedaRobot stages={stages} signalCards={signalCards} />
       </div>
 
       <div className="relative mt-8 grid gap-4 md:grid-cols-3">
@@ -1671,6 +1770,21 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
             </div>
 
             <div className="p-6">
+              <div className="mb-5 grid gap-4 rounded-[1.5rem] border border-cyan-300/20 bg-black/40 p-4 md:grid-cols-[9rem_1fr] md:items-center">
+                <div className="relative mx-auto h-28 w-28">
+                  <div className="absolute inset-2 rounded-full border border-cyan-300/40 bg-cyan-300/10 shadow-[0_0_45px_rgba(34,211,238,0.24)]" />
+                  <div className="absolute left-1/2 top-5 h-12 w-16 -translate-x-1/2 rounded-2xl border border-[#caa177]/50 bg-zinc-950" />
+                  <div className="absolute left-[2.15rem] top-10 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
+                  <div className="absolute right-[2.15rem] top-10 h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.9)]" />
+                  <div className="absolute left-1/2 top-[4.6rem] h-10 w-14 -translate-x-1/2 rounded-2xl border border-cyan-300/50 bg-[#071116]" />
+                  <div className="absolute left-1 top-16 h-1 w-11 origin-right -rotate-12 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(34,211,238,0.7)]" />
+                  <div className="absolute right-1 top-16 h-1 w-11 origin-left rotate-12 rounded-full bg-[#caa177] shadow-[0_0_16px_rgba(202,161,119,0.7)]" />
+                </div>
+                <p className="leading-7 text-zinc-300">
+                  Veda is presenting the page like a learning scene: one signal for beginners, one for intermediate builders, and one for advanced AI systems.
+                </p>
+              </div>
+
               <div className="rounded-[1.5rem] border border-zinc-800 bg-black/50 p-6">
                 <p className="text-sm font-bold uppercase tracking-[0.22em] text-[#caa177]">
                   Step {activeStep + 1} of {stages.length}
