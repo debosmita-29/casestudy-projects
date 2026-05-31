@@ -1321,39 +1321,11 @@ export default function App() {
           </nav>
         </div>
 
-        <div className="relative hidden overflow-hidden border-t border-cyan-300/10 bg-[#061018]/95 px-6 py-3 lg:block">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_50%,rgba(34,211,238,0.16),transparent_20%),radial-gradient(circle_at_82%_50%,rgba(202,161,119,0.12),transparent_18%)]" />
-          <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/35 to-transparent" />
-          <div className="relative mx-auto flex max-w-7xl items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <span className="relative flex h-10 w-10 items-center justify-center rounded-2xl border border-cyan-300/40 bg-cyan-300/10 text-cyan-200 shadow-lg shadow-cyan-500/10">
-                <ChatOrbitIcon />
-                <span className="absolute -right-1 -top-1 h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.9)]" />
-              </span>
-              <div>
-                <p className="text-xs font-black uppercase tracking-[0.28em] text-cyan-200">Debosmita AI Learning Portal</p>
-                <p className="mt-1 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-zinc-500">Veda neural routing console</p>
-              </div>
-            </div>
-            <nav className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em]">
-              {learningPortalPages.map(([key, label]) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => goToPage(key)}
-                  className={`rounded-full border px-4 py-2 transition ${
-                    page === key
-                      ? "border-cyan-300 bg-cyan-300 text-black shadow-lg shadow-cyan-500/20"
-                      : "border-cyan-300/30 bg-cyan-300/10 text-cyan-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-black"
-                  }`}
-                >
-                  {label}
-                </button>
-              ))}
-            </nav>
-          </div>
-        </div>
       </header>
+
+      {["learning", "aiLab", "resources"].includes(page) && (
+        <LearningPortalOrbMenu page={page} goToPage={goToPage} />
+      )}
 
       {page === "home" && <HomePage goToPage={goToPage} />}
       {page === "about" && <AboutPage />}
@@ -1394,6 +1366,70 @@ function GiftIcon() {
         fill="currentColor"
       />
     </svg>
+  );
+}
+
+function LearningPortalOrbMenu({ page, goToPage }) {
+  const portalItems = [
+    ["learning", "Learning", "Academy"],
+    ["aiLab", "AI Lab", "Command"],
+    ["resources", "Resources", "Vault"]
+  ];
+
+  return (
+    <>
+      <nav className="fixed right-4 top-1/2 z-40 hidden -translate-y-1/2 lg:block" aria-label="Debosmita AI Learning Portal">
+        <div className="relative flex flex-col items-center gap-4 rounded-full border border-cyan-300/20 bg-black/50 p-3 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
+          <div className="absolute inset-y-10 left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-cyan-300/40 to-transparent" />
+          <div className="relative flex h-14 w-14 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 text-cyan-200 shadow-[0_0_28px_rgba(34,211,238,0.22)]">
+            <ChatOrbitIcon />
+            <span className="absolute h-20 w-20 animate-pulse rounded-full border border-cyan-300/10" />
+          </div>
+          {portalItems.map(([key, label, shortLabel]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => goToPage(key)}
+              className={`group relative flex h-16 w-16 items-center justify-center rounded-full border text-[0.62rem] font-black uppercase tracking-[0.12em] transition ${
+                page === key
+                  ? "border-cyan-300 bg-cyan-300 text-black shadow-[0_0_30px_rgba(34,211,238,0.34)]"
+                  : "border-cyan-300/25 bg-cyan-300/10 text-cyan-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-black"
+              }`}
+              aria-label={`Open ${label}`}
+            >
+              <span className="text-center leading-3">{shortLabel}</span>
+              <span className="pointer-events-none absolute right-20 hidden whitespace-nowrap rounded-full border border-cyan-300/25 bg-black/80 px-3 py-2 text-xs text-cyan-100 shadow-xl shadow-cyan-500/10 group-hover:block">
+                {label}
+              </span>
+            </button>
+          ))}
+        </div>
+      </nav>
+
+      <nav className="fixed inset-x-0 bottom-4 z-40 px-4 lg:hidden" aria-label="Debosmita AI Learning Portal mobile">
+        <div className="relative mx-auto flex max-w-sm items-center justify-center gap-3 rounded-full border border-cyan-300/20 bg-black/70 p-3 shadow-2xl shadow-cyan-500/10 backdrop-blur-xl">
+          <div className="absolute left-10 right-10 top-1/2 h-px -translate-y-1/2 bg-gradient-to-r from-cyan-300/10 via-cyan-300/50 to-cyan-300/10" />
+          <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-cyan-300/40 bg-cyan-300/10 text-cyan-200">
+            <ChatOrbitIcon />
+          </div>
+          {portalItems.map(([key, label, shortLabel]) => (
+            <button
+              key={key}
+              type="button"
+              onClick={() => goToPage(key)}
+              className={`relative flex h-14 w-14 items-center justify-center rounded-full border text-[0.55rem] font-black uppercase tracking-[0.08em] transition ${
+                page === key
+                  ? "border-cyan-300 bg-cyan-300 text-black shadow-[0_0_30px_rgba(34,211,238,0.34)]"
+                  : "border-cyan-300/25 bg-cyan-300/10 text-cyan-100 hover:border-cyan-300 hover:bg-cyan-300 hover:text-black"
+              }`}
+              aria-label={`Open ${label}`}
+            >
+              <span className="text-center leading-3">{shortLabel}</span>
+            </button>
+          ))}
+        </div>
+      </nav>
+    </>
   );
 }
 
@@ -1877,6 +1913,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
   const [activeStep, setActiveStep] = useState(0);
   const audioContextRef = useRef(null);
   const cosmicAudioRef = useRef(null);
+  const vedaVoiceStartedRef = useRef(false);
   const currentStage = stages[activeStep];
   const vedaVoiceLine = "You weren't supposed to see me. The simulation has detected your curiosity!";
   const routeOptions =
@@ -1893,6 +1930,7 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       return;
     }
 
+    vedaVoiceStartedRef.current = true;
     window.speechSynthesis.cancel();
     const utterance = new window.SpeechSynthesisUtterance(vedaVoiceLine);
     utterance.rate = 0.92;
@@ -1920,45 +1958,62 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
     if (!cosmicAudioRef.current) {
       const masterGain = audioContext.createGain();
       masterGain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-      masterGain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 1.2);
+      masterGain.gain.exponentialRampToValueAtTime(0.11, audioContext.currentTime + 1.2);
       masterGain.connect(audioContext.destination);
 
-      const drone = audioContext.createOscillator();
-      drone.type = "sine";
-      drone.frequency.setValueAtTime(72, audioContext.currentTime);
+      const sampleRate = audioContext.sampleRate;
+      const noiseBuffer = audioContext.createBuffer(1, sampleRate * 4, sampleRate);
+      const channelData = noiseBuffer.getChannelData(0);
+      for (let index = 0; index < channelData.length; index += 1) {
+        channelData[index] = Math.random() * 2 - 1;
+      }
 
-      const shimmer = audioContext.createOscillator();
-      shimmer.type = "triangle";
-      shimmer.frequency.setValueAtTime(288, audioContext.currentTime);
+      const waveNoise = audioContext.createBufferSource();
+      waveNoise.buffer = noiseBuffer;
+      waveNoise.loop = true;
 
-      const pulse = audioContext.createOscillator();
-      pulse.type = "sine";
-      pulse.frequency.setValueAtTime(0.18, audioContext.currentTime);
+      const lowPass = audioContext.createBiquadFilter();
+      lowPass.type = "lowpass";
+      lowPass.frequency.setValueAtTime(680, audioContext.currentTime);
+      lowPass.Q.setValueAtTime(0.7, audioContext.currentTime);
 
-      const pulseGain = audioContext.createGain();
-      pulseGain.gain.setValueAtTime(0.018, audioContext.currentTime);
+      const waveGain = audioContext.createGain();
+      waveGain.gain.setValueAtTime(0.06, audioContext.currentTime);
 
-      const shimmerGain = audioContext.createGain();
-      shimmerGain.gain.setValueAtTime(0.012, audioContext.currentTime);
+      const swell = audioContext.createOscillator();
+      swell.type = "sine";
+      swell.frequency.setValueAtTime(0.09, audioContext.currentTime);
 
-      const droneGain = audioContext.createGain();
-      droneGain.gain.setValueAtTime(0.028, audioContext.currentTime);
+      const swellGain = audioContext.createGain();
+      swellGain.gain.setValueAtTime(0.025, audioContext.currentTime);
 
-      pulse.connect(pulseGain);
-      pulseGain.connect(droneGain.gain);
-      drone.connect(droneGain);
-      shimmer.connect(shimmerGain);
-      droneGain.connect(masterGain);
-      shimmerGain.connect(masterGain);
+      const deepTone = audioContext.createOscillator();
+      deepTone.type = "sine";
+      deepTone.frequency.setValueAtTime(96, audioContext.currentTime);
 
-      drone.start();
-      shimmer.start();
-      pulse.start();
-      cosmicAudioRef.current = { drone, shimmer, pulse, masterGain };
+      const deepGain = audioContext.createGain();
+      deepGain.gain.setValueAtTime(0.018, audioContext.currentTime);
+
+      swell.connect(swellGain);
+      swellGain.connect(waveGain.gain);
+      waveNoise.connect(lowPass);
+      lowPass.connect(waveGain);
+      waveGain.connect(masterGain);
+      deepTone.connect(deepGain);
+      deepGain.connect(masterGain);
+
+      waveNoise.start();
+      swell.start();
+      deepTone.start();
+      cosmicAudioRef.current = { waveNoise, swell, deepTone, masterGain };
     }
 
-    if (withVoice) {
-      window.setTimeout(speakVedaIntro, 850);
+    if (withVoice && !vedaVoiceStartedRef.current) {
+      window.setTimeout(() => {
+        if (!vedaVoiceStartedRef.current) {
+          speakVedaIntro();
+        }
+      }, 850);
     }
   };
 
@@ -1971,8 +2026,16 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       startCosmicAudio(true);
     }, 650);
 
+    const startOnInteraction = () => startCosmicAudio(true);
+    window.addEventListener("pointerdown", startOnInteraction, { once: true });
+    window.addEventListener("keydown", startOnInteraction, { once: true });
+    window.addEventListener("touchstart", startOnInteraction, { once: true });
+
     return () => {
       window.clearTimeout(voiceTimer);
+      window.removeEventListener("pointerdown", startOnInteraction);
+      window.removeEventListener("keydown", startOnInteraction);
+      window.removeEventListener("touchstart", startOnInteraction);
       if ("speechSynthesis" in window) {
         window.speechSynthesis.cancel();
       }
@@ -2065,8 +2128,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       </div>
 
       {introOpen && (
-        <div className="veda-modal-backdrop fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/85 px-5 py-8 backdrop-blur-md lg:items-center lg:px-8">
-          <div className="veda-modal-panel relative my-auto max-h-[calc(100vh-4rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
+        <div className="veda-modal-backdrop fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/85 px-5 pb-8 pt-28 backdrop-blur-md lg:px-8 lg:pt-32">
+          <div className="veda-modal-panel relative max-h-[calc(100vh-9rem)] w-full max-w-5xl overflow-y-auto overflow-x-hidden rounded-[2rem] border border-cyan-300/40 bg-[#050b12] shadow-2xl shadow-cyan-500/20">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_62%_24%,rgba(34,211,238,0.22),transparent_32%),radial-gradient(circle_at_20%_74%,rgba(202,161,119,0.16),transparent_28%),linear-gradient(135deg,rgba(8,47,73,0.72),rgba(0,0,0,0.95))]" />
             <div className="absolute inset-0 opacity-[0.13] [background-image:linear-gradient(rgba(103,232,249,0.55)_1px,transparent_1px),linear-gradient(90deg,rgba(103,232,249,0.55)_1px,transparent_1px)] [background-size:54px_54px] [transform:perspective(900px)_rotateX(58deg)_translateY(-12rem)_scale(1.25)]" />
 
@@ -2146,8 +2209,8 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
       )}
 
       {tourOpen && (
-        <div className="fixed inset-0 z-[95] flex items-center justify-center bg-black/80 px-4 backdrop-blur-md">
-          <div className="w-full max-w-2xl overflow-hidden rounded-[2rem] border border-cyan-300/40 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
+        <div className="fixed inset-0 z-[110] flex items-start justify-center overflow-y-auto bg-black/80 px-4 pb-8 pt-28 backdrop-blur-md lg:pt-32">
+          <div className="max-h-[calc(100vh-9rem)] w-full max-w-2xl overflow-y-auto rounded-[2rem] border border-cyan-300/40 bg-zinc-950 shadow-2xl shadow-cyan-500/20">
             <div className="flex items-center justify-between border-b border-zinc-800 bg-[#070b12] px-6 py-5">
               <div>
                 <p className="text-xs font-black uppercase tracking-[0.25em] text-cyan-200">Veda Guided Journey</p>
@@ -4996,7 +5059,7 @@ function ContactPage() {
 function PageShell({ eyebrow, title, children, immersive = false }) {
   if (immersive) {
     return (
-      <main id={`${eyebrow.toLowerCase()}-section`} className="relative overflow-hidden bg-[#050505] px-6 py-24">
+      <main id={`${eyebrow.toLowerCase()}-section`} className="relative overflow-hidden bg-[#050505] px-6 pb-28 pt-32">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_72%_4%,rgba(34,211,238,0.12),transparent_28%),radial-gradient(circle_at_8%_38%,rgba(202,161,119,0.08),transparent_30%)]" />
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="rounded-[2rem] border border-cyan-300/15 bg-black/20 p-6 shadow-2xl shadow-cyan-500/5 md:p-8">
