@@ -2174,6 +2174,19 @@ function VedaNeuralGuide({ eyebrow, title, intro, theme, modeLabel, stages, sign
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-200">{card.label}</p>
             <h3 className="mt-3 text-xl font-bold text-white">{card.title}</h3>
             <p className="mt-3 text-sm leading-6 text-zinc-400">{card.desc}</p>
+            {card.training && (
+              <div className="mt-5 rounded-2xl border border-cyan-300/15 bg-cyan-300/5 p-4">
+                <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-[#caa177]">Tutorials & training</p>
+                <ul className="mt-3 space-y-2 text-sm leading-6 text-zinc-300">
+                  {card.training.map((item) => (
+                    <li key={item} className="flex gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-cyan-300" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </article>
         ))}
       </div>
@@ -2662,17 +2675,32 @@ function LearningPage({ goToPage }) {
     {
       label: "Neural Path 01",
       title: "Foundations",
-      desc: "AI basics, Python, ML concepts, data thinking, prompts, and responsible AI."
+      desc: "AI basics, Python, ML concepts, data thinking, prompts, and responsible AI.",
+      training: [
+        "AI basics crash course: models, tokens, prompts, hallucinations, and evaluation.",
+        "Python for AI builders: notebooks, files, APIs, pandas, and reusable functions.",
+        "Responsible AI mini-training: bias, safety, privacy, grounding, and human review."
+      ]
     },
     {
       label: "Neural Path 02",
       title: "Builder Mode",
-      desc: "Notebooks, labs, project templates, RAG prototypes, and portfolio deliverables."
+      desc: "Notebooks, labs, project templates, RAG prototypes, and portfolio deliverables.",
+      training: [
+        "Notebook lab: build an embeddings similarity demo and explain the results.",
+        "RAG prototype tutorial: chunk documents, retrieve context, generate answers, and add citations.",
+        "Portfolio deliverable workshop: README, architecture diagram, demo screenshots, and LinkedIn post."
+      ]
     },
     {
       label: "Neural Path 03",
       title: "Advanced Systems",
-      desc: "Agents, Azure AI Foundry, evaluation, MLOps, observability, and deployment readiness."
+      desc: "Agents, Azure AI Foundry, evaluation, MLOps, observability, and deployment readiness.",
+      training: [
+        "Agent systems training: tool use, planning, memory, retries, and human approval.",
+        "Azure AI Foundry tutorial: model routing, prompt optimization, guardrails, traces, and evaluations.",
+        "Production AI readiness lab: monitoring, cost controls, deployment checklist, and failure recovery."
+      ]
     }
   ];
 
@@ -3968,17 +3996,32 @@ function AIBuilderLabPage({ goToPage }) {
     {
       label: "Command Deck",
       title: "AI Energy",
-      desc: "Daily streaks become a visible power meter for learning consistency."
+      desc: "Daily streaks become a visible power meter for learning consistency.",
+      training: [
+        "Daily micro-lesson: read one AI concept in 3 minutes and summarize it in one sentence.",
+        "Quiz practice: answer one question on prompts, embeddings, RAG, agents, or evaluation.",
+        "Notebook streak: run one notebook cell, inspect the output, and record one observation."
+      ]
     },
     {
       label: "Mission Bay",
       title: "Build Engine",
-      desc: "Weekly challenges and project prompts turn ideas into portfolio artifacts."
+      desc: "Weekly challenges and project prompts turn ideas into portfolio artifacts.",
+      training: [
+        "Weekly challenge tutorial: build a tiny RAG assistant with five documents and three test questions.",
+        "Project prompt lab: choose a level, define the user problem, stack, data source, and demo outcome.",
+        "Artifact training: turn every build into a GitHub README, screenshot, architecture note, and demo script."
+      ]
     },
     {
       label: "Signal Wall",
       title: "Skill Cores",
-      desc: "Badges, leaderboards, and build-in-public prompts make progress shareable."
+      desc: "Badges, leaderboards, and build-in-public prompts make progress shareable.",
+      training: [
+        "Badge prep: complete one lesson, one quiz, and one build artifact for a visible skill proof.",
+        "Build-in-public training: write a LinkedIn post with what you learned, built, struggled with, and improved.",
+        "Leaderboard readiness: submit a GitHub link, screenshot, or capstone note for weekly challenge review."
+      ]
     }
   ];
 
@@ -4841,17 +4884,32 @@ function ResourcesPage() {
     {
       label: "Vault Layer 01",
       title: "Toolkits",
-      desc: "Curated learning resources for AI fundamentals, RAG, agents, data science, and GenAI."
+      desc: "Curated learning resources for AI fundamentals, RAG, agents, data science, and GenAI.",
+      training: [
+        "AI fundamentals toolkit: AI, ML, deep learning, GenAI, LLMs, prompts, and evaluation basics.",
+        "RAG and agents toolkit: embeddings, vector databases, tool calling, memory, planning, and traces.",
+        "Data science toolkit: Python, pandas, SQL, statistics, visualization, model metrics, and business storytelling."
+      ]
     },
     {
       label: "Vault Layer 02",
       title: "Launch Kits",
-      desc: "Templates and project structures that help learners publish stronger work."
+      desc: "Templates and project structures that help learners publish stronger work.",
+      training: [
+        "Project launch kit: problem statement, architecture, setup steps, demo flow, and success metrics.",
+        "RAG app template: ingestion, chunking, embeddings, retrieval, citations, and answer evaluation.",
+        "Portfolio publishing kit: GitHub README, case study outline, resume bullets, and LinkedIn launch post."
+      ]
     },
     {
       label: "Vault Layer 03",
       title: "Advanced Labs",
-      desc: "Guided project paths for production chatbots, RAG systems, agents, and MLOps."
+      desc: "Guided project paths for production chatbots, RAG systems, agents, and MLOps.",
+      training: [
+        "Production chatbot lab: React UI, API backend, prompt routing, auth, logging, and deployment.",
+        "Enterprise RAG lab: ingestion pipeline, vector search, reranking, citations, evaluation, and governance.",
+        "MLOps and agent lab: monitoring, drift checks, traces, cost controls, retries, and human-in-the-loop review."
+      ]
     }
   ];
 
