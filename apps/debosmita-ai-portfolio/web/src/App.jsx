@@ -1365,7 +1365,15 @@ function FloatingMitaMindChat() {
     "What should I learn first for RAG?",
     "Suggest a portfolio project",
     "Explain Azure AI Foundry",
-    "Which AI career path fits me?"
+    "Which AI career path fits me?",
+    "Give me a 7-day AI learning plan",
+    "What should I build this week?",
+    "How do I earn a RAG badge?",
+    "Explain agentic AI simply",
+    "Summarize Debosmita's projects",
+    "Turn this into a LinkedIn post",
+    "What newsletter should I read first?",
+    "Which tools should I learn for GenAI?"
   ];
 
   const siteKnowledge = [
@@ -1441,12 +1449,32 @@ function FloatingMitaMindChat() {
       return "For RAG, use this path: learn embeddings, create a small document set, retrieve relevant chunks, generate grounded answers, then evaluate whether each answer cites the right context. The AI Lab weekly challenge is a good first build: a tiny RAG assistant in 30 minutes.";
     }
 
+    if (normalizedQuestion.includes("agent") || normalizedQuestion.includes("agentic")) {
+      return "Agentic AI means building systems that can plan, use tools, observe results, retry when something fails, and ask for human approval when needed. A strong starter project is a research agent with three tools: search, source summarization, and answer critique.";
+    }
+
     if (normalizedQuestion.includes("azure") || normalizedQuestion.includes("foundry") || normalizedQuestion.includes("foundation model")) {
       return "Debosmita's latest newsletter frames Azure AI Foundry as an operating layer for foundation model systems: model selection, agents, evaluations, prompt optimization, guardrails, tracing, governance, and deployment working together instead of one isolated model call.";
     }
 
     if (normalizedQuestion.includes("project") || normalizedQuestion.includes("portfolio") || normalizedQuestion.includes("build")) {
       return "A strong portfolio project from this site is a RAG Research Agent: retrieve sources, draft an answer, check grounding, log failures, and ask for human approval. For beginners, start with a Personal AI Study Coach that recommends one lesson, one flashcard, and one practice task each day.";
+    }
+
+    if (normalizedQuestion.includes("7-day") || normalizedQuestion.includes("learning plan") || normalizedQuestion.includes("learn this week")) {
+      return "Here is a 7-day AI plan: Day 1 learn embeddings, Day 2 learn RAG, Day 3 build a tiny retrieval demo, Day 4 study agents, Day 5 read the Azure AI Foundry newsletter, Day 6 create a project README, Day 7 share your progress on LinkedIn with one lesson learned and one screenshot.";
+    }
+
+    if (normalizedQuestion.includes("badge") || normalizedQuestion.includes("linkedin") || normalizedQuestion.includes("share")) {
+      return "To earn and share a learning badge, complete one focused action: read a micro-lesson, answer a quiz, run a notebook, or finish a weekly challenge. Then share it on LinkedIn with this format: what I learned, what I built, what confused me, and what I will try next.";
+    }
+
+    if (normalizedQuestion.includes("newsletter") || normalizedQuestion.includes("read first")) {
+      return "Start with Debosmita's Azure AI Foundry newsletter. It explains why modern AI builders need to understand the operating layer around foundation models: model routing, evaluations, prompt optimization, guardrails, traces, governance, and deployment.";
+    }
+
+    if (normalizedQuestion.includes("tool") || normalizedQuestion.includes("genai")) {
+      return "For GenAI, learn these tools in order: prompt testing, embeddings, vector databases, RAG evaluation, Azure AI Foundry, agent frameworks, tracing, and MLOps monitoring. The goal is not just calling a model, but operating a reliable AI system.";
     }
 
     if (matches.length > 0) {
@@ -3147,6 +3175,21 @@ function AIBuilderLabPage({ goToPage }) {
         "Use the AI Toolkit Directory by category. For GenAI, start with prompt testing and Azure AI Foundry. For RAG, add vector databases. For MLOps, add model cards, evaluation, monitoring, and drift checks."
     },
     {
+      triggers: ["7-day", "learning plan", "learn this week", "study plan"],
+      text:
+        "Here is a 7-day AI plan: Day 1 embeddings, Day 2 RAG, Day 3 tiny retrieval demo, Day 4 agents and tool use, Day 5 Azure AI Foundry newsletter, Day 6 portfolio README, Day 7 LinkedIn build-in-public reflection."
+    },
+    {
+      triggers: ["linkedin", "build-in-public", "public post", "post"],
+      text:
+        "Try this LinkedIn prompt: Today I learned one AI concept, built one tiny artifact, and found one gap in my understanding. The concept was __, the artifact was __, and next I will improve __."
+    },
+    {
+      triggers: ["notebook", "lab", "beginner lab", "practice"],
+      text:
+        "A good beginner notebook lab is an embeddings similarity notebook: write five short text snippets, compare their meaning, retrieve the closest snippet for a question, then explain why the result was or was not useful."
+    },
+    {
       triggers: ["flashcard", "term", "concept", "learn", "beginner"],
       text:
         `Today's flashcard is ${activeFlashcard[0]}: ${activeFlashcard[1]} A useful habit is to explain the term in one sentence, then build one tiny example using it.`
@@ -3157,7 +3200,15 @@ function AIBuilderLabPage({ goToPage }) {
     "What should I learn first for RAG?",
     "Suggest a portfolio project for me",
     "Which AI career path fits me?",
-    "How do I share a badge on LinkedIn?"
+    "How do I share a badge on LinkedIn?",
+    "Give me a 7-day AI learning plan",
+    "What should I build this week?",
+    "Explain agentic AI simply",
+    "What tools should I learn for GenAI?",
+    "How do I use the newsletter companion?",
+    "Give me a LinkedIn build-in-public prompt",
+    "What is a good beginner notebook lab?",
+    "How do I prepare for Cloud AI Architect?"
   ];
 
   const getAssistantReply = (question) => {
