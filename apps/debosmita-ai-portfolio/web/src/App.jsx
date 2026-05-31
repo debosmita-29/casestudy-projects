@@ -2165,53 +2165,248 @@ function SpeakingPage() {
 // }
 
 function ResourcesPage() {
-  const resources = [
+  const currentResources = [
     {
       title: "Agentic AI Production Readiness Checklist",
-      desc:
-        "A practical checklist for evaluating orchestration, tools, memory, guardrails, telemetry, and failure recovery.",
+      desc: "A practical checklist for evaluating orchestration, tools, memory, guardrails, telemetry, and failure recovery.",
     },
     {
       title: "RAG Architecture Blueprint",
-      desc:
-        "A reference guide for ingestion, chunking, embeddings, retrieval, reranking, grounding, and evaluation.",
+      desc: "A reference guide for ingestion, chunking, embeddings, retrieval, reranking, grounding, and evaluation.",
     },
     {
       title: "AI Build Agent Design Notes",
-      desc:
-        "A systems-thinking guide for designing build agents that analyze pipelines, failures, code quality, and release risks.",
+      desc: "A systems-thinking guide for designing build agents that analyze pipelines, failures, code quality, and release risks.",
     },
     {
       title: "Executive AI Adoption Scorecard",
-      desc:
-        "A leadership-friendly framework to assess business value, risk, maturity, governance, and adoption readiness.",
+      desc: "A leadership-friendly framework to assess business value, risk, maturity, governance, and adoption readiness.",
+    },
+  ];
+
+  const freeResources = [
+    {
+      title: "AI Fundamentals Starter Pack",
+      desc: "Beginner-friendly lessons on how AI, ML, GenAI, LLMs, prompts, embeddings, and agents work.",
+      tag: "Free",
+    },
+    {
+      title: "Python for AI Builders",
+      desc: "Core Python concepts every AI learner needs: data structures, functions, APIs, files, notebooks, and debugging.",
+      tag: "Free",
+    },
+    {
+      title: "Data Science Foundations",
+      desc: "Statistics, data cleaning, exploratory analysis, visualization, SQL, and model-ready datasets.",
+      tag: "Free",
+    },
+    {
+      title: "Machine Learning Roadmap",
+      desc: "A guided path through regression, classification, evaluation metrics, feature engineering, and model selection.",
+      tag: "Free",
+    },
+    {
+      title: "Prompt Engineering Guide",
+      desc: "Practical prompting patterns for research, coding, summarization, reasoning, tutoring, and workflow automation.",
+      tag: "Free",
+    },
+    {
+      title: "RAG Beginner Guide",
+      desc: "Learn chunking, embeddings, vector databases, retrieval, grounding, citations, and answer evaluation.",
+      tag: "Free",
+    },
+    {
+      title: "Agentic AI Glossary",
+      desc: "Plain-English definitions for agents, tools, memory, planning, orchestration, guardrails, and observability.",
+      tag: "Free",
+    },
+    {
+      title: "AI Career Starter Kit",
+      desc: "Portfolio ideas, GitHub project templates, LinkedIn positioning, resume bullets, and interview prep prompts.",
+      tag: "Free",
+    },
+  ];
+
+  const externalResources = [
+    {
+      title: "Google Machine Learning Crash Course",
+      desc: "A free beginner-friendly ML course from Google.",
+      link: "https://developers.google.com/machine-learning/crash-course",
+    },
+    {
+      title: "Kaggle Learn",
+      desc: "Short practical courses for Python, pandas, ML, SQL, and data visualization.",
+      link: "https://www.kaggle.com/learn",
+    },
+    {
+      title: "Hugging Face Learn",
+      desc: "Free lessons on transformers, NLP, diffusion models, agents, and open-source AI tooling.",
+      link: "https://huggingface.co/learn",
+    },
+    {
+      title: "fast.ai",
+      desc: "Practical deep learning courses focused on building real models.",
+      link: "https://www.fast.ai/",
+    },
+    {
+      title: "OpenAI Cookbook",
+      desc: "Examples and implementation patterns for building AI applications.",
+      link: "https://cookbook.openai.com/",
+    },
+    {
+      title: "Made With ML",
+      desc: "Practical MLOps and ML engineering lessons for production systems.",
+      link: "https://madewithml.com/",
+    },
+  ];
+
+  const comingSoon = [
+    {
+      title: "Build Your First AI Chatbot",
+      desc: "A step-by-step tutorial for building a chatbot UI, prompt flow, backend API, and response handling.",
+    },
+    {
+      title: "Build a RAG App Over PDFs",
+      desc: "Upload documents, chunk content, create embeddings, retrieve context, and generate grounded answers.",
+    },
+    {
+      title: "Build Your First AI Agent",
+      desc: "Learn tool calling, planning, memory, retries, and human-in-the-loop review.",
+    },
+    {
+      title: "LLM Evaluation Workbook",
+      desc: "Hands-on exercises for testing hallucination, answer quality, latency, cost, and retrieval accuracy.",
+    },
+    {
+      title: "AI Portfolio Project Templates",
+      desc: "Ready-to-customize project structures for GitHub, resumes, LinkedIn, and interviews.",
+    },
+    {
+      title: "White Papers & Architecture Notes",
+      desc: "Deep dives on RAG, agentic AI, observability, MLOps, multimodal AI, and production readiness.",
+    },
+  ];
+
+  const paidProjects = [
+    {
+      title: "Production Chatbot Bootcamp",
+      desc: "Build a full-stack chatbot with React, FastAPI, authentication, prompt routing, and deployment.",
+      price: "Paid Project",
+    },
+    {
+      title: "RAG System for Enterprise Documents",
+      desc: "Create a document intelligence app with ingestion, embeddings, vector search, citations, and evaluation.",
+      price: "Paid Project",
+    },
+    {
+      title: "Agentic AI Workflow Builder",
+      desc: "Build a tool-using agent with memory, planning, observability, and approval workflows.",
+      price: "Paid Project",
+    },
+    {
+      title: "AI Data Science Capstone",
+      desc: "Analyze a real dataset, train ML models, build dashboards, and present business insights.",
+      price: "Paid Project",
+    },
+    {
+      title: "MLOps Deployment Lab",
+      desc: "Package, deploy, monitor, and evaluate an ML or LLM application with production-style practices.",
+      price: "Paid Project",
+    },
+    {
+      title: "Build Your Own Mini LLM App",
+      desc: "Learn tokenization concepts, model usage patterns, fine-tuning basics, and LLM app architecture.",
+      price: "Paid Project",
     },
   ];
 
   return (
-    <PageShell eyebrow="Resources" title="Templates, Blueprints & Practical AI Guides">
-      <p className="mb-10 max-w-3xl text-zinc-400">
-        These resources are designed to help engineers, leaders, and builders move
-        from AI curiosity to AI execution.
+    <PageShell eyebrow="Resources" title="Free AI, ML, data science, and agentic systems resources for builders.">
+      <p className="max-w-4xl text-lg leading-8 text-zinc-300">
+        These resources are designed to help students, fresh graduates, working professionals, and curious builders move from AI curiosity to hands-on AI execution.
       </p>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {resources.map((resource) => (
-          <div
-            key={resource.title}
-            className="rounded-3xl border border-zinc-800 bg-zinc-950/80 p-7 transition hover:-translate-y-1 hover:border-cyan-300/40"
-          >
-            <p className="mb-3 text-xs uppercase tracking-[0.22em] text-cyan-200">
-              Resource
-            </p>
-            <h2 className="text-2xl font-semibold text-white">{resource.title}</h2>
-            <p className="mt-4 text-zinc-400">{resource.desc}</p>
-            <button className="mt-6 rounded-2xl border border-zinc-700 px-5 py-3 text-sm font-semibold text-zinc-200 transition hover:border-cyan-300 hover:text-cyan-200">
-              Coming Soon →
-            </button>
-          </div>
-        ))}
-      </div>
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Featured Resources</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
+          {currentResources.map((resource) => (
+            <article key={resource.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-[#caa177]">Resource</p>
+              <h3 className="mt-4 text-2xl font-bold text-white">{resource.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
+              <p className="mt-6 font-semibold text-[#caa177]">Coming Soon →</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Free Learning Library</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          {freeResources.map((resource) => (
+            <article key={resource.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-6 transition hover:-translate-y-1 hover:border-[#caa177]/60">
+              <span className="rounded-full border border-[#caa177]/50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-[#caa177]">
+                {resource.tag}
+              </span>
+              <h3 className="mt-5 text-xl font-bold text-white">{resource.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Helpful Free External Resources</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {externalResources.map((resource) => (
+            <a
+              key={resource.title}
+              href={resource.link}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-2xl border border-zinc-800 bg-zinc-950 p-6 transition hover:border-[#caa177]/60 hover:bg-[#caa177]/10"
+            >
+              <h3 className="text-xl font-bold text-white">{resource.title}</h3>
+              <p className="mt-3 leading-7 text-zinc-400">{resource.desc}</p>
+              <p className="mt-4 font-semibold text-[#caa177]">Open Resource →</p>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12">
+        <h2 className="font-serif text-4xl font-light text-white md:text-5xl">Tutorials & Guides Coming Soon</h2>
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {comingSoon.map((resource) => (
+            <article key={resource.title} className="rounded-[2rem] border border-zinc-800 bg-zinc-950 p-7">
+              <p className="text-xs font-bold uppercase tracking-[0.25em] text-zinc-500">Coming Soon</p>
+              <h3 className="mt-4 text-2xl font-bold text-white">{resource.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{resource.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-12 rounded-[2rem] border border-[#caa177]/40 bg-[#caa177]/10 p-8">
+        <p className="text-sm font-semibold uppercase tracking-[0.3em] text-[#caa177]">Project-Based Learning</p>
+        <h2 className="mt-4 font-serif text-4xl font-light text-white md:text-5xl">Build real-world AI projects with guidance.</h2>
+        <p className="mt-5 max-w-4xl leading-8 text-zinc-300">
+          These paid project tracks are for learners who want structured mentorship, project reviews, templates, code walkthroughs, and portfolio-ready deliverables.
+        </p>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {paidProjects.map((project) => (
+            <article key={project.title} className="rounded-[2rem] border border-zinc-800 bg-black/50 p-7">
+              <span className="rounded-full bg-[#caa177] px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-black">
+                {project.price}
+              </span>
+              <h3 className="mt-5 text-2xl font-bold text-white">{project.title}</h3>
+              <p className="mt-4 leading-7 text-zinc-400">{project.desc}</p>
+              <p className="mt-6 font-semibold text-[#caa177]">Enrollment Opening Soon →</p>
+            </article>
+          ))}
+        </div>
+      </section>
     </PageShell>
   );
 }
